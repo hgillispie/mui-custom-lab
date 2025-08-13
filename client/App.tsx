@@ -1,8 +1,5 @@
-import "./global.css";
-import "./styles/tokens.css";
-
+import React from "react";
 import { Toaster } from "@/components/ui/toaster";
-import { createRoot } from "react-dom/client";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -28,60 +25,60 @@ function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <DesignSystemProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Layout>
-                  <WelcomeScreen />
-                </Layout>
-              }
-            />
-            <Route
-              path="/components/:category/:name"
-              element={
-                <Layout>
-                  <ComponentPage />
-                </Layout>
-              }
-            />
-            <Route
-              path="/documentation"
-              element={
-                <Layout>
-                  <Documentation />
-                </Layout>
-              }
-            />
-            <Route
-              path="/playground"
-              element={
-                <Layout>
-                  <Playground />
-                </Layout>
-              }
-            />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route
-              path="*"
-              element={
-                <Layout>
-                  <NotFound />
-                </Layout>
-              }
-            />
-          </Routes>
-        </BrowserRouter>
-      </DesignSystemProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
-
-createRoot(document.getElementById("root")!).render(<App />);
+export default function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <DesignSystemProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Layout>
+                    <WelcomeScreen />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/components/:category/:name"
+                element={
+                  <Layout>
+                    <ComponentPage />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/documentation"
+                element={
+                  <Layout>
+                    <Documentation />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/playground"
+                element={
+                  <Layout>
+                    <Playground />
+                  </Layout>
+                }
+              />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route
+                path="*"
+                element={
+                  <Layout>
+                    <NotFound />
+                  </Layout>
+                }
+              />
+            </Routes>
+          </BrowserRouter>
+        </DesignSystemProvider>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+}
