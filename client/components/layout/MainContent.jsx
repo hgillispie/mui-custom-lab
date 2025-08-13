@@ -72,20 +72,6 @@ const WelcomeScreen = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="text-3xl font-bold text-primary-500 mb-2">
-              {progress.total}
-            </div>
-            <div className="text-sm text-gray-600">Total Components</div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="text-3xl font-bold text-yellow-500 mb-2">
-              {progress.inProgress}
-            </div>
-            <div className="text-sm text-gray-600">In Progress</div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6">
             <div className="text-3xl font-bold text-green-500 mb-2">
               {progress.completed}
             </div>
@@ -93,12 +79,7 @@ const WelcomeScreen = () => {
           </div>
         </div>
 
-        <div className="text-center">
-          <p className="text-gray-500 text-sm">
-            Ready to transform Material UI components? Start by selecting a
-            component from the sidebar.
-          </p>
-        </div>
+        <div />
       </div>
     </div>
   );
