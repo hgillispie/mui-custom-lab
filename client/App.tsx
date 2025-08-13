@@ -9,7 +9,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { DesignSystemProvider } from "./context/DesignSystemContext.jsx";
 import Sidebar from "./components/layout/Sidebar.jsx";
-import MainContent, { WelcomeScreen } from "./components/layout/MainContent.jsx";
+import MainContent, {
+  WelcomeScreen,
+} from "./components/layout/MainContent.jsx";
 import ComponentPage from "./pages/ComponentPage.jsx";
 import Documentation from "./pages/Documentation.jsx";
 import Playground from "./pages/Playground.jsx";
@@ -34,32 +36,47 @@ const App = () => (
       <DesignSystemProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={
-              <Layout>
-                <WelcomeScreen />
-              </Layout>
-            } />
-            <Route path="/components/:category/:name" element={
-              <Layout>
-                <ComponentPage />
-              </Layout>
-            } />
-            <Route path="/documentation" element={
-              <Layout>
-                <Documentation />
-              </Layout>
-            } />
-            <Route path="/playground" element={
-              <Layout>
-                <Playground />
-              </Layout>
-            } />
+            <Route
+              path="/"
+              element={
+                <Layout>
+                  <WelcomeScreen />
+                </Layout>
+              }
+            />
+            <Route
+              path="/components/:category/:name"
+              element={
+                <Layout>
+                  <ComponentPage />
+                </Layout>
+              }
+            />
+            <Route
+              path="/documentation"
+              element={
+                <Layout>
+                  <Documentation />
+                </Layout>
+              }
+            />
+            <Route
+              path="/playground"
+              element={
+                <Layout>
+                  <Playground />
+                </Layout>
+              }
+            />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={
-              <Layout>
-                <NotFound />
-              </Layout>
-            } />
+            <Route
+              path="*"
+              element={
+                <Layout>
+                  <NotFound />
+                </Layout>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </DesignSystemProvider>

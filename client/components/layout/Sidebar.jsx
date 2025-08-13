@@ -1,28 +1,58 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { useDesignSystem } from '../../context/DesignSystemContext.jsx';
-import { 
-  COMPONENT_CATEGORIES, 
-  getCategoryDisplayName, 
-  TRANSFORMATION_STATUS 
-} from '../../utils/component-registry.js';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useDesignSystem } from "../../context/DesignSystemContext.jsx";
+import {
+  COMPONENT_CATEGORIES,
+  getCategoryDisplayName,
+  TRANSFORMATION_STATUS,
+} from "../../utils/component-registry.js";
 
 // Icons (using simple SVGs for now)
 const ChevronDownIcon = ({ className }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+  <svg
+    className={className}
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+    />
   </svg>
 );
 
 const ChevronRightIcon = ({ className }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+  <svg
+    className={className}
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M8.25 4.5l7.5 7.5-7.5 7.5"
+    />
   </svg>
 );
 
 const SearchIcon = ({ className }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+  <svg
+    className={className}
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+    />
   </svg>
 );
 
@@ -30,31 +60,33 @@ const StatusBadge = ({ status }) => {
   const getStatusColor = (status) => {
     switch (status) {
       case TRANSFORMATION_STATUS.COMPLETE:
-        return 'bg-green-500';
+        return "bg-green-500";
       case TRANSFORMATION_STATUS.IN_PROGRESS:
-        return 'bg-yellow-500';
+        return "bg-yellow-500";
       case TRANSFORMATION_STATUS.NOT_STARTED:
       default:
-        return 'bg-gray-500';
+        return "bg-gray-500";
     }
   };
 
   const getStatusText = (status) => {
     switch (status) {
       case TRANSFORMATION_STATUS.COMPLETE:
-        return 'Complete';
+        return "Complete";
       case TRANSFORMATION_STATUS.IN_PROGRESS:
-        return 'In Progress';
+        return "In Progress";
       case TRANSFORMATION_STATUS.NOT_STARTED:
       default:
-        return 'Not Started';
+        return "Not Started";
     }
   };
 
   return (
     <div className="flex items-center gap-2">
       <div className={`w-2 h-2 rounded-full ${getStatusColor(status)}`} />
-      <span className="text-xs text-sidebar-text-muted">{getStatusText(status)}</span>
+      <span className="text-xs text-sidebar-text-muted">
+        {getStatusText(status)}
+      </span>
     </div>
   );
 };
@@ -62,7 +94,9 @@ const StatusBadge = ({ status }) => {
 const ComponentItem = ({ component, category }) => {
   const location = useLocation();
   const { selectComponent } = useDesignSystem();
-  const isActive = location.pathname === `/components/${category}/${component.name.toLowerCase()}`;
+  const isActive =
+    location.pathname ===
+    `/components/${category}/${component.name.toLowerCase()}`;
 
   const handleClick = () => {
     selectComponent(component, category);
@@ -75,7 +109,7 @@ const ComponentItem = ({ component, category }) => {
       className={`
         block px-4 py-2 ml-6 rounded-md text-sm transition-colors duration-fast
         hover:bg-sidebar-hover
-        ${isActive ? 'bg-sidebar-active text-white' : 'text-sidebar-text-muted hover:text-white'}
+        ${isActive ? "bg-sidebar-active text-white" : "text-sidebar-text-muted hover:text-white"}
       `}
     >
       <div className="flex items-center justify-between">
@@ -97,7 +131,9 @@ const CategorySection = ({ category, components }) => {
         onClick={() => toggleCategory(category)}
         className="w-full px-4 py-2 flex items-center justify-between text-left hover:bg-sidebar-hover rounded-md transition-colors duration-fast"
       >
-        <span className="text-sm font-medium text-sidebar-text">{categoryDisplayName}</span>
+        <span className="text-sm font-medium text-sidebar-text">
+          {categoryDisplayName}
+        </span>
         <div className="flex items-center gap-2">
           <span className="text-xs text-sidebar-text-muted">
             {components.length}
@@ -109,7 +145,7 @@ const CategorySection = ({ category, components }) => {
           )}
         </div>
       </button>
-      
+
       {!isCollapsed && (
         <div className="mt-1 space-y-1">
           {components.map((component) => (
@@ -136,7 +172,9 @@ const ProgressSummary = () => {
       </div>
       <div className="space-y-2">
         <div className="flex justify-between items-center">
-          <span className="text-sm text-sidebar-text">{progress.percentage}% Complete</span>
+          <span className="text-sm text-sidebar-text">
+            {progress.percentage}% Complete
+          </span>
           <span className="text-xs text-sidebar-text-muted">
             {progress.completed}/{progress.total}
           </span>
@@ -157,12 +195,8 @@ const ProgressSummary = () => {
 };
 
 export default function Sidebar() {
-  const { 
-    searchQuery, 
-    setSearchQuery, 
-    filteredComponents, 
-    isSearchActive 
-  } = useDesignSystem();
+  const { searchQuery, setSearchQuery, filteredComponents, isSearchActive } =
+    useDesignSystem();
 
   return (
     <div className="h-screen w-sidebar bg-sidebar-bg flex flex-col">

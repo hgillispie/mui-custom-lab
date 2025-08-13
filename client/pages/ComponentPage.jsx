@@ -1,20 +1,24 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useDesignSystem } from '../context/DesignSystemContext.jsx';
-import { ComponentView } from '../components/layout/MainContent.jsx';
-import { getComponentsByCategory, getCategoryDisplayName } from '../utils/component-registry.js';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDesignSystem } from "../context/DesignSystemContext.jsx";
+import { ComponentView } from "../components/layout/MainContent.jsx";
+import {
+  getComponentsByCategory,
+  getCategoryDisplayName,
+} from "../utils/component-registry.js";
 
 export default function ComponentPage() {
   const { category, name } = useParams();
-  const { selectComponent, selectedComponent, selectedCategory } = useDesignSystem();
+  const { selectComponent, selectedComponent, selectedCategory } =
+    useDesignSystem();
 
   useEffect(() => {
     if (category && name) {
       const components = getComponentsByCategory(category);
       const component = components.find(
-        comp => comp.name.toLowerCase() === name.toLowerCase()
+        (comp) => comp.name.toLowerCase() === name.toLowerCase(),
       );
-      
+
       if (component) {
         selectComponent(component, category);
       }
@@ -29,12 +33,15 @@ export default function ComponentPage() {
             Component Not Found
           </h2>
           <p className="text-gray-500">
-            The component "{name}" was not found in category "{getCategoryDisplayName(category)}".
+            The component "{name}" was not found in category "
+            {getCategoryDisplayName(category)}".
           </p>
         </div>
       </div>
     );
   }
 
-  return <ComponentView component={selectedComponent} category={selectedCategory} />;
+  return (
+    <ComponentView component={selectedComponent} category={selectedCategory} />
+  );
 }
