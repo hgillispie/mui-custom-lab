@@ -224,9 +224,13 @@ export default function Sidebar() {
       <div className="flex-1 overflow-y-auto py-4">
         <div className="space-y-2">
           {Object.entries(filteredComponents).map(([category, components]) => (
-            <div key={category} className="mb-2">
-              <div className="mt-1 space-y-1" />
-            </div>
+            components.length > 0 && (
+              <CategorySection
+                key={category}
+                category={category}
+                components={components}
+              />
+            )
           ))}
         </div>
       </div>

@@ -15,7 +15,7 @@ export const TRANSFORMATION_STATUS = {
   COMPLETE: "complete",
 };
 
-// Empty registry - components will be added when explicitly requested
+// Component registry with Button component
 export const COMPONENT_REGISTRY = {
   [COMPONENT_CATEGORIES.FORMS]: [],
   [COMPONENT_CATEGORIES.NAVIGATION]: [],

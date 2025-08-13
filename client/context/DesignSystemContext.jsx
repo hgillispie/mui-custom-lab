@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from "react";
+import React, { createContext, useContext, useReducer, useEffect, useCallback } from "react";
 import {
   COMPONENT_REGISTRY,
   TRANSFORMATION_STATUS,
@@ -171,91 +171,97 @@ export function DesignSystemProvider({ children }) {
     document.documentElement.classList.toggle("dark", state.theme === "dark");
   }, [state.theme]);
 
-  // Action creators
-  const actions = {
-    selectComponent: (component, category) => {
-      dispatch({
-        type: ActionTypes.SET_SELECTED_COMPONENT,
-        payload: { component, category },
-      });
-    },
+  // Memoized action creators to prevent infinite re-renders
+  const selectComponent = useCallback((component, category) => {
+    dispatch({
+      type: ActionTypes.SET_SELECTED_COMPONENT,
+      payload: { component, category },
+    });
+  }, []);
 
-    updateComponentStatus: (category, componentName, status) => {
-      dispatch({
-        type: ActionTypes.UPDATE_COMPONENT_STATUS,
-        payload: { category, componentName, status },
-      });
-    },
+  const updateComponentStatus = useCallback((category, componentName, status) => {
+    dispatch({
+      type: ActionTypes.UPDATE_COMPONENT_STATUS,
+      payload: { category, componentName, status },
+    });
+  }, []);
 
-    setSearchQuery: (query) => {
-      dispatch({
-        type: ActionTypes.SET_SEARCH_QUERY,
-        payload: query,
-      });
-    },
+  const setSearchQuery = useCallback((query) => {
+    dispatch({
+      type: ActionTypes.SET_SEARCH_QUERY,
+      payload: query,
+    });
+  }, []);
 
-    toggleCategory: (category) => {
-      dispatch({
-        type: ActionTypes.TOGGLE_CATEGORY,
-        payload: category,
-      });
-    },
+  const toggleCategory = useCallback((category) => {
+    dispatch({
+      type: ActionTypes.TOGGLE_CATEGORY,
+      payload: category,
+    });
+  }, []);
 
-    setTheme: (theme) => {
-      dispatch({
-        type: ActionTypes.SET_THEME,
-        payload: theme,
-      });
-    },
+  const setTheme = useCallback((theme) => {
+    dispatch({
+      type: ActionTypes.SET_THEME,
+      payload: theme,
+    });
+  }, []);
 
-    toggleSidebar: () => {
-      dispatch({
-        type: ActionTypes.SET_SIDEBAR_COLLAPSED,
-        payload: !state.sidebarCollapsed,
-      });
-    },
+  const toggleSidebar = useCallback(() => {
+    dispatch({
+      type: ActionTypes.SET_SIDEBAR_COLLAPSED,
+      payload: !state.sidebarCollapsed,
+    });
+  }, [state.sidebarCollapsed]);
 
-    loadComponentRegistry: (registry) => {
-      dispatch({
-        type: ActionTypes.LOAD_COMPONENT_REGISTRY,
-        payload: registry,
-      });
-    },
+  const loadComponentRegistry = useCallback((registry) => {
+    dispatch({
+      type: ActionTypes.LOAD_COMPONENT_REGISTRY,
+      payload: registry,
+    });
+  }, []);
 
-    // Helper methods
-    getComponentsByStatus: (status) => {
-      const components = [];
-      Object.values(state.componentRegistry).forEach((categoryComponents) => {
-        components.push(
-          ...categoryComponents.filter((comp) => comp.status === status),
-        );
-      });
-      return components;
-    },
+  // Helper methods that depend on state
+  const getComponentsByStatus = useCallback((status) => {
+    const components = [];
+    Object.values(state.componentRegistry).forEach((categoryComponents) => {
+      components.push(
+        ...categoryComponents.filter((comp) => comp.status === status),
+      );
+    });
+    return components;
+  }, [state.componentRegistry]);
 
-    getTransformationProgress: () => {
-      const allComponents = Object.values(state.componentRegistry).flat();
-      const total = allComponents.length;
-      const completed = allComponents.filter(
-        (comp) => comp.status === TRANSFORMATION_STATUS.COMPLETE,
-      ).length;
-      const inProgress = allComponents.filter(
-        (comp) => comp.status === TRANSFORMATION_STATUS.IN_PROGRESS,
-      ).length;
+  const getTransformationProgress = useCallback(() => {
+    const allComponents = Object.values(state.componentRegistry).flat();
+    const total = allComponents.length;
+    const completed = allComponents.filter(
+      (comp) => comp.status === TRANSFORMATION_STATUS.COMPLETE,
+    ).length;
+    const inProgress = allComponents.filter(
+      (comp) => comp.status === TRANSFORMATION_STATUS.IN_PROGRESS,
+    ).length;
 
-      return {
-        total,
-        completed,
-        inProgress,
-        notStarted: total - completed - inProgress,
-        percentage: total > 0 ? Math.round((completed / total) * 100) : 0,
-      };
-    },
-  };
+    return {
+      total,
+      completed,
+      inProgress,
+      notStarted: total - completed - inProgress,
+      percentage: total > 0 ? Math.round((completed / total) * 100) : 0,
+    };
+  }, [state.componentRegistry]);
 
   const value = {
     ...state,
-    ...actions,
+    selectComponent,
+    updateComponentStatus,
+    setSearchQuery,
+    toggleCategory,
+    setTheme,
+    toggleSidebar,
+    loadComponentRegistry,
+    getComponentsByStatus,
+    getTransformationProgress,
   };
 
   return (

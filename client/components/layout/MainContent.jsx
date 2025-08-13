@@ -29,6 +29,44 @@ const WelcomeScreen = () => {
 
 // Component view screen (when a component is selected)
 const ComponentView = ({ component, category }) => {
+  // Render component examples
+  const renderExamples = () => {
+    return (
+      <div className="p-6 text-center text-gray-500">
+        <p>Examples will be displayed here once the component is implemented.</p>
+      </div>
+    );
+  };
+
+  if (component.status === 'complete') {
+    return (
+      <div className="h-full overflow-y-auto">
+        <div className="border-b border-gray-200 bg-white px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">
+                {component.name}
+              </h1>
+              <p className="text-gray-600 mt-1">{component.description}</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">
+                {category}
+              </span>
+              <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                Complete
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white">
+          {renderExamples()}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="h-full">
       <div className="border-b border-gray-200 bg-white px-6 py-4">
@@ -81,37 +119,41 @@ const ComponentView = ({ component, category }) => {
                   </code>
                 </div>
 
-                <div>
-                  <h3 className="text-sm font-medium text-gray-700 mb-2">
-                    Available Variants
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {component.variants.map((variant) => (
-                      <span
-                        key={variant}
-                        className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-sm"
-                      >
-                        {variant}
-                      </span>
-                    ))}
+                {component.variants && (
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-700 mb-2">
+                      Available Variants
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {component.variants.map((variant) => (
+                        <span
+                          key={variant}
+                          className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-sm"
+                        >
+                          {variant}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
 
-                <div>
-                  <h3 className="text-sm font-medium text-gray-700 mb-2">
-                    Available Sizes
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {component.sizes.map((size) => (
-                      <span
-                        key={size}
-                        className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-sm"
-                      >
-                        {size}
-                      </span>
-                    ))}
+                {component.sizes && (
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-700 mb-2">
+                      Available Sizes
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {component.sizes.map((size) => (
+                        <span
+                          key={size}
+                          className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-sm"
+                        >
+                          {size}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
 
@@ -141,7 +183,7 @@ const ComponentView = ({ component, category }) => {
                   </p>
                 </div>
 
-                <button className="bg-primary-500 text-white px-6 py-2 rounded-md hover:bg-primary-600 transition-colors">
+                <button className="bg-[var(--color-primary-500)] text-white px-6 py-2 rounded-md hover:bg-[var(--color-primary-600)] transition-colors">
                   Start Transformation
                 </button>
 

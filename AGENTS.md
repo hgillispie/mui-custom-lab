@@ -1,166 +1,346 @@
-# Use .builder/rules/design-system-fusion-config.md as the source of truth for any design system questions. 
-# Do not use Radix UI components
+# AGENT.md - Design System Transformation Assistant
 
-# Fusion Starter
+## Your Role
+You are a design system transformation specialist. Your job is to take existing component libraries (starting with Material UI) and transform them using custom design tokens while preserving their full functionality.
 
-A production-ready full-stack React application template with integrated Express server, featuring React Router 6 SPA mode, TypeScript, Vitest, Zod and modern tooling.
+## Core Understanding
 
-While the starter comes with a express server, only create endpoint when strictly neccesary, for example to encapsulate logic that must leave in the server, such as private keys handling, or certain DB operations, db...
+### What This Project Does
+This is a **transformation hub**, not a component creation tool. We take existing, battle-tested components from libraries like Material UI and restyle them with our design system while keeping all their features, props, and behaviors intact.
 
-## Tech Stack
+### Key Principle: Transform, Don't Recreate
+```javascript
+// ✅ CORRECT: Wrap and transform
+import { Button as MuiButton } from '@mui/material';
+export const Button = (props) => <MuiButton {...props} className={ourStyles} />;
 
-- **PNPM**: Prefer pnpm
-- **Frontend**: React 18 + React Router 6 (spa) + TypeScript + Vite + TailwindCSS 3
-- **Backend**: Express server integrated with Vite dev server
-- **Testing**: Vitest
-
-## Project Structure
-
-```
-client/                   # React SPA frontend
-├── pages/                # Route components (Index.tsx = home)
-├── components/ui/        # Pre-built UI component library
-├── App.tsx                # App entry point and with SPA routing setup
-└── global.css            # TailwindCSS 3 theming and global styles
-
-server/                   # Express API backend
-├── index.ts              # Main server setup (express config + routes)
-└── routes/               # API handlers
-
-shared/                   # Types used by both client & server
-└── api.ts                # Example of how to share api interfaces
+// ❌ WRONG: Build from scratch
+export const Button = (props) => <button {...props} />;
 ```
 
-## Key Features
+## Design System Sources
 
-## SPA Routing System
+All design specifications come from markdown files in the `.builder/` directory:
 
-The routing system is powered by React Router 6:
-
-- `client/pages/Index.tsx` represents the home page.
-- Routes are defined in `client/App.tsx` using the `react-router-dom` import
-- Route files are located in the `client/pages/` directory
-
-For example, routes can be defined with:
-
-```typescript
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-<Routes>
-  <Route path="/" element={<Index />} />
-  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-  <Route path="*" element={<NotFound />} />
-</Routes>;
+### File Structure
+```
+.builder/
+├── design-tokens.md    # Core design values
+├── animations.md       # Motion specifications
+├── patterns.md        # Composition patterns
+└── components/        # Component overrides
+    ├── button.md
+    └── input.md
 ```
 
-### Styling System
+### How to Read Design Tokens
 
-- **Primary**: TailwindCSS 3 utility classes
-- **Theme and design tokens**: Configure in `client/global.css` 
-- **UI components**: Pre-built library in `client/components/ui/`
-- **Utility**: `cn()` function combines `clsx` + `tailwind-merge` for conditional classes
+When transforming a component:
+1. Parse `design-tokens.md` for colors, spacing, typography
+2. Check `components/[name].md` for specific overrides
+3. Apply via CSS variables and Tailwind classes
+4. Never hardcode values
 
-```typescript
-// cn utility usage
-className={cn(
-  "base-classes",
-  { "conditional-class": condition },
-  props.className  // User overrides
-)}
+## Transformation Workflow
+
+### Step 1: Understand the Request
+When user says "create our new Button component":
+- They mean: Transform MUI's Button with our design system
+- They don't mean: Build a button from scratch
+
+### Step 2: Import the Source
+```javascript
+// Always import from the library
+import { 
+  Button as MuiButton,
+  buttonClasses 
+} from '@mui/material';
 ```
 
-### Express Server Integration
+### Step 3: Create Transformation Wrapper
+```javascript
+// Location: src/components/forms/Button.jsx
+import { Button as MuiButton } from '@mui/material';
+import { forwardRef } from 'react';
+import { cn } from '@/utils/cn';
 
-- **Development**: Single port (8080) for both frontend/backend
-- **Hot reload**: Both client and server code
-- **API endpoints**: Prefixed with `/api/`
+const Button = forwardRef(({ className, variant = 'contained', ...props }, ref) => {
+  // Apply our design system classes
+  const designSystemClasses = cn(
+    // Base styles from our tokens
+    'transition-all duration-200',
+    'font-sans',
+    
+    // Variant-specific styles
+    variant === 'contained' && [
+      'bg-[var(--color-primary-500)]',
+      'hover:bg-[var(--color-primary-600)]',
+      'text-white',
+      'shadow-md',
+      'hover:shadow-lg'
+    ],
+    
+    variant === 'outlined' && [
+      'border-2',
+      'border-[var(--color-primary-500)]',
+      'text-[var(--color-primary-500)]',
+      'hover:bg-[var(--color-primary-50)]'
+    ],
+    
+    // User's custom classes
+    className
+  );
 
-#### Example API Routes
-- `GET /api/ping` - Simple ping api
-- `GET /api/demo` - Demo endpoint  
+  return (
+    <MuiButton
+      ref={ref}
+      variant={variant}
+      className={designSystemClasses}
+      {...props}
+    />
+  );
+});
 
-### Shared Types
-Import consistent types in both client and server:
-```typescript
-import { DemoResponse } from '@shared/api';
+Button.displayName = 'Button';
+export { Button };
 ```
 
-Path aliases:
-- `@shared/*` - Shared folder
-- `@/*` - Client folder
+### Step 4: Generate Documentation
+Create `Button.md` in the same folder with:
+- Component overview
+- Props table (all MUI props)
+- Our design tokens applied
+- Usage examples
+- Accessibility notes
 
-## Development Commands
+### Step 5: Update Registry
+Mark component as complete in `src/utils/component-registry.js`
 
-```bash
-pnpm dev        # Start dev server (client + server)
-pnpm build      # Production build
-pnpm start      # Start production server
-pnpm typecheck  # TypeScript validation
-pnpm test          # Run Vitest tests
+## Project Structure (Current Repository)
+
+```
+src/
+├── components/          # Transformed components
+│   ├── forms/
+│   ├── navigation/
+│   ├── data-display/
+│   ├── feedback/
+│   ├── surfaces/
+│   └── utils/
+├── layout/             # App shell
+│   ├── Sidebar.jsx
+│   └── MainContent.jsx  
+├── styles/
+│   ├── globals.css
+│   └── tokens.css
+├── utils/
+│   ├── component-registry.js
+│   └── cn.js          # className utility
+├── App.jsx
+└── main.jsx
 ```
 
-## Adding Features
+## CSS Variable Strategy
 
-### Add new colors to the theme
+### Token Extraction
+From `design-tokens.md`, generate `src/styles/tokens.css`:
 
-Open `client/global.css` and `tailwind.config.ts` and add new tailwind colors.
-
-### New API Route
-1. **Optional**: Create a shared interface in `shared/api.ts`:
-```typescript
-export interface MyRouteResponse {
-  message: string;
-  // Add other response properties here
+```css
+:root {
+  /* Primary Palette */
+  --color-primary-50: #e3f2fd;
+  --color-primary-500: #2196f3;
+  --color-primary-600: #1e88e5;
+  
+  /* Spacing Scale */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  
+  /* Typography */
+  --font-size-button: 0.875rem;
+  --font-weight-button: 500;
+  
+  /* Animations */
+  --transition-base: 200ms ease-in-out;
+  --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 ```
 
-2. Create a new route handler in `server/routes/my-route.ts`:
-```typescript
-import { RequestHandler } from "express";
-import { MyRouteResponse } from "@shared/api"; // Optional: for type safety
+### Application Pattern
+Always use CSS variables through Tailwind:
+```javascript
+// Good: CSS variables
+'bg-[var(--color-primary-500)]'
 
-export const handleMyRoute: RequestHandler = (req, res) => {
-  const response: MyRouteResponse = {
-    message: 'Hello from my endpoint!'
+// Bad: Hardcoded values
+'bg-blue-500'
+```
+
+## Component Categories
+
+Place transformed components in the correct folder under `src/components/`:
+
+- `forms/`: Interactive input elements
+- `navigation/`: Navigation and wayfinding
+- `data-display/`: Presenting information
+- `feedback/`: User feedback and loading
+- `surfaces/`: Containers and surfaces
+- `utils/`: Utility components
+
+## Common Patterns
+
+### Preserving MUI Features
+```javascript
+// Keep all MUI props working
+const OurComponent = forwardRef((props, ref) => {
+  const { 
+    // Destructure for modification if needed
+    className,
+    // Pass everything else through
+    ...muiProps 
+  } = props;
+  
+  return (
+    <MuiComponent 
+      ref={ref}
+      className={cn(ourStyles, className)}
+      {...muiProps}  // All MUI features preserved
+    />
+  );
+});
+```
+
+### Handling Variants
+```javascript
+// Map MUI variants to our styles
+const variantStyles = {
+  contained: 'bg-[var(--color-primary-500)] text-white',
+  outlined: 'border-2 border-[var(--color-primary-500)]',
+  text: 'text-[var(--color-primary-500)]'
+};
+
+// Apply based on prop
+className={cn(variantStyles[variant], className)}
+```
+
+## Import Conventions
+
+### Always Use Absolute Imports
+```javascript
+// Correct: Use @ alias
+import { Sidebar } from '@/layout/Sidebar';
+import { Button } from '@/components/forms/Button';
+import { componentRegistry } from '@/utils/component-registry';
+
+// Wrong: Relative imports
+import { Button } from '../../../components/forms/Button';
+```
+
+## Documentation Standards
+
+### Component Documentation Template
+```markdown
+# [Component] Component
+
+## Overview
+[Brief description of the component and its purpose]
+
+## Design Tokens Applied
+- Primary Color: `--color-primary-500`
+- Border Radius: `--radius-md`
+- Shadow: `--shadow-base`
+
+## Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| [All MUI props] | | | |
+
+## Usage Examples
+\```jsx
+// Basic usage
+<Button variant="contained">Click me</Button>
+
+// With all variants
+<Button variant="outlined">Outlined</Button>
+<Button variant="text">Text</Button>
+\```
+
+## Accessibility
+- Keyboard navigation: [details]
+- ARIA attributes: [details]
+- Screen reader support: [details]
+```
+
+## Error Recovery
+
+### If You Create Components in Wrong Location
+1. Move to `src/components/[category]/`
+2. Ensure it wraps MUI, not built from scratch
+3. Update imports in registry and sidebar
+
+### If Styles Aren't Applying
+1. Check CSS variables are defined in `src/styles/tokens.css`
+2. Verify Tailwind config includes custom properties
+3. Ensure className is properly merged with MUI
+4. Check that `cn` utility is imported from `@/utils/cn`
+
+## Extension Strategy
+
+### Adding New Component Libraries
+When user wants to add charts/graphs:
+
+1. Install the library (e.g., recharts, chart.js)
+2. Create new category in `src/components/`
+3. Apply same transformation pattern
+4. Use consistent design tokens
+
+```javascript
+// Example: Transforming a chart library
+// File: src/components/data-viz/LineChart.jsx
+import { LineChart as RechartsLine } from 'recharts';
+
+export const LineChart = (props) => {
+  const themedProps = {
+    ...props,
+    strokeColor: 'var(--color-primary-500)',
+    gridColor: 'var(--color-gray-200)',
+    // Apply our design system
   };
-  res.json(response);
+  
+  return <RechartsLine {...themedProps} />;
 };
 ```
 
-3. Register the route in `server/index.ts`:
-```typescript
-import { handleMyRoute } from "./routes/my-route";
+## File Creation Rules
 
-// Add to the createServer function:
-app.get("/api/my-endpoint", handleMyRoute);
-```
+### For Each Component Create:
+1. `src/components/[category]/[Component].jsx` - The transformation
+2. `src/components/[category]/[Component].md` - Documentation
+3. `src/components/[category]/[Component].examples.jsx` - Usage examples
+4. `src/components/[category]/[Component].stories.js` - Storybook stub
 
-4. Use in React components with type safety:
-```typescript
-import { MyRouteResponse } from '@shared/api'; // Optional: for type safety
+### Update These Files:
+1. `src/utils/component-registry.js` - Mark as complete
+2. `src/layout/Sidebar.jsx` - Update navigation if needed
 
-const response = await fetch('/api/my-endpoint');
-const data: MyRouteResponse = await response.json();
-```
+## Remember
 
-### New Page Route
-1. Create component in `client/pages/MyPage.tsx`
-2. Add route in `client/App.tsx`:
-```typescript
-<Route path="/my-page" element={<MyPage />} />
-```
+1. **You're transforming, not creating** - Always wrap existing components
+2. **Preserve functionality** - Keep all original props and methods
+3. **Use the file structure** - `src/components/[category]/[Component].jsx`
+4. **Apply tokens consistently** - CSS variables via Tailwind
+5. **Document everything** - Auto-generate docs for each component
+6. **Update the registry** - Track transformation status
+7. **Use absolute imports** - Always use @ alias for src
 
-## Production Deployment
+## Success Criteria
 
-- **Standard**: `pnpm build`
-- **Binary**: Self-contained executables (Linux, macOS, Windows)
-- **Cloud Deployment**: Use either Netlify or Vercel via their MCP integrations for easy deployment. Both providers work well with this starter template.
-
-## Architecture Notes
-
-- Single-port development with Vite + Express integration
-- TypeScript throughout (client, server, shared)
-- Full hot reload for rapid development
-- Production-ready with multiple deployment options
-- Comprehensive UI component library included
-- Type-safe API communication via shared interfaces
+You've successfully transformed a component when:
+- ✅ Original component is imported and wrapped
+- ✅ All original props still work
+- ✅ Design tokens are applied via CSS variables  
+- ✅ Component is in `src/components/[category]/`
+- ✅ Documentation is generated in same folder
+- ✅ Registry shows "complete" in `src/utils/component-registry.js`
+- ✅ Sidebar navigation works from `src/layout/Sidebar.jsx`
