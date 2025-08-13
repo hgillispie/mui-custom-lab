@@ -192,23 +192,13 @@ export default function Sidebar() {
 
       {/* Component Categories */}
       <div className="flex-1 overflow-y-auto py-4">
-        {isSearchActive && Object.keys(filteredComponents).length === 0 ? (
-          <div className="px-4 py-8 text-center">
-            <p className="text-sidebar-text-muted text-sm">
-              No components found for "{searchQuery}"
-            </p>
-          </div>
-        ) : (
-          <div className="space-y-2">
-            {Object.entries(filteredComponents).map(([category, components]) => (
-              <CategorySection
-                key={category}
-                category={category}
-                components={components}
-              />
-            ))}
-          </div>
-        )}
+        <div className="space-y-2">
+          {Object.entries(filteredComponents).map(([category, components]) => (
+            <div key={category} className="mb-2">
+              <div className="mt-1 space-y-1" />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Progress Summary */}
