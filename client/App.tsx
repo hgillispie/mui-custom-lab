@@ -1,7 +1,6 @@
 import React from "react";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster, Sonner, ToastProvider } from "@/components/SimpleToast";
+import { TooltipProvider } from "@/components/SimpleTooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { DesignSystemProvider } from "./context/DesignSystemContext.jsx";
@@ -29,10 +28,11 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <DesignSystemProvider>
-          <BrowserRouter>
+        <ToastProvider>
+          <Toaster />
+          <Sonner />
+          <DesignSystemProvider>
+            <BrowserRouter>
             <Routes>
               <Route
                 path="/"
@@ -78,6 +78,7 @@ export default function App() {
             </Routes>
           </BrowserRouter>
         </DesignSystemProvider>
+        </ToastProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );
