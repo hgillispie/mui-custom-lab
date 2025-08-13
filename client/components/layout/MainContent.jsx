@@ -19,65 +19,7 @@ const WelcomeScreen = () => {
           </p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-            Getting Started
-          </h2>
-
-          <div className="space-y-4 text-left">
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-primary-500 text-white rounded-full flex items-center justify-center font-semibold">
-                1
-              </div>
-              <div>
-                <h3 className="font-medium text-gray-800">
-                  Select a Component
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  Choose a component from the sidebar to begin transformation
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-primary-500 text-white rounded-full flex items-center justify-center font-semibold">
-                2
-              </div>
-              <div>
-                <h3 className="font-medium text-gray-800">
-                  Review Design Tokens
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  Design tokens from{" "}
-                  <code className="bg-gray-100 px-1 rounded">.builder</code>{" "}
-                  directory will be applied automatically
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-primary-500 text-white rounded-full flex items-center justify-center font-semibold">
-                3
-              </div>
-              <div>
-                <h3 className="font-medium text-gray-800">Transform & Test</h3>
-                <p className="text-gray-600 text-sm">
-                  Generate the transformed component with live preview and
-                  documentation
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="text-3xl font-bold text-green-500 mb-2">
-              {progress.completed}
-            </div>
-            <div className="text-sm text-gray-600">Completed</div>
-          </div>
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8" />
 
         <div />
       </div>
