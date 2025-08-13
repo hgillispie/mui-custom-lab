@@ -1,7 +1,6 @@
-# Design System Configuration Files for Builder.io Fusion
+# Design System Configuration File
 
-## 1. Color Palette Configuration
-**File:** `.builder/rules/colors.mdc`
+
 
 ```markdown
 ---
@@ -114,7 +113,7 @@ Use semantic class names: bg-surface, text-primary, border-subtle
 ```
 
 ## 2. Typography System
-**File:** `.builder/rules/typography.mdc`
+
 
 ```markdown
 ---
@@ -274,7 +273,7 @@ typography: {
 ```
 
 ## 3. Spacing System
-**File:** `.builder/rules/spacing.mdc`
+
 
 ```markdown
 ---
@@ -362,7 +361,7 @@ Add semantic spacing utilities: p-component, m-section, gap-content
 ```
 
 ## 4. Animation System
-**File:** `.builder/rules/animations.mdc`
+
 
 ```markdown
 ---
@@ -574,7 +573,7 @@ animation: {
 ```
 
 ## 5. Shadows & Elevation
-**File:** `.builder/rules/shadows.mdc`
+
 
 ```markdown
 ---
@@ -627,7 +626,7 @@ alwaysApply: true
 ```
 
 ## 6. Border Radius
-**File:** `.builder/rules/borders.mdc`
+
 
 ```markdown
 ---
@@ -683,7 +682,7 @@ alwaysApply: true
 ```
 
 ## 7. Breakpoints & Containers
-**File:** `.builder/rules/responsive.mdc`
+
 
 ```markdown
 ---
@@ -746,7 +745,7 @@ screens: {
 ```
 
 ## 8. Component States
-**File:** `.builder/rules/states.mdc`
+
 
 ```markdown
 ---
@@ -840,7 +839,7 @@ alwaysApply: true
 ```
 
 ## 9. Tailwind Complete Config
-**File:** `.builder/rules/tailwind-config.mdc`
+
 
 ```markdown
 ---
@@ -953,7 +952,7 @@ module.exports = {
 ```
 
 ## 10. Implementation Guide
-**File:** `.builder/rules/implementation.mdc`
+
 
 ```markdown
 ---
