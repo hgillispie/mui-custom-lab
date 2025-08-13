@@ -185,10 +185,6 @@ const ProgressSummary = () => {
             style={{ width: `${progress.percentage}%` }}
           />
         </div>
-        <div className="flex justify-between text-xs text-sidebar-text-muted">
-          <span>{progress.notStarted} Not Started</span>
-          <span>{progress.inProgress} In Progress</span>
-        </div>
       </div>
     </div>
   );
