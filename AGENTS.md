@@ -1,3 +1,6 @@
+# Use .builder/rules/design-system-fusion-config.md as the source of truth for any design system questions. 
+# Do not use Radix UI components
+
 # Fusion Starter
 
 A production-ready full-stack React application template with integrated Express server, featuring React Router 6 SPA mode, TypeScript, Vitest, Zod and modern tooling.
