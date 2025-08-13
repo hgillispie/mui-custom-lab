@@ -1,0 +1,292 @@
+import React from 'react';
+import { useDesignSystem } from '../../context/DesignSystemContext.jsx';
+
+// Welcome screen component
+const WelcomeScreen = () => {
+  const { getTransformationProgress } = useDesignSystem();
+  const progress = getTransformationProgress();
+
+  return (
+    <div className="h-full flex items-center justify-center">
+      <div className="max-w-2xl mx-auto text-center">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Welcome to Design System Hub
+          </h1>
+          <p className="text-xl text-gray-600 leading-relaxed">
+            Transform Material UI components into your custom-styled components using design tokens and specifications.
+          </p>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+            Getting Started
+          </h2>
+          
+          <div className="space-y-4 text-left">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-8 h-8 bg-primary-500 text-white rounded-full flex items-center justify-center font-semibold">
+                1
+              </div>
+              <div>
+                <h3 className="font-medium text-gray-800">Select a Component</h3>
+                <p className="text-gray-600 text-sm">
+                  Choose a component from the sidebar to begin transformation
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-8 h-8 bg-primary-500 text-white rounded-full flex items-center justify-center font-semibold">
+                2
+              </div>
+              <div>
+                <h3 className="font-medium text-gray-800">Review Design Tokens</h3>
+                <p className="text-gray-600 text-sm">
+                  Design tokens from <code className="bg-gray-100 px-1 rounded">.builder</code> directory will be applied automatically
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-8 h-8 bg-primary-500 text-white rounded-full flex items-center justify-center font-semibold">
+                3
+              </div>
+              <div>
+                <h3 className="font-medium text-gray-800">Transform & Test</h3>
+                <p className="text-gray-600 text-sm">
+                  Generate the transformed component with live preview and documentation
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="text-3xl font-bold text-primary-500 mb-2">
+              {progress.total}
+            </div>
+            <div className="text-sm text-gray-600">
+              Total Components
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="text-3xl font-bold text-yellow-500 mb-2">
+              {progress.inProgress}
+            </div>
+            <div className="text-sm text-gray-600">
+              In Progress
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="text-3xl font-bold text-green-500 mb-2">
+              {progress.completed}
+            </div>
+            <div className="text-sm text-gray-600">
+              Completed
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center">
+          <p className="text-gray-500 text-sm">
+            Ready to transform Material UI components? Start by selecting a component from the sidebar.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Component view screen (when a component is selected)
+const ComponentView = ({ component, category }) => {
+  return (
+    <div className="h-full">
+      <div className="border-b border-gray-200 bg-white px-6 py-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">
+              {component.name}
+            </h1>
+            <p className="text-gray-600 mt-1">
+              {component.description}
+            </p>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">
+              {category}
+            </span>
+            <span className={`px-3 py-1 rounded-full text-sm ${
+              component.status === 'complete' 
+                ? 'bg-green-100 text-green-800' 
+                : component.status === 'in-progress'
+                ? 'bg-yellow-100 text-yellow-800'
+                : 'bg-gray-100 text-gray-800'
+            }`}>
+              {component.status === 'not-started' ? 'Not Started' : 
+               component.status === 'in-progress' ? 'In Progress' : 'Complete'}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex-1 p-6">
+        <div className="max-w-4xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Component Info */}
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                Component Information
+              </h2>
+              
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-sm font-medium text-gray-700 mb-2">
+                    Material UI Component
+                  </h3>
+                  <code className="bg-gray-100 px-2 py-1 rounded text-sm">
+                    {component.muiComponent}
+                  </code>
+                </div>
+
+                <div>
+                  <h3 className="text-sm font-medium text-gray-700 mb-2">
+                    Available Variants
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {component.variants.map((variant) => (
+                      <span 
+                        key={variant}
+                        className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-sm"
+                      >
+                        {variant}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-sm font-medium text-gray-700 mb-2">
+                    Available Sizes
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {component.sizes.map((size) => (
+                      <span 
+                        key={size}
+                        className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-sm"
+                      >
+                        {size}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Transformation Area */}
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                Transformation
+              </h2>
+              
+              <div className="bg-gray-50 rounded-lg p-6 text-center">
+                <div className="text-gray-500 mb-4">
+                  <svg className="w-16 h-16 mx-auto mb-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-4.5B6.75 8.25 4.5 10.5 4.5 13.875v2.625m15 0a3.375 3.375 0 01-3.375 3.375h-9.75a3.375 3.375 0 01-3.375-3.375m15 0v.375c0 .621-.504 1.125-1.125 1.125h-.375M4.5 17.25v.375c0 .621.504 1.125 1.125 1.125h.375" />
+                  </svg>
+                  <p className="text-gray-600">
+                    Component transformation ready
+                  </p>
+                </div>
+                
+                <button className="bg-primary-500 text-white px-6 py-2 rounded-md hover:bg-primary-600 transition-colors">
+                  Start Transformation
+                </button>
+                
+                <p className="text-xs text-gray-500 mt-3">
+                  Will read design tokens from .builder directory
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Instructions */}
+          <div className="mt-8 bg-blue-50 rounded-lg p-6">
+            <h3 className="text-lg font-medium text-blue-900 mb-3">
+              Transformation Workflow
+            </h3>
+            <div className="space-y-2 text-sm text-blue-800">
+              <p>• Design tokens will be read from .builder directory specifications</p>
+              <p>• Material UI component will be wrapped with custom styling</p>
+              <p>• All original functionality and props will be preserved</p>
+              <p>• Documentation and usage examples will be generated</p>
+              <p>• Component will be added to the transformed library</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Placeholder screen for unimplemented routes
+const PlaceholderScreen = ({ title, description }) => {
+  return (
+    <div className="h-full flex items-center justify-center">
+      <div className="text-center">
+        <div className="text-gray-400 mb-4">
+          <svg className="w-16 h-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+        <h2 className="text-xl font-semibold text-gray-700 mb-2">
+          {title}
+        </h2>
+        <p className="text-gray-500 mb-4">
+          {description}
+        </p>
+        <p className="text-sm text-gray-400">
+          Continue prompting to fill in this page content
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default function MainContent({ children }) {
+  const { selectedComponent, selectedCategory } = useDesignSystem();
+
+  // If children are provided (from router), render them
+  if (children) {
+    return (
+      <div className="flex-1 overflow-hidden">
+        {children}
+      </div>
+    );
+  }
+
+  // If a component is selected, show component view
+  if (selectedComponent && selectedCategory) {
+    return (
+      <div className="flex-1 overflow-hidden">
+        <ComponentView 
+          component={selectedComponent} 
+          category={selectedCategory} 
+        />
+      </div>
+    );
+  }
+
+  // Default to welcome screen
+  return (
+    <div className="flex-1 overflow-hidden bg-gray-50">
+      <WelcomeScreen />
+    </div>
+  );
+}
+
+// Export additional components for routing
+export { WelcomeScreen, ComponentView, PlaceholderScreen };
