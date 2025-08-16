@@ -96,7 +96,7 @@ After adding to registry, the component should appear in the sidebar immediately
 
 ### Minimum Transformations Required:
 - ✅ **Font**: Must use Figtree font
-- ✅ **Colors**: Must use design token colors
+- ✅ **Colors**: Must use design token and semantic colors
 - ✅ **Spacing**: Must use spacing tokens
 - ✅ **Borders**: Must use radius tokens
 - ✅ **Shadows**: Must use shadow tokens
@@ -330,6 +330,7 @@ A component is successfully created when:
 3. **Document everything** - Props, variants, usage examples
 4. **Use design tokens** - Never hardcode values
 5. **Test in sidebar** - Verify it appears and works
+5. **Create Variants/States** - All default MUI states should be created with our CSS/design tokens applied. Also create variants based on semantic values available when applicable. i.e Success, Info, Warning, Danger. Additionally, create variants for Ghost and Gradients
 
 ## 🔴 FINAL REMINDER
 
