@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/SimpleTooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { DesignSystemProvider } from "./context/DesignSystemContext.jsx";
+import { MuiThemeProvider } from "./components/providers/MuiThemeProvider";
 import Sidebar from "./components/layout/Sidebar.jsx";
 import MainContent, {
   WelcomeScreen,
@@ -11,6 +12,7 @@ import MainContent, {
 import ComponentPage from "./pages/ComponentPage.jsx";
 import Documentation from "./pages/Documentation.jsx";
 import Playground from "./pages/Playground.jsx";
+import MuiDemo from "./pages/MuiDemo";
  
 import NotFound from "./pages/NotFound";
 
@@ -33,8 +35,9 @@ export default function App() {
           <Toaster />
           <Sonner />
           <DesignSystemProvider>
-            <BrowserRouter>
-            <Routes>
+            <MuiThemeProvider>
+              <BrowserRouter>
+                <Routes>
               <Route
                 path="/"
                 element={
@@ -67,6 +70,14 @@ export default function App() {
                   </Layout>
                 }
               />
+              <Route
+                path="/mui-demo"
+                element={
+                  <Layout>
+                    <MuiDemo />
+                  </Layout>
+                }
+              />
          
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route
@@ -79,7 +90,8 @@ export default function App() {
               />
             </Routes>
           </BrowserRouter>
-        </DesignSystemProvider>
+        </MuiThemeProvider>
+      </DesignSystemProvider>
         </ToastProvider>
       </TooltipProvider>
     </QueryClientProvider>
