@@ -1,5 +1,341 @@
 # AGENTS.md - Material UI Component Transformation Instructions for Fusion
+# .builderrules - Material UI Component Transformation Rules
 
+## 🚨 CRITICAL: WHEN ASKED TO CREATE A COMPONENT
+
+### YOU MUST DO THREE THINGS:
+1. **CREATE** the component file with heavy transformations
+2. **ADD** it to the component registry
+3. **VERIFY** it appears in the sidebar
+
+## 📝 EXACT STEPS FOR COMPONENT CREATION
+
+### Step 1: Create Component File
+Location: `client/components/ui/[ComponentName].tsx`
+
+```typescript
+import React from 'react';
+import Mui[Component] from '@mui/material/[Component]';
+import { styled, alpha } from '@mui/material/styles';
+
+// APPLY HEAVY TRANSFORMATIONS
+const Styled[Component] = styled(Mui[Component])(({ theme }) => ({
+  // MANDATORY TRANSFORMATIONS:
+  fontFamily: 'Figtree, sans-serif',  // ✅ Custom font
+  borderRadius: 'var(--radius-md)',   // ✅ Design tokens
+  transition: 'all 200ms ease',       // ✅ Smooth animations
+  
+  // VISUAL ENHANCEMENTS:
+  boxShadow: 'var(--shadow-sm)',
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    boxShadow: 'var(--shadow-md)',
+  },
+  
+  // USE CSS VARIABLES:
+  backgroundColor: 'var(--color-primary-500)',
+  color: 'var(--color-white)',
+  padding: 'var(--spacing-2) var(--spacing-4)',
+}));
+
+export const [Component] = (props) => {
+  return <Styled[Component] {...props} />;
+};
+
+export default [Component];
+```
+
+### Step 2: Add to Registry (MANDATORY!)
+Location: `client/utils/component-registry.js`
+
+Find the appropriate category and ADD your component:
+
+```javascript
+export const COMPONENT_REGISTRY = {
+  [COMPONENT_CATEGORIES.FORMS]: [
+    // YOUR COMPONENT ENTRY:
+    {
+      name: 'YourComponent',
+      displayName: 'Your Component',
+      description: 'Brief description of transformations',
+      status: TRANSFORMATION_STATUS.COMPLETE,
+      path: '/components/ui/YourComponent',
+      component: () => import('../components/ui/YourComponent'),
+      muiComponent: '@mui/material/YourComponent',
+      transformedDate: new Date().toISOString(),
+      
+      // REQUIRED: Show variants
+      variants: [
+        { 
+          name: 'Default', 
+          props: { variant: 'default' }, 
+          code: '<YourComponent variant="default">Example</YourComponent>' 
+        },
+      ],
+      
+      // REQUIRED: Document props
+      props: {
+        variant: { type: 'enum', options: ['default', 'custom'], default: 'default' },
+      },
+      
+      // REQUIRED: List tokens used
+      designTokens: ['primary-500', 'spacing-2', 'radius-md'],
+      
+      // REQUIRED: Documentation
+      documentation: `Component documentation here`
+    },
+    // ... existing components
+  ]
+}
+```
+
+### Step 3: Verify Sidebar Display
+After adding to registry, the component should appear in the sidebar immediately.
+
+## 🎨 TRANSFORMATION REQUIREMENTS
+
+### Minimum Transformations Required:
+- ✅ **Font**: Must use Figtree font
+- ✅ **Colors**: Must use design token colors
+- ✅ **Spacing**: Must use spacing tokens
+- ✅ **Borders**: Must use radius tokens
+- ✅ **Shadows**: Must use shadow tokens
+- ✅ **Animations**: Must have hover/focus effects
+- ✅ **Transitions**: Smooth state changes
+
+### Visual Impact Checklist:
+- [ ] Component looks SIGNIFICANTLY different from MUI default
+- [ ] Uses at least 5 design tokens
+- [ ] Has custom hover state
+- [ ] Has smooth transitions
+- [ ] Includes at least one unique feature (gradient, glow, animation, etc.)
+
+## 📦 COMPONENT CATEGORIES
+
+Place components in the correct category:
+
+```javascript
+COMPONENT_CATEGORIES = {
+  FORMS: "forms",           // Button, TextField, Select, Checkbox, Switch
+  NAVIGATION: "navigation",  // Tabs, AppBar, Drawer, Menu, Breadcrumbs
+  DATA_DISPLAY: "data-display", // Table, List, Card, Avatar, Chip
+  FEEDBACK: "feedback",      // Alert, Dialog, Snackbar, Progress
+  SURFACES: "surfaces",      // Paper, Accordion, Card
+  UTILS: "utils"            // Tooltip, Popover, Modal
+}
+```
+
+## 🔧 SPECIFIC TRANSFORMATION PATTERNS
+
+### Button Transformation Example
+```typescript
+const StyledButton = styled(MuiButton)({
+  // Base styles
+  fontFamily: 'Figtree, sans-serif',
+  textTransform: 'none',
+  fontWeight: 500,
+  borderRadius: 'var(--radius-md)',
+  padding: 'var(--spacing-2) var(--spacing-4)',
+  transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+  
+  // Remove MUI defaults
+  boxShadow: 'none',
+  
+  // Enhanced hover
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    boxShadow: '0 8px 16px rgba(139, 92, 246, 0.3)',
+  },
+  
+  // Custom variants
+  '&.gradient': {
+    background: 'linear-gradient(135deg, var(--color-primary-500), var(--color-primary-400))',
+  }
+});
+```
+
+### TextField Transformation Example
+```typescript
+const StyledTextField = styled(MuiTextField)({
+  '& .MuiInputBase-root': {
+    fontFamily: 'Figtree, sans-serif',
+    borderRadius: 'var(--radius-md)',
+    transition: 'all 200ms ease',
+    
+    '&:hover': {
+      transform: 'translateY(-1px)',
+      boxShadow: 'var(--shadow-sm)',
+    },
+  },
+  
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'var(--color-gray-300)',
+      borderWidth: '2px',
+    },
+    '&:hover fieldset': {
+      borderColor: 'var(--color-primary-400)',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'var(--color-primary-500)',
+      borderWidth: '2px',
+    },
+  },
+  
+  '& .MuiInputLabel-root': {
+    fontFamily: 'Figtree, sans-serif',
+    '&.Mui-focused': {
+      color: 'var(--color-primary-500)',
+    },
+  },
+});
+```
+
+## 📊 REGISTRY ENTRY STRUCTURE
+
+Every component in the registry MUST have:
+
+```javascript
+{
+  // IDENTIFICATION
+  name: string,              // Component name (e.g., 'Button')
+  displayName: string,       // Display name (e.g., 'Button')
+  description: string,       // What transformations were applied
+  
+  // STATUS
+  status: TRANSFORMATION_STATUS.COMPLETE,
+  transformedDate: new Date().toISOString(),
+  
+  // PATHS
+  path: string,              // Path to component file
+  component: () => import(), // Dynamic import
+  muiComponent: string,      // Original MUI component
+  
+  // EXAMPLES (REQUIRED!)
+  variants: [
+    {
+      name: string,          // Variant name
+      props: object,         // Props to apply
+      code: string          // Example code
+    }
+  ],
+  
+  sizes: [                   // If applicable
+    {
+      name: string,
+      props: object,
+      code: string
+    }
+  ],
+  
+  states: [                  // If applicable
+    {
+      name: string,
+      props: object,
+      code: string
+    }
+  ],
+  
+  // DOCUMENTATION (REQUIRED!)
+  props: {
+    [propName]: {
+      type: string,
+      options?: array,
+      default?: any
+    }
+  },
+  
+  designTokens: string[],    // List of tokens used
+  
+  documentation: string      // Markdown documentation
+}
+```
+
+## ⚠️ COMMON MISTAKES TO AVOID
+
+### ❌ DON'T: Create component without adding to registry
+Result: Component won't appear in sidebar
+
+### ❌ DON'T: Use hardcoded values
+```typescript
+// WRONG
+borderRadius: '8px',
+color: '#8b5cf6',
+```
+
+### ✅ DO: Use design tokens
+```typescript
+// CORRECT
+borderRadius: 'var(--radius-md)',
+color: 'var(--color-primary-500)',
+```
+
+### ❌ DON'T: Minimal styling
+```typescript
+// WRONG - Too minimal
+const StyledButton = styled(MuiButton)({
+  textTransform: 'none'
+});
+```
+
+### ✅ DO: Heavy transformation
+```typescript
+// CORRECT - Significant changes
+const StyledButton = styled(MuiButton)({
+  fontFamily: 'Figtree, sans-serif',
+  borderRadius: 'var(--radius-md)',
+  background: 'linear-gradient(...)',
+  transition: 'all 200ms ease',
+  // ... many more styles
+});
+```
+
+## 🚀 QUICK COMMAND REFERENCE
+
+When user says: **"Create a [Component] component"**
+
+You must:
+1. Create `client/components/ui/[Component].tsx`
+2. Apply heavy transformations using styled()
+3. Add to `client/utils/component-registry.js`
+4. Include variants, props, documentation
+5. Respond: "Created and transformed [Component]. It now appears in the sidebar."
+
+## 📋 COMPONENT CREATION CHECKLIST
+
+- [ ] Component file created in `client/components/ui/`
+- [ ] Uses styled() API for transformations
+- [ ] Applies Figtree font
+- [ ] Uses design tokens (no hardcoded values)
+- [ ] Has hover/focus animations
+- [ ] Added to component registry
+- [ ] Includes variant examples
+- [ ] Includes props documentation
+- [ ] Includes markdown documentation
+- [ ] Tested that it appears in sidebar
+
+## 🎯 SUCCESS CRITERIA
+
+A component is successfully created when:
+1. **It appears in the sidebar** (most important!)
+2. **It looks significantly different** from default MUI
+3. **It has complete documentation** in the registry
+4. **It uses design tokens** throughout
+5. **It includes examples** for all variants
+
+## 💡 PRO TIPS
+
+1. **Always add to registry** - No registry entry = No sidebar display
+2. **Transform heavily** - Make it visually impressive
+3. **Document everything** - Props, variants, usage examples
+4. **Use design tokens** - Never hardcode values
+5. **Test in sidebar** - Verify it appears and works
+
+## 🔴 FINAL REMINDER
+
+**IF YOU DON'T ADD THE COMPONENT TO THE REGISTRY, IT WON'T APPEAR IN THE SIDEBAR!**
+
+The registry entry is NOT optional - it's MANDATORY for the component to be visible and usable in the design system.
 ## 🎯 YOUR PRIMARY OBJECTIVE
 
 When asked to create or transform a component, you MUST:

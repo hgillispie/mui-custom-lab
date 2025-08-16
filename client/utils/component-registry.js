@@ -20,46 +20,7 @@ export const TRANSFORMATION_STATUS = {
 
 export const COMPONENT_REGISTRY = {
   [COMPONENT_CATEGORIES.FORMS]: [
-    // Example: Button component transformed by Fusion
-    // {
-    //   name: 'Button',
-    //   displayName: 'Button',
-    //   description: 'Material UI Button customized with our design system',
-    //   status: TRANSFORMATION_STATUS.COMPLETE,
-    //   path: '/components/ui/Button',
-    //   component: () => import('../components/ui/Button'),
-    //   muiComponent: '@mui/material/Button',
-    //   variants: [
-    //     { name: 'Contained', props: { variant: 'contained' }, code: '<Button variant="contained">Click Me</Button>' },
-    //     { name: 'Outlined', props: { variant: 'outlined' }, code: '<Button variant="outlined">Click Me</Button>' },
-    //     { name: 'Text', props: { variant: 'text' }, code: '<Button variant="text">Click Me</Button>' },
-    //     { name: 'Gradient', props: { variant: 'gradient' }, code: '<Button variant="gradient">Gradient</Button>' }
-    //   ],
-    //   sizes: [
-    //     { name: 'Small', props: { size: 'small' }, code: '<Button size="small">Small</Button>' },
-    //     { name: 'Medium', props: { size: 'medium' }, code: '<Button size="medium">Medium</Button>' },
-    //     { name: 'Large', props: { size: 'large' }, code: '<Button size="large">Large</Button>' }
-    //   ],
-    //   states: [
-    //     { name: 'Loading', props: { loading: true }, code: '<Button loading>Loading</Button>' },
-    //     { name: 'Disabled', props: { disabled: true }, code: '<Button disabled>Disabled</Button>' }
-    //   ],
-    //   props: {
-    //     variant: { type: 'enum', options: ['contained', 'outlined', 'text', 'gradient'], default: 'contained' },
-    //     size: { type: 'enum', options: ['small', 'medium', 'large'], default: 'medium' },
-    //     color: { type: 'enum', options: ['primary', 'secondary', 'error'], default: 'primary' },
-    //     disabled: { type: 'boolean', default: false },
-    //     loading: { type: 'boolean', default: false },
-    //     fullWidth: { type: 'boolean', default: false },
-    //     startIcon: { type: 'ReactNode' },
-    //     endIcon: { type: 'ReactNode' }
-    //   },
-    //   designTokens: ['primary-500', 'primary-600', 'spacing-2', 'spacing-4', 'radius-md', 'shadow-md'],
-    //   documentation: `
-    //     The Button component is a customized Material UI Button that uses our design system tokens.
-    //     It includes additional features like loading states and a gradient variant.
-    //   `
-    // }
+    // Components will be added here when created
   ],
   [COMPONENT_CATEGORIES.NAVIGATION]: [],
   [COMPONENT_CATEGORIES.DATA_DISPLAY]: [],

@@ -1,9 +1,9 @@
 import React, { useState, Suspense } from 'react';
-import { 
-  Box, 
-  Paper, 
-  Typography, 
-  Stack, 
+import {
+  Box,
+  Paper,
+  Typography,
+  Stack,
   Tabs,
   Tab,
   Chip,
@@ -23,7 +23,7 @@ import {
   Palette as PaletteIcon
 } from '@mui/icons-material';
 import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'prism-react-renderer';
+// Removed prism-react-renderer import as it's not needed for current implementation
 
 interface ComponentViewerProps {
   component: any;
@@ -124,8 +124,8 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
                 Interactive Playground
               </Typography>
               
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6}>
+              <div style={{ display: 'flex', gap: '24px', flexDirection: window.innerWidth < 768 ? 'column' : 'row' }}>
+                <div style={{ flex: 1 }}>
                   <Stack spacing={2}>
                     {/* Variant Selector */}
                     {component.variants && (
@@ -190,9 +190,9 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
                       </Box>
                     )}
                   </Stack>
-                </Grid>
+                </div>
 
-                <Grid item xs={12} md={6}>
+                <div style={{ flex: 1 }}>
                   <Box 
                     sx={{ 
                       p: 4, 
@@ -212,8 +212,8 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
                       component.states?.[selectedState]
                     )}
                   </Box>
-                </Grid>
-              </Grid>
+                </div>
+              </div>
             </Paper>
 
             {/* All Variants */}
@@ -221,9 +221,9 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
               <Typography variant="h6" gutterBottom>
                 All Variants
               </Typography>
-              <Grid container spacing={2}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
                 {component.variants?.map((variant: any, index: number) => (
-                  <Grid item xs={12} sm={6} md={4} key={index}>
+                  <div key={index}>
                     <Box
                       sx={{
                         p: 3,
@@ -266,9 +266,9 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
                         </IconButton>
                       </Box>
                     </Box>
-                  </Grid>
+                  </div>
                 ))}
-              </Grid>
+              </div>
             </Paper>
 
             {/* Props Documentation */}
@@ -358,9 +358,9 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
             <Alert severity="info" sx={{ mb: 3 }}>
               These design tokens are applied to transform the Material UI component
             </Alert>
-            <Grid container spacing={2}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
               {component.designTokens?.map((token: string) => (
-                <Grid item xs={12} sm={6} md={4} key={token}>
+                <div key={token}>
                   <Box
                     sx={{
                       p: 2,
@@ -377,9 +377,9 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
                       --color-{token}
                     </Typography>
                   </Box>
-                </Grid>
+                </div>
               ))}
-            </Grid>
+            </div>
           </Paper>
         )}
       </Box>

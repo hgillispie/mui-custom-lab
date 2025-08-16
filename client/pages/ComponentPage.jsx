@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDesignSystem } from "../context/DesignSystemContext.jsx";
-import { ComponentView } from "../components/layout/MainContent.jsx";
+import { ComponentViewer } from "../components/ComponentViewer.tsx";
 import {
   getComponentsByCategory,
   getCategoryDisplayName,
@@ -42,6 +42,6 @@ export default function ComponentPage() {
   }
 
   return (
-    <ComponentView component={selectedComponent} category={selectedCategory} />
+    <ComponentViewer component={selectedComponent} category={selectedCategory} />
   );
 }
