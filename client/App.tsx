@@ -11,6 +11,7 @@ import MainContent, {
 import ComponentPage from "./pages/ComponentPage.jsx";
 import Documentation from "./pages/Documentation.jsx";
 import Playground from "./pages/Playground.jsx";
+ 
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -66,6 +67,7 @@ export default function App() {
                   </Layout>
                 }
               />
+         
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route
                 path="*"

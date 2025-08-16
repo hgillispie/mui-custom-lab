@@ -15,7 +15,32 @@ export const TRANSFORMATION_STATUS = {
   COMPLETE: "complete",
 };
 
-// Component registry with Button component
+// Component registry with example structure
+// When adding components, follow this structure:
+// {
+//   name: 'Button',
+//   displayName: 'Button',
+//   description: 'Interactive button with multiple variants',
+//   status: TRANSFORMATION_STATUS.COMPLETE,
+//   path: '/components/forms/Button',
+//   hasDemo: true,
+//   props: {
+//     variant: ['contained', 'outlined', 'text'],
+//     size: ['small', 'medium', 'large'],
+//     color: ['primary', 'secondary', 'error'],
+//     disabled: 'boolean',
+//     fullWidth: 'boolean',
+//     startIcon: 'ReactNode',
+//     endIcon: 'ReactNode'
+//   },
+//   examples: [
+//     { label: 'Contained', code: '<Button variant="contained">Click Me</Button>' },
+//     { label: 'Outlined', code: '<Button variant="outlined">Click Me</Button>' },
+//     { label: 'Text', code: '<Button variant="text">Click Me</Button>' }
+//   ],
+//   designTokens: ['primary-500', 'primary-600', 'spacing-sm', 'radius-md']
+// }
+
 export const COMPONENT_REGISTRY = {
   [COMPONENT_CATEGORIES.FORMS]: [],
   [COMPONENT_CATEGORIES.NAVIGATION]: [],

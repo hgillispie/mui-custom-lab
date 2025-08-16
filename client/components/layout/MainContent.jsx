@@ -31,6 +31,95 @@ const WelcomeScreen = () => {
 const ComponentView = ({ component, category }) => {
   // Render component examples
   const renderExamples = () => {
+    // If component has examples defined, render them
+    if (component.examples && component.examples.length > 0) {
+      return (
+        <div className="p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Live Examples</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {component.examples.map((example, index) => (
+              <div key={index} className="border border-gray-200 rounded-lg p-4">
+                <div className="mb-2 text-sm font-medium text-gray-700">
+                  {example.label}
+                </div>
+                <div className="p-4 bg-gray-50 rounded flex items-center justify-center min-h-[80px] font-sans">
+                  {/* This is where the live component would render */}
+                  <div className="text-gray-400 text-sm">
+                    {example.code}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Code Examples Section */}
+          {component.codeExample && (
+            <div className="mt-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Code Example</h3>
+              <div className="bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto">
+                <pre className="text-sm font-mono">
+                  <code>{component.codeExample}</code>
+                </pre>
+              </div>
+            </div>
+          )}
+          
+          {/* Props Documentation */}
+          {component.props && (
+            <div className="mt-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Props</h3>
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Prop
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Type
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Description
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {Object.entries(component.props).map(([prop, type]) => (
+                      <tr key={prop}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">
+                          {prop}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {Array.isArray(type) ? type.join(' | ') : type}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-gray-500">
+                          {/* Add descriptions if available */}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+          
+          {/* Design Tokens Used */}
+          {component.designTokens && component.designTokens.length > 0 && (
+            <div className="mt-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Design Tokens</h3>
+              <div className="flex flex-wrap gap-2">
+                {component.designTokens.map((token) => (
+                  <code key={token} className="px-3 py-1 bg-gray-100 text-gray-800 rounded text-sm font-mono">
+                    --color-{token}
+                  </code>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+    
     return (
       <div className="p-6 text-center text-gray-500">
         <p>Examples will be displayed here once the component is implemented.</p>

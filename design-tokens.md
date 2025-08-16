@@ -1,5 +1,38 @@
 # Design System Configuration File
 
+## 🔴 CRITICAL: FONT SETUP MUST BE DONE FIRST!
+
+### ⚠️ WITHOUT PROPER FONT CONFIGURATION, THE DESIGN SYSTEM WILL NOT WORK!
+
+**BEFORE ANYTHING ELSE:**
+1. **Import Figtree font** in your global CSS file (at the VERY TOP):
+   ```css
+   @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap');
+   ```
+
+2. **Set Figtree as the default font** in your global CSS:
+   ```css
+   body {
+     font-family: 'Figtree', system-ui, -apple-system, sans-serif !important;
+   }
+   ```
+
+3. **Configure Tailwind** (tailwind.config.js):
+   ```javascript
+   theme: {
+     extend: {
+       fontFamily: {
+         // Override the default sans font with Figtree
+         sans: ['Figtree', 'system-ui', '-apple-system', 'sans-serif'],
+       }
+     }
+   }
+   ```
+   
+   **Note:** In components, always include `font-sans` class to ensure Figtree is applied!
+
+4. **VERIFY:** Open DevTools → Inspect any text → Computed styles MUST show "Figtree"
+
 
 
 ```markdown
@@ -122,13 +155,22 @@ globs: ["src/**/*.{js,jsx,ts,tsx,css}"]
 alwaysApply: true
 ---
 
-## Font Families
+## 🚨 CRITICAL: Font Families Configuration
 
-### Primary Font Stack
-- Sans: 'Inter', system-ui, -apple-system, sans-serif
-- Serif: 'Merriweather', Georgia, serif
-- Mono: 'JetBrains Mono', 'Fira Code', monospace
-- Display: 'Playfair Display', serif (for headlines)
+### 🔴 PRIMARY FONT STACK (MUST BE CONFIGURED!)
+**THE ENTIRE DESIGN SYSTEM DEPENDS ON FIGTREE BEING PROPERLY LOADED!**
+
+- **Sans (DEFAULT):** 'Figtree', system-ui, -apple-system, sans-serif
+- **Display (Headlines):** 'Figtree', system-ui, -apple-system, sans-serif
+- **Body (Content):** 'Figtree', system-ui, -apple-system, sans-serif
+- **Mono (Code):** 'JetBrains Mono', 'Fira Code', Consolas, monospace
+
+### ⚠️ Font Implementation Checklist:
+- [ ] Google Fonts import added to global CSS
+- [ ] Body font-family set to Figtree
+- [ ] Tailwind config updated with Figtree as sans
+- [ ] All components include 'font-sans' class
+- [ ] DevTools shows Figtree as computed font
 
 ## Type Scale System
 
@@ -254,15 +296,19 @@ alwaysApply: true
 }
 ```
 
-## Tailwind Configuration
+## 🔴 CRITICAL: Tailwind Font Configuration
 ```javascript
-typography: {
-  fontFamily: {
-    sans: ['Inter', ...defaultTheme.fontFamily.sans],
-    serif: ['Merriweather', ...defaultTheme.fontFamily.serif],
-    mono: ['JetBrains Mono', ...defaultTheme.fontFamily.mono],
-    display: ['Playfair Display', ...defaultTheme.fontFamily.serif],
-  },
+// ⚠️ THIS MUST BE SET OR COMPONENTS WON'T USE FIGTREE!
+module.exports = {
+  theme: {
+    extend: {
+      fontFamily: {
+        // 🚨 OVERRIDE DEFAULT SANS WITH FIGTREE!
+        sans: ['Figtree', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['Figtree', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        body: ['Figtree', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'Courier New', 'monospace'],
+      },
   fontSize: {
     xs: ['0.75rem', { lineHeight: '1rem' }],
     sm: ['0.875rem', { lineHeight: '1.25rem' }],
@@ -865,9 +911,12 @@ module.exports = {
         'surface-secondary': 'var(--color-bg-secondary)',
       },
       fontFamily: {
-        // Import from typography.mdc
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Playfair Display', 'serif'],
+        // 🔴 CRITICAL: Import from typography.mdc
+        // 🚨 WITHOUT THIS, YOUR DESIGN SYSTEM WON'T WORK!
+        sans: ['Figtree', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['Figtree', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        body: ['Figtree', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
       },
       fontSize: {
         // Import from typography.mdc scale
