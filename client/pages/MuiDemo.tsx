@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { 
-  Box, 
-  Container, 
-  Typography, 
-  Stack, 
+import {
+  Box,
+  Container,
+  Typography,
+  Stack,
   Paper,
   TextField,
   Card,
@@ -13,10 +13,10 @@ import {
   Chip,
   Switch,
   FormControlLabel,
-  Divider
+  Divider,
+  Button
 } from '@mui/material';
 import { Save as SaveIcon, Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
-import Button from '../components/ui/Button';
 
 export const MuiDemo: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -56,8 +56,8 @@ export const MuiDemo: React.FC = () => {
             <Button variant="text" color="primary">
               Text
             </Button>
-            <Button variant="gradient">
-              Gradient
+            <Button variant="contained" color="secondary">
+              Secondary
             </Button>
           </Stack>
           
@@ -80,10 +80,10 @@ export const MuiDemo: React.FC = () => {
             <Button variant="outlined" color="error" startIcon={<DeleteIcon />}>
               Delete
             </Button>
-            <Button 
-              variant="contained" 
-              loading={loading}
+            <Button
+              variant="contained"
               onClick={handleLoadingClick}
+              disabled={loading}
             >
               {loading ? 'Loading...' : 'Click to Load'}
             </Button>

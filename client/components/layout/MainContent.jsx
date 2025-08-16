@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useDesignSystem } from "../../context/DesignSystemContext.jsx";
 
 // Welcome screen component
@@ -27,102 +27,221 @@ const WelcomeScreen = () => {
   );
 };
 
+// Live component renderer
+const LiveComponentRenderer = ({ component, componentName, props, label }) => {
+  const [Component, setComponent] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (component && component.component) {
+      component.component()
+        .then((module) => {
+          setComponent(() => module.default || module[componentName]);
+          setError(null);
+        })
+        .catch((err) => {
+          console.error(`Failed to load component ${componentName}:`, err);
+          setError(err.message);
+        });
+    }
+  }, [component, componentName]);
+
+  if (error) {
+    return (
+      <div className="text-red-500 text-sm p-4 border border-red-200 rounded">
+        Error loading component: {error}
+      </div>
+    );
+  }
+
+  if (!Component) {
+    return (
+      <div className="text-gray-400 text-sm p-4">
+        Loading {componentName}...
+      </div>
+    );
+  }
+
+  try {
+    return <Component {...props}>{label}</Component>;
+  } catch (renderError) {
+    return (
+      <div className="text-red-500 text-sm p-2 border border-red-200 rounded">
+        Render Error: {renderError.message}
+      </div>
+    );
+  }
+};
+
 // Component view screen (when a component is selected)
 const ComponentView = ({ component, category }) => {
-  // Render component examples
-  const renderExamples = () => {
-    // If component has examples defined, render them
-    if (component.examples && component.examples.length > 0) {
+  // Render component variants, sizes, and states
+  const renderLiveExamples = () => {
+    if (component.status !== 'complete') {
       return (
-        <div className="p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Live Examples</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {component.examples.map((example, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg p-4">
-                <div className="mb-2 text-sm font-medium text-gray-700">
-                  {example.label}
-                </div>
-                <div className="p-4 bg-gray-50 rounded flex items-center justify-center min-h-[80px] font-sans">
-                  {/* This is where the live component would render */}
-                  <div className="text-gray-400 text-sm">
-                    {example.code}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          {/* Code Examples Section */}
-          {component.codeExample && (
-            <div className="mt-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Code Example</h3>
-              <div className="bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto">
-                <pre className="text-sm font-mono">
-                  <code>{component.codeExample}</code>
-                </pre>
-              </div>
-            </div>
-          )}
-          
-          {/* Props Documentation */}
-          {component.props && (
-            <div className="mt-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Props</h3>
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Prop
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Type
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Description
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {Object.entries(component.props).map(([prop, type]) => (
-                      <tr key={prop}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">
-                          {prop}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {Array.isArray(type) ? type.join(' | ') : type}
-                        </td>
-                        <td className="px-6 py-4 text-sm text-gray-500">
-                          {/* Add descriptions if available */}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
-          
-          {/* Design Tokens Used */}
-          {component.designTokens && component.designTokens.length > 0 && (
-            <div className="mt-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Design Tokens</h3>
-              <div className="flex flex-wrap gap-2">
-                {component.designTokens.map((token) => (
-                  <code key={token} className="px-3 py-1 bg-gray-100 text-gray-800 rounded text-sm font-mono">
-                    --color-{token}
-                  </code>
-                ))}
-              </div>
-            </div>
-          )}
+        <div className="p-6 text-center text-gray-500">
+          <p>Live examples will be displayed here once the component is implemented.</p>
         </div>
       );
     }
-    
+
     return (
-      <div className="p-6 text-center text-gray-500">
-        <p>Examples will be displayed here once the component is implemented.</p>
+      <div className="p-6">
+        {/* Variants Section */}
+        {component.variants && component.variants.length > 0 && (
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Variants</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {component.variants.map((variant, index) => (
+                <div key={index} className="border border-gray-200 rounded-lg p-4">
+                  <div className="mb-3 text-sm font-medium text-gray-700">
+                    {variant.name}
+                  </div>
+                  <div className="p-4 bg-gray-50 rounded flex items-center justify-center min-h-[80px]">
+                    <Suspense fallback={<div className="text-gray-400">Loading...</div>}>
+                      <LiveComponentRenderer
+                        component={component}
+                        componentName={component.name}
+                        props={variant.props}
+                        label={variant.name}
+                      />
+                    </Suspense>
+                  </div>
+                  <div className="mt-2 p-2 bg-gray-100 rounded text-xs font-mono text-gray-600">
+                    {variant.code}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Sizes Section */}
+        {component.sizes && component.sizes.length > 0 && (
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Sizes</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {component.sizes.map((size, index) => (
+                <div key={index} className="border border-gray-200 rounded-lg p-4">
+                  <div className="mb-3 text-sm font-medium text-gray-700">
+                    {size.name}
+                  </div>
+                  <div className="p-4 bg-gray-50 rounded flex items-center justify-center min-h-[80px]">
+                    <Suspense fallback={<div className="text-gray-400">Loading...</div>}>
+                      <LiveComponentRenderer
+                        component={component}
+                        componentName={component.name}
+                        props={size.props}
+                        label={size.name}
+                      />
+                    </Suspense>
+                  </div>
+                  <div className="mt-2 p-2 bg-gray-100 rounded text-xs font-mono text-gray-600">
+                    {size.code}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* States Section */}
+        {component.states && component.states.length > 0 && (
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">States</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {component.states.map((state, index) => (
+                <div key={index} className="border border-gray-200 rounded-lg p-4">
+                  <div className="mb-3 text-sm font-medium text-gray-700">
+                    {state.name}
+                  </div>
+                  <div className="p-4 bg-gray-50 rounded flex items-center justify-center min-h-[80px]">
+                    <Suspense fallback={<div className="text-gray-400">Loading...</div>}>
+                      <LiveComponentRenderer
+                        component={component}
+                        componentName={component.name}
+                        props={state.props}
+                        label={state.name}
+                      />
+                    </Suspense>
+                  </div>
+                  <div className="mt-2 p-2 bg-gray-100 rounded text-xs font-mono text-gray-600">
+                    {state.code}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Props Documentation */}
+        {component.props && (
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Props</h3>
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200 border border-gray-200 rounded-lg">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Prop
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Type
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Options
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Default
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {Object.entries(component.props).map(([prop, propData]) => (
+                    <tr key={prop}>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">
+                        {prop}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {propData.type || 'string'}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-500">
+                        {propData.options ? propData.options.join(' | ') : '-'}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-500">
+                        {propData.default !== undefined ? String(propData.default) : '-'}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Design Tokens Used */}
+        {component.designTokens && component.designTokens.length > 0 && (
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Design Tokens Used</h3>
+            <div className="flex flex-wrap gap-2">
+              {component.designTokens.map((token) => (
+                <code key={token} className="px-3 py-1 bg-blue-100 text-blue-800 rounded text-sm font-mono">
+                  --color-{token}
+                </code>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Documentation */}
+        {component.documentation && (
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Documentation</h3>
+            <div className="prose prose-sm max-w-none bg-gray-50 rounded-lg p-4">
+              <pre className="whitespace-pre-wrap text-gray-700">{component.documentation}</pre>
+            </div>
+          </div>
+        )}
       </div>
     );
   };
@@ -134,7 +253,7 @@ const ComponentView = ({ component, category }) => {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-gray-900">
-                {component.name}
+                {component.displayName || component.name}
               </h1>
               <p className="text-gray-600 mt-1">{component.description}</p>
             </div>
@@ -150,7 +269,7 @@ const ComponentView = ({ component, category }) => {
         </div>
 
         <div className="bg-white">
-          {renderExamples()}
+          {renderLiveExamples()}
         </div>
       </div>
     );
@@ -162,7 +281,7 @@ const ComponentView = ({ component, category }) => {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">
-              {component.name}
+              {component.displayName || component.name}
             </h1>
             <p className="text-gray-600 mt-1">{component.description}</p>
           </div>
@@ -216,10 +335,10 @@ const ComponentView = ({ component, category }) => {
                     <div className="flex flex-wrap gap-2">
                       {component.variants.map((variant) => (
                         <span
-                          key={variant}
+                          key={variant.name}
                           className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-sm"
                         >
-                          {variant}
+                          {variant.name}
                         </span>
                       ))}
                     </div>
@@ -234,10 +353,10 @@ const ComponentView = ({ component, category }) => {
                     <div className="flex flex-wrap gap-2">
                       {component.sizes.map((size) => (
                         <span
-                          key={size}
+                          key={size.name}
                           className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-sm"
                         >
-                          {size}
+                          {size.name}
                         </span>
                       ))}
                     </div>
