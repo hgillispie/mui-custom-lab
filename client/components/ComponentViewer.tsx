@@ -23,6 +23,7 @@ import {
   Palette as PaletteIcon
 } from '@mui/icons-material';
 import ReactMarkdown from 'react-markdown';
+import { createCardContent } from '../utils/card-mock-content.jsx';
 // Removed prism-react-renderer import as it's not needed for current implementation
 
 interface ComponentViewerProps {
@@ -35,7 +36,7 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [selectedSize, setSelectedSize] = useState(0);
-  const [selectedState, setSelectedState] = useState(0);
+  const [selectedState, setSelectedState] = useState(-1); // -1 for 'None' option
 
   // Dynamically import the component
   const DynamicComponent = React.lazy(component.component);
@@ -50,25 +51,62 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
     const props = {
       ...variant?.props,
       ...size?.props,
-      ...state?.props,
+      ...(state ? state.props : {}), // Only apply state props if state is not null
     };
+
+    // For Switch components, remove checked prop to allow internal state management in playground
+    if (component.name === 'Switch') {
+      delete props.checked;
+    }
+
+    // Handle Card mock content
+    if (component.name === 'Card' && props.mockContent) {
+      const mockContent = createCardContent[props.mockContent];
+      if (mockContent) {
+        const { mockContent: _, ...cardProps } = props; // Remove mockContent from props
+        return (
+          <Suspense fallback={<CircularProgress size={24} />}>
+            <DynamicComponent {...cardProps}>
+              {mockContent()}
+            </DynamicComponent>
+          </Suspense>
+        );
+      }
+    }
+
+    // Handle Modal - ensure it shows demo mode (trigger button)
+    if (component.name === 'Modal') {
+      return (
+        <Suspense fallback={<CircularProgress size={24} />}>
+          <DynamicComponent {...props} showDemo={true} />
+        </Suspense>
+      );
+    }
 
     return (
       <Suspense fallback={<CircularProgress size={24} />}>
         <DynamicComponent {...props}>
-          {props.loading ? 'Loading...' : 'Click Me'}
+          {['Table', 'Alert', 'AppBar', 'Snackbar', 'Modal', 'Tabs', 'Dialog', 'Radio', 'Switch', 'Badge', 'Chip', 'Avatar', 'Progress'].includes(component.name)
+            ? undefined
+            : (props.loading ? 'Loading...' : 'Click Me')
+          }
         </DynamicComponent>
       </Suspense>
     );
   };
 
   return (
-    <Box sx={{ height: '100%', overflow: 'auto', bgcolor: '#f8f9fa' }}>
+    <Box sx={{
+      height: '100%',
+      overflow: 'auto',
+      bgcolor: '#f8f9fa',
+      px: { xs: 1, sm: 2, md: 0 }
+    }}>
       {/* Header */}
-      <Paper 
+      <Paper
         elevation={0}
-        sx={{ 
-          p: 3, 
+        sx={{
+          p: { xs: 2, sm: 2.5, md: 3 },
           borderBottom: '1px solid',
           borderColor: 'divider',
           bgcolor: 'white'
@@ -76,8 +114,16 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
       >
         <Stack direction="row" justifyContent="space-between" alignItems="flex-start">
           <Box>
-            <Stack direction="row" spacing={2} alignItems="center">
-              <Typography variant="h4" fontWeight={600}>
+            <Stack
+              direction={{ xs: 'column', sm: 'row' }}
+              spacing={2}
+              alignItems={{ xs: 'flex-start', sm: 'center' }}
+            >
+              <Typography
+                variant="h4"
+                fontWeight={600}
+                sx={{ fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' } }}
+              >
                 {component.displayName}
               </Typography>
               <Chip 
@@ -90,14 +136,33 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
             <Typography variant="body1" color="text.secondary" sx={{ mt: 1 }}>
               {component.description}
             </Typography>
-            <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
-              <Chip label={category} size="small" variant="outlined" />
-              <Chip label={`MUI: ${component.muiComponent}`} size="small" variant="outlined" />
+            <Stack
+              direction={{ xs: 'column', sm: 'row' }}
+              spacing={1}
+              sx={{
+                mt: 2,
+                flexWrap: 'wrap',
+                gap: { xs: 1, sm: 1 }
+              }}
+            >
+              <Chip
+                label={category}
+                size="small"
+                variant="outlined"
+                sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}
+              />
+              <Chip
+                label={`MUI: ${component.muiComponent}`}
+                size="small"
+                variant="outlined"
+                sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}
+              />
               {component.transformedDate && (
-                <Chip 
-                  label={`Transformed: ${new Date(component.transformedDate).toLocaleDateString()}`} 
-                  size="small" 
-                  variant="outlined" 
+                <Chip
+                  label={`Transformed: ${new Date(component.transformedDate).toLocaleDateString()}`}
+                  size="small"
+                  variant="outlined"
+                  sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}
                 />
               )}
             </Stack>
@@ -124,8 +189,14 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
                 Interactive Playground
               </Typography>
               
-              <div style={{ display: 'flex', gap: '24px', flexDirection: window.innerWidth < 768 ? 'column' : 'row' }}>
-                <div style={{ flex: 1 }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  gap: { xs: 2, sm: 2, md: 3 },
+                  flexDirection: { xs: 'column', lg: 'row' }
+                }}
+              >
+                <div style={{ flex: 1, minWidth: 0 }}>
                   <Stack spacing={2}>
                     {/* Variant Selector */}
                     {component.variants && (
@@ -138,6 +209,14 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
                           exclusive
                           onChange={(e, v) => v !== null && setSelectedVariant(v)}
                           size="small"
+                          sx={{
+                            flexWrap: 'wrap',
+                            '& .MuiToggleButton-root': {
+                              fontSize: { xs: '0.7rem', sm: '0.75rem' },
+                              px: { xs: 1, sm: 1.5 },
+                              py: { xs: 0.5, sm: 0.75 }
+                            }
+                          }}
                         >
                           {component.variants.map((v: any, i: number) => (
                             <ToggleButton key={i} value={i}>
@@ -159,6 +238,14 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
                           exclusive
                           onChange={(e, v) => v !== null && setSelectedSize(v)}
                           size="small"
+                          sx={{
+                            flexWrap: 'wrap',
+                            '& .MuiToggleButton-root': {
+                              fontSize: { xs: '0.7rem', sm: '0.75rem' },
+                              px: { xs: 1, sm: 1.5 },
+                              py: { xs: 0.5, sm: 0.75 }
+                            }
+                          }}
                         >
                           {component.sizes.map((s: any, i: number) => (
                             <ToggleButton key={i} value={i}>
@@ -180,7 +267,18 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
                           exclusive
                           onChange={(e, v) => v !== null && setSelectedState(v)}
                           size="small"
+                          sx={{
+                            flexWrap: 'wrap',
+                            '& .MuiToggleButton-root': {
+                              fontSize: { xs: '0.7rem', sm: '0.75rem' },
+                              px: { xs: 1, sm: 1.5 },
+                              py: { xs: 0.5, sm: 0.75 }
+                            }
+                          }}
                         >
+                          <ToggleButton value={-1}>
+                            None
+                          </ToggleButton>
                           {component.states.map((s: any, i: number) => (
                             <ToggleButton key={i} value={i}>
                               {s.name}
@@ -192,10 +290,11 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
                   </Stack>
                 </div>
 
-                <div style={{ flex: 1 }}>
-                  <Box 
-                    sx={{ 
-                      p: 4, 
+                <div style={{ flex: 1.5, minWidth: 0 }}>
+                  <Box
+                    sx={{
+                      p: { xs: 2, sm: 3, md: 4 },
+                      pt: { xs: 3, sm: 4, md: 6 },
                       bgcolor: 'background.default',
                       borderRadius: 2,
                       border: '2px dashed',
@@ -203,17 +302,19 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      minHeight: 200
+                      minHeight: { xs: 200, sm: 240, md: 280 },
+                      width: '100%',
+                      overflow: 'hidden'
                     }}
                   >
                     {renderLiveExample(
                       component.variants?.[selectedVariant],
                       component.sizes?.[selectedSize],
-                      component.states?.[selectedState]
+                      selectedState >= 0 ? component.states?.[selectedState] : null
                     )}
                   </Box>
                 </div>
-              </div>
+              </Box>
             </Paper>
 
             {/* All Variants */}
@@ -221,54 +322,83 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
               <Typography variant="h6" gutterBottom>
                 All Variants
               </Typography>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+              <Box
+                sx={{
+                  display: 'grid',
+                  // Use single column layout for longer components
+                  gridTemplateColumns: ['Table', 'Alert', 'AppBar', 'Snackbar', 'Modal', 'Tabs', 'Dialog'].includes(component.name)
+                    ? '1fr'
+                    : {
+                        xs: '1fr',
+                        sm: 'repeat(auto-fit, minmax(250px, 1fr))',
+                        md: 'repeat(auto-fit, minmax(280px, 1fr))'
+                      },
+                  gap: { xs: 1.5, sm: 2 }
+                }}
+              >
                 {component.variants?.map((variant: any, index: number) => (
                   <div key={index}>
                     <Box
                       sx={{
-                        p: 3,
+                        p: { xs: 2, sm: 2.5, md: 3 },
                         border: '1px solid',
                         borderColor: 'divider',
                         borderRadius: 1,
-                        textAlign: 'center',
+                        textAlign: ['Table', 'Alert', 'AppBar', 'Snackbar', 'Tabs', 'Dialog'].includes(component.name) ? 'left' : 'center',
+                        minWidth: 0,
+                        overflow: 'hidden',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        height: 'fit-content'
                       }}
                     >
                       <Typography variant="caption" color="text.secondary" gutterBottom display="block">
                         {variant.name}
                       </Typography>
-                      <Box sx={{ my: 2 }}>
+                      <Box sx={{
+                        my: { xs: 1.5, sm: 2 },
+                        minWidth: 0,
+                        overflow: 'hidden',
+                        display: 'flex',
+                        alignItems: ['Table', 'AppBar'].includes(component.name) ? 'flex-start' : 'center',
+                        justifyContent: ['Table', 'Alert', 'AppBar', 'Snackbar', 'Tabs', 'Dialog'].includes(component.name) ? 'flex-start' : 'center',
+                        minHeight: {
+                          xs: ['Table', 'Alert', 'AppBar', 'Snackbar', 'Tabs', 'Dialog'].includes(component.name) ? 120 : 60,
+                          sm: ['Table', 'Alert', 'AppBar', 'Snackbar', 'Tabs', 'Dialog'].includes(component.name) ? 150 : 80,
+                          md: ['Table', 'Alert', 'AppBar', 'Snackbar', 'Tabs', 'Dialog'].includes(component.name) ? 180 : 100
+                        },
+                        width: '100%'
+                      }}>
                         <Suspense fallback={<CircularProgress size={20} />}>
-                          <DynamicComponent {...variant.props}>
-                            {variant.name}
-                          </DynamicComponent>
+                          {(() => {
+                            // Handle Card mock content in All Variants section
+                            if (component.name === 'Card' && variant.props.mockContent) {
+                              const mockContent = createCardContent[variant.props.mockContent];
+                              if (mockContent) {
+                                const { mockContent: _, ...cardProps } = variant.props; // Remove mockContent from props
+                                return (
+                                  <DynamicComponent {...cardProps}>
+                                    {mockContent()}
+                                  </DynamicComponent>
+                                );
+                              }
+                            }
+
+                            // For longer components, don't pass variant name as children
+                            const componentProps = ['Table', 'Alert', 'AppBar', 'Snackbar', 'Modal', 'Tabs', 'Dialog', 'Radio', 'Switch', 'Badge', 'Chip', 'Avatar', 'Progress'].includes(component.name)
+                              ? variant.props
+                              : { ...variant.props, children: variant.name };
+
+                            return (
+                              <DynamicComponent {...componentProps} />
+                            );
+                          })()}
                         </Suspense>
-                      </Box>
-                      <Box sx={{ position: 'relative', mt: 2 }}>
-                        <Typography
-                          variant="caption"
-                          component="pre"
-                          sx={{
-                            bgcolor: 'grey.100',
-                            p: 1,
-                            borderRadius: 1,
-                            overflow: 'auto',
-                            fontSize: '0.7rem',
-                          }}
-                        >
-                          {variant.code}
-                        </Typography>
-                        <IconButton
-                          size="small"
-                          sx={{ position: 'absolute', top: 4, right: 4 }}
-                          onClick={() => handleCopyCode(variant.code, `variant-${index}`)}
-                        >
-                          {copiedCode === `variant-${index}` ? <CheckIcon fontSize="small" /> : <CopyIcon fontSize="small" />}
-                        </IconButton>
                       </Box>
                     </Box>
                   </div>
                 ))}
-              </div>
+              </Box>
             </Paper>
 
             {/* Props Documentation */}
@@ -277,27 +407,34 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
                 <Typography variant="h6" gutterBottom>
                   Props
                 </Typography>
-                <Box sx={{ overflowX: 'auto' }}>
+                <Box
+                  sx={{
+                    overflowX: 'auto',
+                    '& table': {
+                      minWidth: { xs: '500px', md: '100%' }
+                    }
+                  }}
+                >
                   <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                     <thead>
                       <tr style={{ borderBottom: '2px solid #e0e0e0' }}>
-                        <th style={{ padding: '12px', textAlign: 'left' }}>Prop</th>
-                        <th style={{ padding: '12px', textAlign: 'left' }}>Type</th>
-                        <th style={{ padding: '12px', textAlign: 'left' }}>Default</th>
-                        <th style={{ padding: '12px', textAlign: 'left' }}>Options</th>
+                        <th style={{ padding: '8px 12px', textAlign: 'left', fontSize: '0.875rem' }}>Prop</th>
+                        <th style={{ padding: '8px 12px', textAlign: 'left', fontSize: '0.875rem' }}>Type</th>
+                        <th style={{ padding: '8px 12px', textAlign: 'left', fontSize: '0.875rem' }}>Default</th>
+                        <th style={{ padding: '8px 12px', textAlign: 'left', fontSize: '0.875rem' }}>Options</th>
                       </tr>
                     </thead>
                     <tbody>
                       {Object.entries(component.props).map(([propName, propDef]: [string, any]) => (
                         <tr key={propName} style={{ borderBottom: '1px solid #f0f0f0' }}>
-                          <td style={{ padding: '12px', fontFamily: 'monospace' }}>{propName}</td>
-                          <td style={{ padding: '12px', fontFamily: 'monospace', color: '#666' }}>
+                          <td style={{ padding: '8px 12px', fontFamily: 'monospace', fontSize: '0.8rem' }}>{propName}</td>
+                          <td style={{ padding: '8px 12px', fontFamily: 'monospace', color: '#666', fontSize: '0.8rem' }}>
                             {propDef.type}
                           </td>
-                          <td style={{ padding: '12px', fontFamily: 'monospace' }}>
+                          <td style={{ padding: '8px 12px', fontFamily: 'monospace', fontSize: '0.8rem' }}>
                             {propDef.default !== undefined ? String(propDef.default) : '-'}
                           </td>
-                          <td style={{ padding: '12px', fontFamily: 'monospace', fontSize: '0.85rem' }}>
+                          <td style={{ padding: '8px 12px', fontFamily: 'monospace', fontSize: '0.75rem', wordBreak: 'break-word' }}>
                             {propDef.options ? propDef.options.join(' | ') : '-'}
                           </td>
                         </tr>

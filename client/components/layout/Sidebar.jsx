@@ -193,6 +193,7 @@ const ProgressSummary = () => {
 export default function Sidebar() {
   const { searchQuery, setSearchQuery, filteredComponents, isSearchActive } =
     useDesignSystem();
+  const location = useLocation();
 
   return (
     <div className="h-screen w-sidebar bg-sidebar-bg flex flex-col">
@@ -204,6 +205,64 @@ export default function Sidebar() {
         <p className="text-sm text-sidebar-text-muted mt-1">
           Transform Material UI components
         </p>
+      </div>
+
+      {/* Navigation */}
+      <div className="px-4 py-3 border-b border-gray-700">
+        <div className="space-y-1">
+          <Link
+            to="/templates"
+            className={`
+              flex items-center px-3 py-2 rounded-md text-sm transition-colors duration-fast
+              hover:bg-sidebar-hover text-sidebar-text hover:text-white
+              ${location.pathname === '/templates' ? 'bg-sidebar-active text-white' : ''}
+            `}
+          >
+            <svg className="w-4 h-4 mr-3" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3-6h3.75m-3.75 0a1.5 1.5 0 01-1.5 1.5h-7.5a1.5 1.5 0 01-1.5-1.5V6a1.5 1.5 0 011.5-1.5h7.5B10.5 4.5 10.5 6v3.75z" />
+            </svg>
+            Templates
+          </Link>
+          <Link
+            to="/documentation"
+            className={`
+              flex items-center px-3 py-2 rounded-md text-sm transition-colors duration-fast
+              hover:bg-sidebar-hover text-sidebar-text hover:text-white
+              ${location.pathname === '/documentation' ? 'bg-sidebar-active text-white' : ''}
+            `}
+          >
+            <svg className="w-4 h-4 mr-3" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-4.5B16.125 7.5 16.125 8.625v2.25" />
+            </svg>
+            Documentation
+          </Link>
+          <Link
+            to="/playground"
+            className={`
+              flex items-center px-3 py-2 rounded-md text-sm transition-colors duration-fast
+              hover:bg-sidebar-hover text-sidebar-text hover:text-white
+              ${location.pathname === '/playground' ? 'bg-sidebar-active text-white' : ''}
+            `}
+          >
+            <svg className="w-4 h-4 mr-3" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25M9.75 14.25L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
+            </svg>
+            Playground
+          </Link>
+          <Link
+            to="/composition-guide"
+            className={`
+              flex items-center px-3 py-2 rounded-md text-sm transition-colors duration-fast
+              hover:bg-sidebar-hover text-sidebar-text hover:text-white
+              ${location.pathname === '/composition-guide' ? 'bg-sidebar-active text-white' : ''}
+            `}
+          >
+            <svg className="w-4 h-4 mr-3" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.625 2.625 0 004.5 9.375v9.75a2.625 2.625 0 002.625 2.625h8.25a2.625 2.625 0 002.625-2.625v-9.75A2.625 2.625 0 0015.75 6.5H8.25a2.625 2.625 0 00-2.625 2.875z" />
+            </svg>
+            Composition Guide
+          </Link>
+        </div>
       </div>
 
       {/* Search */}

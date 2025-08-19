@@ -13,7 +13,9 @@ import ComponentPage from "./pages/ComponentPage.jsx";
 import Documentation from "./pages/Documentation.jsx";
 import Playground from "./pages/Playground.jsx";
 import MuiDemo from "./pages/MuiDemo";
- 
+import Templates from "./pages/Templates";
+import CompositionGuide from "./pages/CompositionGuide";
+
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -78,7 +80,23 @@ export default function App() {
                   </Layout>
                 }
               />
-         
+              <Route
+                path="/templates"
+                element={
+                  <Layout>
+                    <Templates />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/composition-guide"
+                element={
+                  <Layout>
+                    <CompositionGuide />
+                  </Layout>
+                }
+              />
+
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route
                 path="*"
