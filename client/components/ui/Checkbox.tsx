@@ -9,7 +9,7 @@ import { CheckboxProps as MuiCheckboxProps } from '@mui/material/Checkbox';
 
 // Extended interface with custom props
 export interface CheckboxProps extends Omit<MuiCheckboxProps, 'size'> {
-  variant?: 'default' | 'rounded' | 'gradient' | 'glass' | 'success' | 'warning' | 'error';
+  variant?: 'default' | 'rounded' | 'ghost' | 'success' | 'warning' | 'error';
   size?: 'small' | 'medium' | 'large';
   label?: string;
   helperText?: string;
@@ -115,35 +115,8 @@ const StyledCheckbox = styled(MuiCheckbox, {
     },
   }),
 
-  ...(variant === 'gradient' && {
-    color: 'var(--color-gray-400)',
-    
-    '&:hover': {
-      color: 'var(--color-primary-400)',
-    },
-    
-    '&.Mui-checked': {
-      background: 'linear-gradient(135deg, var(--color-primary-300), var(--color-primary-700))',
-      borderRadius: 'var(--radius-base)',
-      color: 'var(--color-white)',
-      
-      '& .MuiSvgIcon-root': {
-        filter: 'drop-shadow(0 6px 12px rgba(139, 92, 246, 0.4))',
-      },
-      
-      '&:hover': {
-        background: 'linear-gradient(135deg, var(--color-primary-500), var(--color-primary-800))',
-      },
-    },
-    
-    '&.Mui-focusVisible': {
-      '& .MuiSvgIcon-root': {
-        boxShadow: '0 0 0 3px var(--color-primary-200)',
-      },
-    },
-  }),
 
-  ...(variant === 'glass' && {
+  ...(variant === 'ghost' && {
     color: 'var(--color-gray-400)',
     
     '&:hover': {

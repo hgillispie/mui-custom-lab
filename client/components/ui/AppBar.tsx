@@ -9,7 +9,7 @@ import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 
 // Extended interface with custom props
 export interface AppBarProps extends Omit<MuiAppBarProps, 'variant'> {
-  variant?: 'default' | 'elevated' | 'gradient' | 'glass' | 'minimal';
+  variant?: 'default' | 'elevated' | 'ghost' | 'minimal';
   size?: 'compact' | 'standard' | 'large';
   logo?: React.ReactNode;
   title?: string;
@@ -75,34 +75,8 @@ const StyledAppBar = styled(MuiAppBar, {
     },
   }),
 
-  ...(variant === 'gradient' && {
-    background: 'linear-gradient(135deg, var(--color-primary-300), var(--color-primary-700))',
-    color: 'var(--color-white)',
-    borderBottom: 'none',
-    boxShadow: '0 4px 20px rgba(139, 92, 246, 0.25)',
-    
-    '&:hover': {
-      background: 'linear-gradient(135deg, var(--color-primary-500), var(--color-primary-800))',
-      boxShadow: '0 6px 30px rgba(139, 92, 246, 0.35)',
-      transform: 'translateY(-1px)',
-    },
-    
-    '& .MuiButton-root': {
-      color: 'var(--color-white)',
-      '&:hover': {
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-      },
-    },
-    
-    '& .MuiIconButton-root': {
-      color: 'var(--color-white)',
-      '&:hover': {
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-      },
-    },
-  }),
 
-  ...(variant === 'glass' && {
+  ...(variant === 'ghost' && {
     background: 'rgba(255, 255, 255, 0.8)',
     backdropFilter: 'blur(20px)',
     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',

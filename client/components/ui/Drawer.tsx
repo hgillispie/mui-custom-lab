@@ -19,7 +19,7 @@ import {
 } from '@mui/icons-material';
 
 export interface DrawerProps {
-  variant?: 'contained' | 'outlined' | 'minimal' | 'gradient' | 'glass';
+  variant?: 'contained' | 'outlined' | 'minimal' | 'ghost';
   size?: 'compact' | 'standard' | 'wide';
   showHeader?: boolean;
   showFooter?: boolean;
@@ -88,22 +88,8 @@ const StyledDrawer = styled(MuiBox, {
     border: '1px solid var(--color-border-subtle)',
   }),
 
-  ...(variant === 'gradient' && {
-    background: 'linear-gradient(135deg, var(--color-primary-300), var(--color-primary-700))',
-    color: 'var(--color-white)',
-    border: 'none',
-    
-    '& .drawer-header': {
-      borderBottomColor: 'rgba(255, 255, 255, 0.2)',
-    },
-    
-    '& .drawer-footer': {
-      borderTopColor: 'rgba(255, 255, 255, 0.2)',
-      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    },
-  }),
 
-  ...(variant === 'glass' && {
+  ...(variant === 'ghost' && {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     backdropFilter: 'blur(20px)',
     border: '1px solid rgba(255, 255, 255, 0.2)',

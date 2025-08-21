@@ -250,7 +250,7 @@ import Button from '@/components/ui/Button';
     {
       name: 'TextField',
       displayName: 'TextField',
-      description: 'Material UI TextField transformed with gradient borders, glass effects, enhanced animations, and comprehensive semantic states',
+      description: 'Material UI TextField transformed with gradient borders, ghost effects, enhanced animations, and comprehensive semantic states',
       status: TRANSFORMATION_STATUS.COMPLETE,
       path: '/components/ui/TextField',
       component: () => import('../components/ui/TextField'),
@@ -280,9 +280,9 @@ import Button from '@/components/ui/Button';
           code: '<TextField variant="gradient" label="Label" />'
         },
         {
-          name: 'Glass',
-          props: { variant: 'glass', label: 'Glass', placeholder: 'Enter text...' },
-          code: '<TextField variant="glass" label="Label" />'
+          name: 'Ghost',
+          props: { variant: 'ghost', label: 'Ghost', placeholder: 'Enter text...' },
+          code: '<TextField variant="ghost" label="Label" />'
         },
       ],
 
@@ -333,7 +333,7 @@ import Button from '@/components/ui/Button';
       props: {
         variant: {
           type: 'enum',
-          options: ['outlined', 'filled', 'standard', 'gradient', 'glass'],
+          options: ['outlined', 'filled', 'standard', 'gradient', 'ghost'],
           default: 'outlined',
           description: 'Visual style variant of the text field'
         },
@@ -401,7 +401,7 @@ The TextField component has been heavily transformed from Material UI with enhan
 ## Major Transformations Applied
 
 - **Gradient Borders**: Custom gradient variant with animated borders using our primary purple scheme
-- **Glass Morphism**: Modern glass effect with backdrop blur
+- **Ghost Morphism**: Modern ghost effect with backdrop blur
 - **Enhanced Focus States**: Smooth animations with lift effects and custom shadows
 - **Semantic States**: Success, warning, error variants with matching colors
 - **Improved Typography**: Figtree font throughout with proper weight variations
@@ -410,7 +410,7 @@ The TextField component has been heavily transformed from Material UI with enhan
 ## New Features Beyond MUI
 
 1. **Gradient Variant**: Animated gradient borders using primary-300 to primary-700
-2. **Glass Effect**: Modern glassmorphism with backdrop filters
+2. **Ghost Effect**: Modern ghostmorphism with backdrop filters
 3. **Hover Animations**: Subtle lift effects on hover and focus
 4. **Enhanced Focus**: Custom focus rings and shadow effects
 5. **Semantic States**: Success and warning states beyond standard error
@@ -448,12 +448,12 @@ import TextField from '@/components/ui/TextField';
 />
 \`\`\`
 
-### Glass Effect
+### Ghost Effect
 \`\`\`jsx
 <TextField
-  variant="glass"
+  variant="ghost"
   label="Modern Field"
-  placeholder="Glass morphism effect"
+  placeholder="Ghost morphism effect"
 />
 \`\`\`
 
@@ -469,7 +469,7 @@ import TextField from '@/components/ui/TextField';
     {
       name: 'Select',
       displayName: 'Select',
-      description: 'Material UI Select transformed with gradient borders, glass effects, enhanced animations, and comprehensive semantic states',
+      description: 'Material UI Select transformed with gradient borders, ghost effects, enhanced animations, and comprehensive semantic states',
       status: TRANSFORMATION_STATUS.COMPLETE,
       path: '/components/ui/Select',
       component: () => import('../components/ui/Select'),
@@ -539,9 +539,9 @@ import TextField from '@/components/ui/TextField';
           code: '<Select variant="gradient" label="Theme" options={options} />'
         },
         {
-          name: 'Glass',
+          name: 'Ghost',
           props: {
-            variant: 'glass',
+            variant: 'ghost',
             label: 'Style',
             value: 'modern',
             options: [
@@ -551,7 +551,7 @@ import TextField from '@/components/ui/TextField';
               { value: 'bold', label: 'Bold Style' }
             ]
           },
-          code: '<Select variant="glass" label="Style" options={options} />'
+          code: '<Select variant="ghost" label="Style" options={options} />'
         },
       ],
 
@@ -668,7 +668,7 @@ import TextField from '@/components/ui/TextField';
       props: {
         variant: {
           type: 'enum',
-          options: ['outlined', 'filled', 'standard', 'gradient', 'glass'],
+          options: ['outlined', 'filled', 'standard', 'gradient', 'ghost'],
           default: 'outlined',
           description: 'Visual style variant of the select field'
         },
@@ -745,7 +745,7 @@ The Select component has been heavily transformed from Material UI with enhanced
 ## Major Transformations Applied
 
 - **Gradient Borders**: Custom gradient variant with animated borders using our primary purple scheme (300-700)
-- **Glass Morphism**: Modern glass effect with backdrop blur
+- **Ghost Morphism**: Modern ghost effect with backdrop blur
 - **Enhanced Focus States**: Smooth animations with lift effects and custom shadows
 - **Semantic States**: Success, warning, error variants with matching colors
 - **Improved Typography**: Figtree font throughout with proper weight variations
@@ -755,7 +755,7 @@ The Select component has been heavily transformed from Material UI with enhanced
 ## New Features Beyond MUI
 
 1. **Gradient Variant**: Animated gradient borders using primary-300 to primary-700
-2. **Glass Effect**: Modern glassmorphism with backdrop filters
+2. **Ghost Effect**: Modern ghostmorphism with backdrop filters
 3. **Hover Animations**: Subtle lift effects on hover and focus
 4. **Enhanced Focus**: Custom focus rings and shadow effects
 5. **Semantic States**: Success and warning states beyond standard error
@@ -806,10 +806,10 @@ const options = [
 />
 \`\`\`
 
-### Glass Effect
+### Ghost Effect
 \`\`\`jsx
 <Select
-  variant="glass"
+  variant="ghost"
   label="Modern Field"
   options={options}
   value={value}
@@ -846,7 +846,7 @@ const optionsWithDisabled = [
     {
       name: 'Checkbox',
       displayName: 'Checkbox',
-      description: 'Material UI Checkbox transformed with gradient backgrounds, glass effects, enhanced animations, and comprehensive semantic variants',
+      description: 'Material UI Checkbox transformed with gradient backgrounds, ghost effects, enhanced animations, and comprehensive semantic variants',
       status: TRANSFORMATION_STATUS.COMPLETE,
       path: '/components/ui/Checkbox',
       component: () => import('../components/ui/Checkbox'),
@@ -883,13 +883,13 @@ const optionsWithDisabled = [
           code: '<Checkbox variant="gradient" label="Premium feature" />'
         },
         {
-          name: 'Glass',
+          name: 'Ghost',
           props: {
-            variant: 'glass',
-            label: 'Modern glassmorphism',
+            variant: 'ghost',
+            label: 'Modern ghostmorphism',
             checked: true
           },
-          code: '<Checkbox variant="glass" label="Modern style" />'
+          code: '<Checkbox variant="ghost" label="Modern style" />'
         },
         {
           name: 'Success',
@@ -1007,7 +1007,7 @@ const optionsWithDisabled = [
       props: {
         variant: {
           type: 'enum',
-          options: ['default', 'rounded', 'gradient', 'glass', 'success', 'warning', 'error'],
+          options: ['default', 'rounded', 'gradient', 'ghost', 'success', 'warning', 'error'],
           default: 'default',
           description: 'Visual style variant of the checkbox'
         },
@@ -1079,7 +1079,7 @@ The Checkbox component has been heavily transformed from Material UI with enhanc
 ## Major Transformations Applied
 
 - **Gradient Backgrounds**: Custom gradient variant with our primary purple scheme (300-700)
-- **Glass Morphism**: Modern glass effect with backdrop blur and subtle borders
+- **Ghost Morphism**: Modern ghost effect with backdrop blur and subtle borders
 - **Enhanced Animations**: Scale effects on hover/active, smooth transitions
 - **Semantic Variants**: Success, warning, error variants with matching colors
 - **Rounded Variant**: Circular checkbox option for different visual styles
@@ -1090,7 +1090,7 @@ The Checkbox component has been heavily transformed from Material UI with enhanc
 ## New Features Beyond MUI
 
 1. **Gradient Variant**: Beautiful gradient background using primary-300 to primary-700
-2. **Glass Effect**: Modern glassmorphism with backdrop filters and borders
+2. **Ghost Effect**: Modern ghostmorphism with backdrop filters and borders
 3. **Rounded Style**: Circular checkbox option for modern designs
 4. **Semantic Colors**: Success, warning, error variants beyond default styling
 5. **Enhanced Animations**: Scale effects and smooth hover transitions
@@ -1131,11 +1131,11 @@ import Checkbox from '@/components/ui/Checkbox';
 />
 \`\`\`
 
-### Glass Effect
+### Ghost Effect
 \`\`\`jsx
 <Checkbox
-  variant="glass"
-  label="Modern glassmorphism style"
+  variant="ghost"
+  label="Modern ghostmorphism style"
   checked={modernStyle}
   onChange={handleStyleChange}
 />
@@ -1174,7 +1174,7 @@ import Checkbox from '@/components/ui/Checkbox';
     {
       name: 'Slider',
       displayName: 'Slider',
-      description: 'Material UI Slider transformed with gradient tracks, glass effects, enhanced animations, and comprehensive semantic variants',
+      description: 'Material UI Slider transformed with gradient tracks, ghost effects, enhanced animations, and comprehensive semantic variants',
       status: TRANSFORMATION_STATUS.COMPLETE,
       path: '/components/ui/Slider',
       component: () => import('../components/ui/Slider'),
@@ -1208,16 +1208,16 @@ import Checkbox from '@/components/ui/Checkbox';
           code: '<Slider variant="gradient" label="Quality" defaultValue={80} />'
         },
         {
-          name: 'Glass',
+          name: 'Ghost',
           props: {
-            variant: 'glass',
+            variant: 'ghost',
             label: 'Transparency',
             defaultValue: 45,
             min: 0,
             max: 100,
             showValue: true
           },
-          code: '<Slider variant="glass" label="Transparency" defaultValue={45} />'
+          code: '<Slider variant="ghost" label="Transparency" defaultValue={45} />'
         },
         {
           name: 'Success',
@@ -1365,7 +1365,7 @@ import Checkbox from '@/components/ui/Checkbox';
       props: {
         variant: {
           type: 'enum',
-          options: ['default', 'gradient', 'glass', 'success', 'warning', 'error'],
+          options: ['default', 'gradient', 'ghost', 'success', 'warning', 'error'],
           default: 'default',
           description: 'Visual style variant of the slider'
         },
@@ -1452,7 +1452,7 @@ The Slider component has been heavily transformed from Material UI with enhanced
 ## Major Transformations Applied
 
 - **Gradient Tracks**: Custom gradient variant with our primary purple scheme (300-700)
-- **Glass Morphism**: Modern glass effect with backdrop blur for both track and thumb
+- **Ghost Morphism**: Modern ghost effect with backdrop blur for both track and thumb
 - **Enhanced Animations**: Scale effects on hover/active, smooth transitions
 - **Semantic Variants**: Success, warning, error variants with matching colors
 - **Custom Thumbs**: Enhanced thumb styling with borders, shadows, and hover effects
@@ -1463,7 +1463,7 @@ The Slider component has been heavily transformed from Material UI with enhanced
 ## New Features Beyond MUI
 
 1. **Gradient Tracks**: Beautiful gradient backgrounds using primary-300 to primary-700
-2. **Glass Effect**: Modern glassmorphism with backdrop filters for track and rail
+2. **Ghost Effect**: Modern ghostmorphism with backdrop filters for track and rail
 3. **Enhanced Thumbs**: Custom styling with borders, shadows, and animations
 4. **Semantic Colors**: Success, warning, error variants beyond default styling
 5. **Scale Animations**: Hover (1.1x) and active (1.2x) scaling effects on thumbs
@@ -1526,10 +1526,10 @@ import Slider from '@/components/ui/Slider';
 />
 \`\`\`
 
-### Glass Effect
+### Ghost Effect
 \`\`\`jsx
 <Slider
-  variant="glass"
+  variant="ghost"
   label="Transparency"
   value={transparency}
   min={0}
@@ -2193,7 +2193,7 @@ import Switch from '@/components/ui/Switch';
     {
       name: 'Menu',
       displayName: 'Menu',
-      description: 'Material UI Menu transformed with contained layout, gradient backgrounds, glass effects, enhanced animations, and comprehensive item styling',
+      description: 'Material UI Menu transformed with contained layout, gradient backgrounds, ghost effects, enhanced animations, and comprehensive item styling',
       status: TRANSFORMATION_STATUS.COMPLETE,
       path: '/components/ui/Menu',
       component: () => import('../components/ui/Menu'),
@@ -2239,13 +2239,13 @@ import Switch from '@/components/ui/Switch';
           code: '<Menu variant="gradient" buttonText="Open Menu" />'
         },
         {
-          name: 'Glass',
+          name: 'Ghost',
           props: {
-            variant: 'glass',
+            variant: 'ghost',
             showDemo: false,
-            buttonText: 'Glass Menu'
+            buttonText: 'Ghost Menu'
           },
-          code: '<Menu variant="glass" buttonText="Open Menu" />'
+          code: '<Menu variant="ghost" buttonText="Open Menu" />'
         }
       ],
 
@@ -2335,7 +2335,7 @@ import Switch from '@/components/ui/Switch';
       props: {
         variant: {
           type: 'enum',
-          options: ['contained', 'outlined', 'minimal', 'gradient', 'glass'],
+          options: ['contained', 'outlined', 'minimal', 'gradient', 'ghost'],
           default: 'contained',
           description: 'Visual style variant of the menu'
         },
@@ -2397,9 +2397,9 @@ The Menu component has been heavily transformed from Material UI with a containe
 
 - **Contained Layout**: Redesigned to display within containers as well as interactive popover menus
 - **Gradient Backgrounds**: Custom gradient variant using our primary purple scheme (300-700)
-- **Glass Morphism**: Modern glass effect with backdrop blur
+- **Ghost Morphism**: Modern ghost effect with backdrop blur
 - **Enhanced Menu Items**: Custom styled items with icons, colors, and slide animations
-- **Multiple Variants**: Contained, outlined, minimal, gradient, and glass styles
+- **Multiple Variants**: Contained, outlined, minimal, gradient, and ghost styles
 - **Responsive Sizing**: Small, medium, and large size options
 - **Consistent Styling**: Uniform item styling with proper hover and focus states
 - **Slide Interactions**: Menu items translate on hover for enhanced feedback
@@ -2408,7 +2408,7 @@ The Menu component has been heavily transformed from Material UI with a containe
 ## New Features Beyond MUI
 
 1. **Contained Display**: Shows within ComponentViewer boundaries as well as interactive popover
-2. **Glass Effect**: Modern glassmorphism with backdrop filters
+2. **Ghost Effect**: Modern ghostmorphism with backdrop filters
 3. **Slide Animations**: Menu items translate on hover for enhanced feedback
 4. **Multiple Sizes**: Small, medium, large with proper scaling
 5. **Consistent Icons**: Material UI icons throughout for better accessibility
@@ -2440,10 +2440,10 @@ import Menu from '@/components/ui/Menu';
 />
 \`\`\`
 
-### Glass Effect
+### Ghost Effect
 \`\`\`jsx
 <Menu
-  variant="glass"
+  variant="ghost"
   size="large"
   buttonText="Modern Menu"
   menuItems={menuItems}
@@ -2545,7 +2545,7 @@ const menuItems = [
     {
       name: 'Drawer',
       displayName: 'Drawer',
-      description: 'Material UI Drawer transformed with contained layout, gradient backgrounds, glass effects, enhanced animations, and comprehensive navigation features',
+      description: 'Material UI Drawer transformed with contained layout, gradient backgrounds, ghost effects, enhanced animations, and comprehensive navigation features',
       status: TRANSFORMATION_STATUS.COMPLETE,
       path: '/components/ui/Drawer',
       component: () => import('../components/ui/Drawer'),
@@ -2595,14 +2595,14 @@ const menuItems = [
           code: '<Drawer variant="gradient" title="Premium" />'
         },
         {
-          name: 'Glass',
+          name: 'Ghost',
           props: {
-            variant: 'glass',
+            variant: 'ghost',
             title: 'Modern',
             showHeader: true,
             showFooter: true
           },
-          code: '<Drawer variant="glass" title="Modern" />'
+          code: '<Drawer variant="ghost" title="Modern" />'
         }
       ],
 
@@ -2684,7 +2684,7 @@ const menuItems = [
       props: {
         variant: {
           type: 'enum',
-          options: ['contained', 'outlined', 'minimal', 'gradient', 'glass'],
+          options: ['contained', 'outlined', 'minimal', 'gradient', 'ghost'],
           default: 'contained',
           description: 'Visual style variant of the drawer'
         },
@@ -2742,9 +2742,9 @@ The Drawer component has been heavily transformed from Material UI with a contai
 
 - **Contained Layout**: Redesigned to display within containers instead of modal overlay
 - **Gradient Backgrounds**: Custom gradient variant using our primary purple scheme (300-700)
-- **Glass Morphism**: Modern glass effect with backdrop blur
+- **Ghost Morphism**: Modern ghost effect with backdrop blur
 - **Enhanced Menu Items**: Custom styled navigation items with icons and active states
-- **Multiple Variants**: Contained, outlined, minimal, gradient, and glass styles
+- **Multiple Variants**: Contained, outlined, minimal, gradient, and ghost styles
 - **Responsive Sizing**: Compact, standard, and wide size options
 - **Header & Footer Control**: Optional header with title and footer sections
 - **Slide Interactions**: Menu items translate on hover for enhanced feedback
@@ -2753,7 +2753,7 @@ The Drawer component has been heavily transformed from Material UI with a contai
 ## New Features Beyond MUI
 
 1. **Contained Display**: Shows within ComponentViewer boundaries rather than full-screen overlay
-2. **Glass Effect**: Modern glassmorphism with backdrop filters
+2. **Ghost Effect**: Modern ghostmorphism with backdrop filters
 3. **Slide Animations**: Menu items translate on hover for enhanced feedback
 4. **Multiple Sizes**: Compact (240px), standard (280px), wide (320px) options
 5. **Enhanced Navigation**: Rich menu items with icons, active states, and dividers
@@ -2783,10 +2783,10 @@ import Drawer from '@/components/ui/Drawer';
 />
 \`\`\`
 
-### Glass Effect
+### Ghost Effect
 \`\`\`jsx
 <Drawer
-  variant="glass"
+  variant="ghost"
   title="Modern Interface"
   showHeader
   showFooter={false}
@@ -2844,7 +2844,7 @@ const menuItems = [
     {
       name: 'AppBar',
       displayName: 'AppBar',
-      description: 'Material UI AppBar transformed with gradient backgrounds, glass effects, enhanced animations, and comprehensive navigation features',
+      description: 'Material UI AppBar transformed with gradient backgrounds, ghost effects, enhanced animations, and comprehensive navigation features',
       status: TRANSFORMATION_STATUS.COMPLETE,
       path: '/components/ui/AppBar',
       component: () => import('../components/ui/AppBar'),
@@ -2894,9 +2894,9 @@ const menuItems = [
           code: '<AppBar variant="gradient" title="Premium App" navigation={navItems} />'
         },
         {
-          name: 'Glass',
+          name: 'Ghost',
           props: {
-            variant: 'glass',
+            variant: 'ghost',
             title: 'Modern UI',
             navigation: [
               { label: 'Design', active: true },
@@ -2904,7 +2904,7 @@ const menuItems = [
               { label: 'Patterns', active: false }
             ]
           },
-          code: '<AppBar variant="glass" title="Modern UI" navigation={navItems} />'
+          code: '<AppBar variant="ghost" title="Modern UI" navigation={navItems} />'
         },
         {
           name: 'Minimal',
@@ -3026,7 +3026,7 @@ const menuItems = [
       props: {
         variant: {
           type: 'enum',
-          options: ['default', 'elevated', 'gradient', 'glass', 'minimal'],
+          options: ['default', 'elevated', 'gradient', 'ghost', 'minimal'],
           default: 'default',
           description: 'Visual style variant of the app bar'
         },
@@ -3096,7 +3096,7 @@ The AppBar component has been heavily transformed from Material UI with enhanced
 ## Major Transformations Applied
 
 - **Gradient Backgrounds**: Custom gradient variant with our primary purple scheme (300-700)
-- **Glass Morphism**: Modern glass effect with backdrop blur and transparency
+- **Ghost Morphism**: Modern ghost effect with backdrop blur and transparency
 - **Enhanced Animations**: Hover lift effects, smooth transitions, and scale animations
 - **Responsive Design**: Built-in mobile menu support with automatic navigation hiding
 - **Navigation Integration**: Structured navigation with active states and hover effects
@@ -3107,7 +3107,7 @@ The AppBar component has been heavily transformed from Material UI with enhanced
 ## New Features Beyond MUI
 
 1. **Gradient Variant**: Beautiful gradient background using primary-300 to primary-700
-2. **Glass Effect**: Modern glassmorphism with backdrop filters
+2. **Ghost Effect**: Modern ghostmorphism with backdrop filters
 3. **Smart Navigation**: Automatic responsive behavior with mobile menu
 4. **Enhanced Interactions**: Hover animations and active state management
 5. **Size Variants**: Compact, standard, large with proper scaling
@@ -3149,10 +3149,10 @@ const navigation = [
 />
 \`\`\`
 
-### Glass Effect AppBar
+### Ghost Effect AppBar
 \`\`\`jsx
 <AppBar
-  variant="glass"
+  variant="ghost"
   title="Modern UI"
   navigation={navigation}
   actions={<UserMenu />}
@@ -3232,7 +3232,7 @@ const navigation = [
     {
       name: 'Tabs',
       displayName: 'Tabs',
-      description: 'Material UI Tabs transformed with gradient indicators, glass effects, enhanced animations, and comprehensive navigation features',
+      description: 'Material UI Tabs transformed with gradient indicators, ghost effects, enhanced animations, and comprehensive navigation features',
       status: TRANSFORMATION_STATUS.COMPLETE,
       path: '/components/ui/Tabs',
       component: () => import('../components/ui/Tabs'),
@@ -3284,9 +3284,9 @@ const navigation = [
           code: '<Tabs variant="gradient" tabItems={tabItems} defaultValue="premium" />'
         },
         {
-          name: 'Glass',
+          name: 'Ghost',
           props: {
-            variant: 'glass',
+            variant: 'ghost',
             defaultValue: 'design',
             tabItems: [
               { label: 'Design', value: 'design' },
@@ -3295,7 +3295,7 @@ const navigation = [
               { label: 'Tokens', value: 'tokens' }
             ]
           },
-          code: '<Tabs variant="glass" tabItems={tabItems} defaultValue="design" />'
+          code: '<Tabs variant="ghost" tabItems={tabItems} defaultValue="design" />'
         },
         {
           name: 'Minimal',
@@ -3421,7 +3421,7 @@ const navigation = [
       props: {
         variant: {
           type: 'enum',
-          options: ['default', 'outlined', 'gradient', 'glass', 'minimal'],
+          options: ['default', 'outlined', 'gradient', 'ghost', 'minimal'],
           default: 'default',
           description: 'Visual style variant of the tabs'
         },
@@ -3490,17 +3490,17 @@ The Tabs component has been heavily transformed from Material UI with enhanced v
 ## Major Transformations Applied
 
 - **Gradient Indicators**: Custom gradient variant with animated indicators using our primary purple scheme (300-700)
-- **Glass Morphism**: Modern glass effect with backdrop blur and full-height indicators
+- **Ghost Morphism**: Modern ghost effect with backdrop blur and full-height indicators
 - **Enhanced Animations**: Hover lift effects, smooth transitions, and scale animations
 - **Improved Typography**: Figtree font throughout with proper weight variations
-- **Custom Variants**: Outlined, minimal, and glass variants beyond default styling
+- **Custom Variants**: Outlined, minimal, and ghost variants beyond default styling
 - **Enhanced Focus States**: Custom focus rings and shadow effects
 - **Design Token Integration**: All styling uses CSS custom properties
 
 ## New Features Beyond MUI
 
 1. **Gradient Variant**: Beautiful gradient background indicators with enhanced shadows
-2. **Glass Effect**: Modern glassmorphism with backdrop filters and full-height selection
+2. **Ghost Effect**: Modern ghostmorphism with backdrop filters and full-height selection
 3. **Outlined Style**: Card-like tabs with borders and elevated selection states
 4. **Minimal Design**: Clean, simple tabs without indicators
 5. **Enhanced Animations**: Hover lift effects and smooth state transitions
@@ -3550,10 +3550,10 @@ const tabsWithIcons = [
 />
 \`\`\`
 
-### Glass Effect Tabs
+### Ghost Effect Tabs
 \`\`\`jsx
 <Tabs
-  variant="glass"
+  variant="ghost"
   tabItems={tabItems}
   defaultValue="design"
 />
@@ -4144,7 +4144,7 @@ function SearchResults({ results, totalResults }) {
     {
       name: 'Table',
       displayName: 'Table',
-      description: 'Material UI Table transformed with gradient headers, glass effects, enhanced animations, and comprehensive data management features',
+      description: 'Material UI Table transformed with gradient headers, ghost effects, enhanced animations, and comprehensive data management features',
       status: TRANSFORMATION_STATUS.COMPLETE,
       path: '/components/ui/Table',
       component: () => import('../components/ui/Table'),
@@ -4414,7 +4414,7 @@ const columns = [
 ];
 
 <Table
-  variant="glass"
+  variant="ghost"
   columns={columns}
   rows={rows}
   actions={(row) => (
@@ -4507,7 +4507,7 @@ The Table component includes a built-in StatusChip component that automatically 
     {
       name: 'Card',
       displayName: 'Card',
-      description: 'Material UI Card transformed with interactive animations, gradient variants, glass effects, and comprehensive semantic styling',
+      description: 'Material UI Card transformed with interactive animations, gradient variants, ghost effects, and comprehensive semantic styling',
       status: TRANSFORMATION_STATUS.COMPLETE,
       path: '/components/ui/Card',
       component: () => import('../components/ui/Card'),
@@ -4537,9 +4537,9 @@ The Table component includes a built-in StatusChip component that automatically 
           code: '<Card variant="gradient"><CardHeader title="Title" /><CardContent>Content</CardContent></Card>'
         },
         {
-          name: 'Glass',
-          props: { variant: 'glass', mockContent: 'glass' },
-          code: '<Card variant="glass"><CardHeader title="Title" /><CardContent>Content</CardContent></Card>'
+          name: 'Ghost',
+          props: { variant: 'ghost', mockContent: 'ghost' },
+          code: '<Card variant="ghost"><CardHeader title="Title" /><CardContent>Content</CardContent></Card>'
         },
         {
           name: 'Success',
@@ -4590,7 +4590,7 @@ The Table component includes a built-in StatusChip component that automatically 
       props: {
         variant: {
           type: 'enum',
-          options: ['default', 'outlined', 'elevated', 'gradient', 'glass', 'success', 'warning', 'error'],
+          options: ['default', 'outlined', 'elevated', 'gradient', 'ghost', 'success', 'warning', 'error'],
           default: 'default',
           description: 'Visual style variant of the card'
         },
@@ -4641,7 +4641,7 @@ The Card component has been heavily transformed from Material UI with significan
 
 - **Interactive Animations**: Hover lift effects and click animations for interactive cards
 - **Gradient Variant**: Beautiful primary purple gradient using our new color scheme (300-700)
-- **Glass Morphism**: Modern glass effect with backdrop blur
+- **Ghost Morphism**: Modern ghost effect with backdrop blur
 - **Semantic Variants**: Success, warning, and error states with matching colors
 - **Enhanced Shadows**: Contextual shadows that respond to interactions
 - **Ripple Effects**: Custom click animations for interactive cards
@@ -4651,7 +4651,7 @@ The Card component has been heavily transformed from Material UI with significan
 
 1. **Interactive Mode**: Cards can be made clickable with hover animations
 2. **Gradient Backgrounds**: Stunning gradient using primary-300 to primary-700
-3. **Glass Effect**: Modern glassmorphism with backdrop filters
+3. **Ghost Effect**: Modern ghostmorphism with backdrop filters
 4. **Semantic States**: Success, warning, error variants
 5. **Enhanced Animations**: Smooth hover and click effects
 6. **Size Variants**: Small, medium, large options
@@ -4679,11 +4679,11 @@ import Card, { CardContent, CardHeader } from '@/components/ui/Card';
 </Card>
 \`\`\`
 
-### Glass Effect
+### Ghost Effect
 \`\`\`jsx
-<Card variant="glass" size="large">
+<Card variant="ghost" size="large">
   <CardContent>
-    Modern glass morphism effect
+    Modern ghost morphism effect
   </CardContent>
 </Card>
 \`\`\`
@@ -6568,7 +6568,7 @@ const settingsSections = [
     {
       name: 'Alert',
       displayName: 'Alert',
-      description: 'Material UI Alert transformed with gradient backgrounds, glass effects, enhanced animations, and comprehensive severity styling',
+      description: 'Material UI Alert transformed with gradient backgrounds, ghost effects, enhanced animations, and comprehensive severity styling',
       status: TRANSFORMATION_STATUS.COMPLETE,
       path: '/components/ui/Alert',
       component: () => import('../components/ui/Alert'),
@@ -6614,13 +6614,13 @@ const settingsSections = [
           code: '<Alert variant="gradient" severity="info">Gradient alert</Alert>'
         },
         {
-          name: 'Glass',
+          name: 'Ghost',
           props: {
-            variant: 'glass',
+            variant: 'ghost',
             severity: 'error',
-            children: 'This is a glass effect alert with backdrop blur.'
+            children: 'This is a ghost effect alert with backdrop blur.'
           },
-          code: '<Alert variant="glass" severity="error">Glass alert</Alert>'
+          code: '<Alert variant="ghost" severity="error">Ghost alert</Alert>'
         }
       ],
 
@@ -6718,7 +6718,7 @@ const settingsSections = [
       props: {
         variant: {
           type: 'enum',
-          options: ['contained', 'outlined', 'minimal', 'gradient', 'glass'],
+          options: ['contained', 'outlined', 'minimal', 'gradient', 'ghost'],
           default: 'contained',
           description: 'Visual style variant of the alert'
         },
@@ -6784,10 +6784,10 @@ The Alert component has been heavily transformed from Material UI with enhanced 
 ## Major Transformations Applied
 
 - **Gradient Backgrounds**: Custom gradient variant using severity-appropriate color schemes
-- **Glass Morphism**: Modern glass effect with backdrop blur for each severity
+- **Ghost Morphism**: Modern ghost effect with backdrop blur for each severity
 - **Enhanced Animations**: Hover lift effects and smooth transitions
 - **Comprehensive Severity Styling**: Success, info, warning, error with matching colors
-- **Multiple Variants**: Contained, outlined, minimal, gradient, and glass styles
+- **Multiple Variants**: Contained, outlined, minimal, gradient, and ghost styles
 - **Enhanced Icons**: Custom severity-based icons with proper scaling
 - **Improved Typography**: Figtree font throughout with proper weight variations
 - **Design Token Integration**: All styling uses CSS custom properties
@@ -6795,7 +6795,7 @@ The Alert component has been heavily transformed from Material UI with enhanced 
 ## New Features Beyond MUI
 
 1. **Gradient Variants**: Beautiful gradient backgrounds using severity-appropriate colors
-2. **Glass Effect**: Modern glassmorphism with backdrop filters for each severity
+2. **Ghost Effect**: Modern ghostmorphism with backdrop filters for each severity
 3. **Hover Animations**: Subtle lift effects on hover with enhanced shadows
 4. **Enhanced Sizing**: Small, medium, large with proper scaling
 5. **Custom Icons**: Material UI icons with proper severity mapping
@@ -6834,10 +6834,10 @@ import Alert from '@/components/ui/Alert';
 </Alert>
 \`\`\`
 
-### Glass Effect Alert
+### Ghost Effect Alert
 \`\`\`jsx
 <Alert
-  variant="glass"
+  variant="ghost"
   severity="error"
   size="large"
 >
@@ -6901,7 +6901,7 @@ const [showAlert, setShowAlert] = useState(true);
     {
       name: 'Snackbar',
       displayName: 'Snackbar',
-      description: 'Material UI Snackbar transformed with gradient backgrounds, glass effects, enhanced animations, and comprehensive positioning options',
+      description: 'Material UI Snackbar transformed with gradient backgrounds, ghost effects, enhanced animations, and comprehensive positioning options',
       status: TRANSFORMATION_STATUS.COMPLETE,
       path: '/components/ui/Snackbar',
       component: () => import('../components/ui/Snackbar'),
@@ -6951,14 +6951,14 @@ const [showAlert, setShowAlert] = useState(true);
           code: '<Snackbar variant="gradient" severity="info" message="Gradient!" />'
         },
         {
-          name: 'Glass',
+          name: 'Ghost',
           props: {
-            variant: 'glass',
+            variant: 'ghost',
             severity: 'error',
             showDemo: false,
-            message: 'This is a glass effect snackbar with backdrop blur.'
+            message: 'This is a ghost effect snackbar with backdrop blur.'
           },
-          code: '<Snackbar variant="glass" severity="error" message="Glass effect" />'
+          code: '<Snackbar variant="ghost" severity="error" message="Ghost effect" />'
         }
       ],
 
@@ -7069,7 +7069,7 @@ const [showAlert, setShowAlert] = useState(true);
       props: {
         variant: {
           type: 'enum',
-          options: ['contained', 'outlined', 'minimal', 'gradient', 'glass'],
+          options: ['contained', 'outlined', 'minimal', 'gradient', 'ghost'],
           default: 'contained',
           description: 'Visual style variant of the snackbar'
         },
@@ -7155,10 +7155,10 @@ The Snackbar component has been heavily transformed from Material UI with enhanc
 ## Major Transformations Applied
 
 - **Gradient Backgrounds**: Custom gradient variant using severity-appropriate color schemes
-- **Glass Morphism**: Modern glass effect with backdrop blur for each severity
+- **Ghost Morphism**: Modern ghost effect with backdrop blur for each severity
 - **Enhanced Animations**: Slide-in animations from different directions based on position
 - **Comprehensive Severity Styling**: Success, info, warning, error with matching colors
-- **Multiple Variants**: Contained, outlined, minimal, gradient, and glass styles
+- **Multiple Variants**: Contained, outlined, minimal, gradient, and ghost styles
 - **Flexible Positioning**: Six position options (top/bottom + left/center/right)
 - **Enhanced Actions**: Custom action buttons with severity-appropriate styling
 - **Improved Typography**: Figtree font throughout with proper weight variations
@@ -7167,7 +7167,7 @@ The Snackbar component has been heavily transformed from Material UI with enhanc
 ## New Features Beyond MUI
 
 1. **Gradient Variants**: Beautiful gradient backgrounds using severity-appropriate colors
-2. **Glass Effect**: Modern glassmorphism with backdrop filters for each severity
+2. **Ghost Effect**: Modern ghostmorphism with backdrop filters for each severity
 3. **Enhanced Animations**: Direction-aware slide-in animations based on position
 4. **Dual Display Modes**: Static for preview and interactive for demos
 5. **Custom Action Buttons**: Styled action buttons with hover effects
@@ -7214,10 +7214,10 @@ const [open, setOpen] = useState(false);
 />
 \`\`\`
 
-### Glass Effect Snackbar
+### Ghost Effect Snackbar
 \`\`\`jsx
 <Snackbar
-  variant="glass"
+  variant="ghost"
   severity="error"
   message="Connection failed. Please try again."
   size="large"

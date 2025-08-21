@@ -5,7 +5,7 @@ import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
 
 // Extended interface with custom props
 export interface TextFieldProps extends Omit<MuiTextFieldProps, 'variant'> {
-  variant?: 'outlined' | 'filled' | 'standard' | 'gradient' | 'glass';
+  variant?: 'outlined' | 'filled' | 'standard' | 'ghost';
   size?: 'small' | 'medium' | 'large';
   state?: 'default' | 'success' | 'warning' | 'error';
 }
@@ -195,41 +195,6 @@ const StyledTextField = styled(MuiTextField, {
   }),
 
   // Gradient variant (custom) - using data attribute
-  '&[data-custom-variant="gradient"]': {
-    '& .MuiOutlinedInput-root': {
-      background: 'linear-gradient(135deg, var(--color-primary-50), var(--color-primary-100))',
-      position: 'relative',
-
-      '& fieldset': {
-        border: 'none',
-      },
-
-      '&:before': {
-        content: '""',
-        position: 'absolute',
-        inset: 0,
-        padding: '2px',
-        background: 'linear-gradient(135deg, var(--color-primary-300), var(--color-primary-700))',
-        borderRadius: 'inherit',
-        mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-        maskComposite: 'xor',
-        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-        WebkitMaskComposite: 'xor',
-      },
-
-      '&:hover:before': {
-        background: 'linear-gradient(135deg, var(--color-primary-400), var(--color-primary-600))',
-      },
-
-      '&.Mui-focused': {
-        boxShadow: '0 0 0 3px var(--color-primary-200)',
-
-        '&:before': {
-          background: 'linear-gradient(135deg, var(--color-primary-500), var(--color-primary-800))',
-        },
-      },
-    },
-  },
 
   // Glass variant (custom) - using data attribute
   '&[data-custom-variant="glass"]': {
@@ -311,7 +276,7 @@ export const TextField: React.FC<TextFieldProps> = ({
   const getMuiVariant = (customVariant: string) => {
     switch (customVariant) {
       case 'gradient':
-      case 'glass':
+      case 'ghost':
         return 'outlined'; // Use outlined as base for custom variants
       default:
         return customVariant;

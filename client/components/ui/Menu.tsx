@@ -21,7 +21,7 @@ import {
 } from '@mui/icons-material';
 
 export interface MenuProps {
-  variant?: 'contained' | 'outlined' | 'minimal' | 'gradient' | 'glass';
+  variant?: 'contained' | 'outlined' | 'minimal' | 'gradient' | 'ghost';
   size?: 'small' | 'medium' | 'large';
   menuItems?: Array<{
     label: string;
@@ -97,7 +97,7 @@ const StyledMenuContainer = styled(MuiBox, {
     color: 'var(--color-white)',
   }),
 
-  ...(variant === 'glass' && {
+  ...(variant === 'ghost' && {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     backdropFilter: 'blur(20px)',
     border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -153,7 +153,7 @@ const StyledMenu = styled(MuiMenu, {
       color: 'var(--color-white)',
     }),
 
-    ...(variant === 'glass' && {
+    ...(variant === 'ghost' && {
       backgroundColor: 'rgba(255, 255, 255, 0.1)',
       backdropFilter: 'blur(20px)',
       border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -262,7 +262,7 @@ const StyledMenuItem = styled(MuiMenuItem, {
     },
   }),
 
-  ...(variant === 'glass' && {
+  ...(variant === 'ghost' && {
     color: 'var(--color-text-primary)',
     '&:hover': {
       backgroundColor: 'rgba(255, 255, 255, 0.2)',
@@ -343,7 +343,7 @@ const StyledTriggerButton = styled(MuiButton, {
     },
   }),
 
-  ...(variant === 'glass' && {
+  ...(variant === 'ghost' && {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     backdropFilter: 'blur(10px)',
     color: 'var(--color-text-primary)',

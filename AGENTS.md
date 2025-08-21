@@ -1,7 +1,7 @@
-# AI Component Library Usage Guide
+# AI Component Library Usage Guide - Sage & Pine Design System
 
 ## 🎯 Overview
-This is a comprehensive Material UI component library optimized for AI code generation. It contains 27 transformed components, 4 production templates, and consistent design patterns for building modern React applications.
+This is a comprehensive Material UI component library with the Sage & Pine design system optimized for AI code generation. It contains 27 transformed components, 4 production templates, and consistent design patterns for building modern React applications with a professional nature-inspired aesthetic.
 
 ## 🚀 Quick Start for AI Tools
 
@@ -13,8 +13,8 @@ import Input from './client/components/ui/Input';
 import Card from './client/components/ui/Card';
 import Switch from './client/components/ui/Switch';
 
-// ✅ Use MUI directly for layout and utilities  
-import { Box, Stack, Grid, Typography, Container } from '@mui/material';
+// ✅ Use MUI directly for layout, typography, and non-visual utilities  
+import { Box, Stack, Grid, Typography, Container, Divider, Paper } from '@mui/material';
 
 // ✅ Use MUI icons
 import { Search, Add, Delete, Settings, Home } from '@mui/icons-material';
@@ -30,6 +30,7 @@ import { Search, Add, Delete, Settings, Home } from '@mui/icons-material';
 | Interactive Elements | **Our Components** | `<Button variant="gradient">` |
 | Layout & Spacing | **MUI Direct** | `<Box sx={{ p: 2 }}>` |
 | Typography | **MUI Direct** | `<Typography variant="h4">` |
+| Non-Visual Components | **MUI Direct** | `<Divider />`, `<Paper />` |
 | Icons | **MUI Icons** | `<Search />` |
 | Complete Pages | **Our Templates** | `<Dashboard />` |
 
@@ -507,17 +508,22 @@ import SettingsForm from './client/templates/SettingsForm';
 import DataTable from './client/templates/DataTable';
 ```
 
-## 🎨 Design Token Reference
+## 🎨 Sage & Pine Design Token Reference
 
 Our components use CSS custom properties for consistent theming:
 
-### Colors
-- `--color-primary-500` - Primary brand color
+### Colors (Sage & Pine Theme)
+- `--color-primary-500` - Pine (dark green) `#31473a` - Primary brand color
+- `--color-secondary-500` - Sage (medium green) `#7c8363` - Secondary accents
 - `--color-success-500` - Success states
 - `--color-warning-500` - Warning states  
 - `--color-error-500` - Error states
 - `--color-gray-300` - Light borders
 - `--color-white` - Pure white
+
+### Typography (Outfit + Poppins)
+- `--font-family-body` - Outfit (body text)
+- `--font-family-heading` - Poppins (headings)
 
 ### Spacing
 - `--spacing-1` through `--spacing-8` - Consistent spacing scale
@@ -544,4 +550,11 @@ When using this component library:
 5. **Responsive design**: Use MUI's breakpoint system
 6. **Design tokens**: Components automatically use our design system
 
-**🤖 AI Integration Ready**: This library is optimized for AI code generation with predictable patterns, comprehensive examples, and consistent APIs. Use templates for rapid development and individual components for custom implementations.
+**🤖 AI Integration Ready**: This Sage & Pine design system is optimized for AI code generation with predictable patterns, comprehensive examples, and consistent APIs. Use templates for rapid development and individual components for custom implementations.
+
+### 🌿 Design Philosophy
+The Sage & Pine theme provides a sophisticated nature-inspired aesthetic with:
+- Professional sage/pine color palette for trust and reliability
+- Modern Outfit + Poppins typography for excellent readability
+- Improved contrast and accessibility
+- Cohesive visual hierarchy supporting business applications

@@ -10,12 +10,12 @@ const WelcomeScreen = () => {
     <div className="h-full flex items-center justify-center">
       <div className="max-w-2xl mx-auto text-center">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-[var(--color-text-primary)] mb-4">
             Welcome to Design System Hub
           </h1>
-          <p className="text-xl text-gray-600 leading-relaxed">
-            Transform Material UI components into your custom-styled components
-            using design tokens and specifications.
+          <p className="text-xl text-[var(--color-text-secondary)] leading-relaxed">
+            Transform Open Source components into custom components
+            using your design tokens and brand specifications.
           </p>
         </div>
 
@@ -90,14 +90,14 @@ const ComponentView = ({ component, category }) => {
         {/* Variants Section */}
         {component.variants && component.variants.length > 0 && (
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Variants</h3>
+            <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">Variants</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {component.variants.map((variant, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg p-4">
-                  <div className="mb-3 text-sm font-medium text-gray-700">
+                <div key={index} className="border border-[var(--color-border-default)] rounded-lg p-4">
+                  <div className="mb-3 text-sm font-medium text-[var(--color-text-primary)]">
                     {variant.name}
                   </div>
-                  <div className="p-4 bg-gray-50 rounded flex items-center justify-center min-h-[80px]">
+                  <div className="p-4 bg-[var(--color-bg-secondary)] rounded flex items-center justify-center min-h-[80px]">
                     <Suspense fallback={<div className="text-gray-400">Loading...</div>}>
                       <LiveComponentRenderer
                         component={component}
@@ -107,7 +107,7 @@ const ComponentView = ({ component, category }) => {
                       />
                     </Suspense>
                   </div>
-                  <div className="mt-2 p-2 bg-gray-100 rounded text-xs font-mono text-gray-600">
+                  <div className="mt-2 p-2 bg-[var(--color-bg-tertiary)] rounded text-xs font-mono text-[var(--color-text-secondary)]">
                     {variant.code}
                   </div>
                 </div>
@@ -119,14 +119,14 @@ const ComponentView = ({ component, category }) => {
         {/* Sizes Section */}
         {component.sizes && component.sizes.length > 0 && (
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Sizes</h3>
+            <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">Sizes</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {component.sizes.map((size, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg p-4">
-                  <div className="mb-3 text-sm font-medium text-gray-700">
+                <div key={index} className="border border-[var(--color-border-default)] rounded-lg p-4">
+                  <div className="mb-3 text-sm font-medium text-[var(--color-text-primary)]">
                     {size.name}
                   </div>
-                  <div className="p-4 bg-gray-50 rounded flex items-center justify-center min-h-[80px]">
+                  <div className="p-4 bg-[var(--color-bg-secondary)] rounded flex items-center justify-center min-h-[80px]">
                     <Suspense fallback={<div className="text-gray-400">Loading...</div>}>
                       <LiveComponentRenderer
                         component={component}
@@ -136,7 +136,7 @@ const ComponentView = ({ component, category }) => {
                       />
                     </Suspense>
                   </div>
-                  <div className="mt-2 p-2 bg-gray-100 rounded text-xs font-mono text-gray-600">
+                  <div className="mt-2 p-2 bg-[var(--color-bg-tertiary)] rounded text-xs font-mono text-[var(--color-text-secondary)]">
                     {size.code}
                   </div>
                 </div>
@@ -148,14 +148,14 @@ const ComponentView = ({ component, category }) => {
         {/* States Section */}
         {component.states && component.states.length > 0 && (
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">States</h3>
+            <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">States</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {component.states.map((state, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg p-4">
-                  <div className="mb-3 text-sm font-medium text-gray-700">
+                <div key={index} className="border border-[var(--color-border-default)] rounded-lg p-4">
+                  <div className="mb-3 text-sm font-medium text-[var(--color-text-primary)]">
                     {state.name}
                   </div>
-                  <div className="p-4 bg-gray-50 rounded flex items-center justify-center min-h-[80px]">
+                  <div className="p-4 bg-[var(--color-bg-secondary)] rounded flex items-center justify-center min-h-[80px]">
                     <Suspense fallback={<div className="text-gray-400">Loading...</div>}>
                       <LiveComponentRenderer
                         component={component}
@@ -165,7 +165,7 @@ const ComponentView = ({ component, category }) => {
                       />
                     </Suspense>
                   </div>
-                  <div className="mt-2 p-2 bg-gray-100 rounded text-xs font-mono text-gray-600">
+                  <div className="mt-2 p-2 bg-[var(--color-bg-tertiary)] rounded text-xs font-mono text-[var(--color-text-secondary)]">
                     {state.code}
                   </div>
                 </div>
@@ -177,38 +177,38 @@ const ComponentView = ({ component, category }) => {
         {/* Props Documentation */}
         {component.props && (
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Props</h3>
+            <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">Props</h3>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200 border border-gray-200 rounded-lg">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-[var(--color-border-default)] border border-[var(--color-border-default)] rounded-lg">
+                <thead className="bg-[var(--color-bg-secondary)]">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[var(--color-text-secondary)] uppercase tracking-wider">
                       Prop
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[var(--color-text-secondary)] uppercase tracking-wider">
                       Type
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[var(--color-text-secondary)] uppercase tracking-wider">
                       Options
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[var(--color-text-secondary)] uppercase tracking-wider">
                       Default
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-[var(--color-bg-primary)] divide-y divide-[var(--color-border-default)]">
                   {Object.entries(component.props).map(([prop, propData]) => (
                     <tr key={prop}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-[var(--color-text-primary)]">
                         {prop}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-[var(--color-text-secondary)]">
                         {propData.type || 'string'}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-500">
+                      <td className="px-6 py-4 text-sm text-[var(--color-text-secondary)]">
                         {propData.options ? propData.options.join(' | ') : '-'}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-500">
+                      <td className="px-6 py-4 text-sm text-[var(--color-text-secondary)]">
                         {propData.default !== undefined ? String(propData.default) : '-'}
                       </td>
                     </tr>
@@ -222,10 +222,10 @@ const ComponentView = ({ component, category }) => {
         {/* Design Tokens Used */}
         {component.designTokens && component.designTokens.length > 0 && (
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Design Tokens Used</h3>
+            <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">Design Tokens Used</h3>
             <div className="flex flex-wrap gap-2">
               {component.designTokens.map((token) => (
-                <code key={token} className="px-3 py-1 bg-blue-100 text-blue-800 rounded text-sm font-mono">
+                <code key={token} className="px-3 py-1 bg-[var(--color-secondary-100)] text-[var(--color-secondary-700)] rounded text-sm font-mono">
                   --color-{token}
                 </code>
               ))}
@@ -236,9 +236,9 @@ const ComponentView = ({ component, category }) => {
         {/* Documentation */}
         {component.documentation && (
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Documentation</h3>
-            <div className="prose prose-sm max-w-none bg-gray-50 rounded-lg p-4">
-              <pre className="whitespace-pre-wrap text-gray-700">{component.documentation}</pre>
+            <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">Documentation</h3>
+            <div className="prose prose-sm max-w-none bg-[var(--color-bg-secondary)] rounded-lg p-4">
+              <pre className="whitespace-pre-wrap text-[var(--color-text-primary)]">{component.documentation}</pre>
             </div>
           </div>
         )}
@@ -249,16 +249,16 @@ const ComponentView = ({ component, category }) => {
   if (component.status === 'complete') {
     return (
       <div className="h-full overflow-y-auto">
-        <div className="border-b border-gray-200 bg-white px-6 py-4">
+        <div className="border-b border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">
+              <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
                 {component.displayName || component.name}
               </h1>
-              <p className="text-gray-600 mt-1">{component.description}</p>
+              <p className="text-[var(--color-text-secondary)] mt-1">{component.description}</p>
             </div>
             <div className="flex items-center gap-4">
-              <span className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">
+              <span className="px-3 py-1 bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] rounded-full text-sm">
                 {category}
               </span>
               <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
@@ -268,7 +268,7 @@ const ComponentView = ({ component, category }) => {
           </div>
         </div>
 
-        <div className="bg-white">
+        <div className="bg-[var(--color-bg-primary)]">
           {renderLiveExamples()}
         </div>
       </div>
@@ -277,7 +277,7 @@ const ComponentView = ({ component, category }) => {
 
   return (
     <div className="h-full">
-      <div className="border-b border-gray-200 bg-white px-6 py-4">
+      <div className="border-b border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-6 py-4">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">
@@ -313,13 +313,13 @@ const ComponentView = ({ component, category }) => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Component Info */}
             <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+              <h2 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">
                 Component Information
               </h2>
 
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700 mb-2">
+                  <h3 className="text-sm font-medium text-[var(--color-text-primary)] mb-2">
                     Material UI Component
                   </h3>
                   <code className="bg-gray-100 px-2 py-1 rounded text-sm">
@@ -329,7 +329,7 @@ const ComponentView = ({ component, category }) => {
 
                 {component.variants && (
                   <div>
-                    <h3 className="text-sm font-medium text-gray-700 mb-2">
+                    <h3 className="text-sm font-medium text-[var(--color-text-primary)] mb-2">
                       Available Variants
                     </h3>
                     <div className="flex flex-wrap gap-2">
@@ -347,7 +347,7 @@ const ComponentView = ({ component, category }) => {
 
                 {component.sizes && (
                   <div>
-                    <h3 className="text-sm font-medium text-gray-700 mb-2">
+                    <h3 className="text-sm font-medium text-[var(--color-text-primary)] mb-2">
                       Available Sizes
                     </h3>
                     <div className="flex flex-wrap gap-2">
@@ -367,7 +367,7 @@ const ComponentView = ({ component, category }) => {
 
             {/* Transformation Area */}
             <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+              <h2 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">
                 Transformation
               </h2>
 
@@ -476,7 +476,7 @@ export default function MainContent({ children }) {
 
   // Default to welcome screen
   return (
-    <div className="flex-1 overflow-hidden bg-gray-50">
+    <div className="flex-1 overflow-hidden bg-[var(--color-bg-primary)]">
       <WelcomeScreen />
     </div>
   );

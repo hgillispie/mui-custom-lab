@@ -126,12 +126,6 @@ export const ComponentViewer: React.FC<ComponentViewerProps> = ({ component, cat
               >
                 {component.displayName}
               </Typography>
-              <Chip 
-                label="Transformed" 
-                color="success" 
-                size="small"
-                icon={<CheckIcon />}
-              />
             </Stack>
             <Typography variant="body1" color="text.secondary" sx={{ mt: 1 }}>
               {component.description}

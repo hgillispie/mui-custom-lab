@@ -5,7 +5,7 @@ import { ButtonProps as MuiButtonProps } from '@mui/material/Button';
 
 // Extended interface with custom props
 export interface ButtonProps extends Omit<MuiButtonProps, 'variant'> {
-  variant?: 'contained' | 'outlined' | 'text' | 'gradient' | 'ghost' | 'success' | 'warning' | 'error';
+  variant?: 'contained' | 'outlined' | 'text' | 'ghost' | 'success' | 'warning' | 'error';
   loading?: boolean;
   size?: 'small' | 'medium' | 'large';
 }
@@ -124,14 +124,6 @@ const StyledButton = styled(MuiButton, {
     },
   }),
 
-  ...(variant === 'gradient' && {
-    background: 'linear-gradient(135deg, var(--color-primary-300), var(--color-primary-700))',
-    color: 'var(--color-white)',
-    '&:hover': {
-      background: 'linear-gradient(135deg, var(--color-primary-500), var(--color-primary-800))',
-      boxShadow: '0 8px 25px rgba(139, 92, 246, 0.4)',
-    },
-  }),
 
   ...(variant === 'ghost' && {
     backgroundColor: 'transparent',

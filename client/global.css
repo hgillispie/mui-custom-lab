@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:wght@100..900&display=swap');
 @import "./styles/tokens.css";
 
 @tailwind base;
@@ -119,7 +120,11 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-family-sans);
+    font-family: var(--font-family-body); /* Outfit for body text */
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading); /* Poppins for headings */
   }
 }
 

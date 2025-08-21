@@ -13,7 +13,7 @@ import {
 } from '@mui/icons-material';
 
 export interface AlertProps extends Omit<MuiAlertProps, 'variant' | 'severity'> {
-  variant?: 'contained' | 'outlined' | 'minimal' | 'gradient' | 'glass';
+  variant?: 'contained' | 'outlined' | 'minimal' | 'ghost';
   severity?: 'success' | 'info' | 'warning' | 'error';
   size?: 'small' | 'medium' | 'large';
   title?: string;
@@ -147,18 +147,8 @@ const StyledAlert = styled(MuiAlert, {
     boxShadow: 'var(--shadow-sm)',
   }),
 
-  ...(variant === 'gradient' && severity === 'success' && {
-    background: 'linear-gradient(135deg, var(--color-success-300), var(--color-success-600))',
-    color: 'var(--color-white)',
-    '& .MuiAlert-icon': {
-      color: 'var(--color-white)',
-    },
-    '&:hover': {
-      boxShadow: '0 8px 25px rgba(34, 197, 94, 0.3)',
-    },
-  }),
 
-  ...(variant === 'glass' && severity === 'success' && {
+  ...(variant === 'ghost' && severity === 'success' && {
     backgroundColor: 'rgba(34, 197, 94, 0.1)',
     backdropFilter: 'blur(20px)',
     border: '1px solid rgba(34, 197, 94, 0.2)',
@@ -185,18 +175,8 @@ const StyledAlert = styled(MuiAlert, {
     boxShadow: 'var(--shadow-sm)',
   }),
 
-  ...(variant === 'gradient' && severity === 'info' && {
-    background: 'linear-gradient(135deg, var(--color-primary-300), var(--color-primary-700))',
-    color: 'var(--color-white)',
-    '& .MuiAlert-icon': {
-      color: 'var(--color-white)',
-    },
-    '&:hover': {
-      boxShadow: '0 8px 25px rgba(139, 92, 246, 0.3)',
-    },
-  }),
 
-  ...(variant === 'glass' && severity === 'info' && {
+  ...(variant === 'ghost' && severity === 'info' && {
     backgroundColor: 'rgba(139, 92, 246, 0.1)',
     backdropFilter: 'blur(20px)',
     border: '1px solid rgba(139, 92, 246, 0.2)',
@@ -223,18 +203,8 @@ const StyledAlert = styled(MuiAlert, {
     boxShadow: 'var(--shadow-sm)',
   }),
 
-  ...(variant === 'gradient' && severity === 'warning' && {
-    background: 'linear-gradient(135deg, var(--color-warning-300), var(--color-warning-600))',
-    color: 'var(--color-white)',
-    '& .MuiAlert-icon': {
-      color: 'var(--color-white)',
-    },
-    '&:hover': {
-      boxShadow: '0 8px 25px rgba(245, 158, 11, 0.3)',
-    },
-  }),
 
-  ...(variant === 'glass' && severity === 'warning' && {
+  ...(variant === 'ghost' && severity === 'warning' && {
     backgroundColor: 'rgba(245, 158, 11, 0.1)',
     backdropFilter: 'blur(20px)',
     border: '1px solid rgba(245, 158, 11, 0.2)',
@@ -261,18 +231,8 @@ const StyledAlert = styled(MuiAlert, {
     boxShadow: 'var(--shadow-sm)',
   }),
 
-  ...(variant === 'gradient' && severity === 'error' && {
-    background: 'linear-gradient(135deg, var(--color-error-300), var(--color-error-600))',
-    color: 'var(--color-white)',
-    '& .MuiAlert-icon': {
-      color: 'var(--color-white)',
-    },
-    '&:hover': {
-      boxShadow: '0 8px 25px rgba(239, 68, 68, 0.3)',
-    },
-  }),
 
-  ...(variant === 'glass' && severity === 'error' && {
+  ...(variant === 'ghost' && severity === 'error' && {
     backgroundColor: 'rgba(239, 68, 68, 0.1)',
     backdropFilter: 'blur(20px)',
     border: '1px solid rgba(239, 68, 68, 0.2)',

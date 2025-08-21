@@ -22,7 +22,7 @@ const queryClient = new QueryClient();
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-[var(--color-bg-primary)]">
       <Sidebar />
       <MainContent>{children}</MainContent>
     </div>

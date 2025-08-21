@@ -8,7 +8,7 @@ import { CardProps as MuiCardProps } from '@mui/material/Card';
 
 // Extended interface with custom props
 export interface CardProps extends Omit<MuiCardProps, 'variant'> {
-  variant?: 'default' | 'outlined' | 'elevated' | 'gradient' | 'glass' | 'success' | 'warning' | 'error';
+  variant?: 'default' | 'outlined' | 'elevated' | 'gradient' | 'ghost' | 'success' | 'warning' | 'error';
   size?: 'small' | 'medium' | 'large';
   interactive?: boolean;
 }
@@ -103,7 +103,7 @@ const StyledCard = styled(MuiCard, {
     },
   }),
 
-  ...(variant === 'glass' && {
+  ...(variant === 'ghost' && {
     background: 'rgba(255, 255, 255, 0.1)',
     backdropFilter: 'blur(16px)',
     border: '1px solid rgba(255, 255, 255, 0.2)',

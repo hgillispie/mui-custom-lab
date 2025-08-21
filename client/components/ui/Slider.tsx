@@ -8,7 +8,7 @@ import { SliderProps as MuiSliderProps } from '@mui/material/Slider';
 
 // Extended interface with custom props
 export interface SliderProps extends Omit<MuiSliderProps, 'size'> {
-  variant?: 'default' | 'gradient' | 'glass' | 'success' | 'warning' | 'error';
+  variant?: 'default' | 'ghost' | 'success' | 'warning' | 'error';
   size?: 'small' | 'medium' | 'large';
   label?: string;
   helperText?: string;
@@ -171,32 +171,8 @@ const StyledSlider = styled(MuiSlider, {
     },
   }),
 
-  ...(variant === 'gradient' && {
-    '& .MuiSlider-track': {
-      background: 'linear-gradient(90deg, var(--color-primary-300), var(--color-primary-700))',
-      position: 'relative',
 
-      '&::after': {
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'linear-gradient(90deg, var(--color-primary-500), var(--color-primary-800))',
-        borderRadius: 'inherit',
-        opacity: 0,
-        transition: 'opacity var(--duration-fast) var(--ease-out)',
-      },
-    },
-
-    '&:hover .MuiSlider-track::after': {
-      opacity: 1,
-    },
-
-  }),
-
-  ...(variant === 'glass' && {
+  ...(variant === 'ghost' && {
     '& .MuiSlider-track': {
       backgroundColor: 'rgba(139, 92, 246, 0.3)',
       backdropFilter: 'blur(8px)',

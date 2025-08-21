@@ -8,7 +8,7 @@ import { TabProps as MuiTabProps } from '@mui/material/Tab';
 
 // Extended interface with custom props
 export interface TabsProps extends Omit<MuiTabsProps, 'variant'> {
-  variant?: 'default' | 'outlined' | 'gradient' | 'glass' | 'minimal';
+  variant?: 'default' | 'outlined' | 'ghost' | 'minimal';
   size?: 'small' | 'medium' | 'large';
   tabItems?: Array<{ label: string; value: string | number; disabled?: boolean; icon?: React.ReactNode }>;
   defaultValue?: string | number;
@@ -146,43 +146,8 @@ const StyledTabs = styled(MuiTabs, {
     },
   }),
 
-  ...(variant === 'gradient' && {
-    position: 'relative',
-    
-    '&::before': {
-      content: '""',
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      height: '4px',
-      background: 'linear-gradient(90deg, var(--color-primary-300), var(--color-primary-700))',
-      borderRadius: 'var(--radius-full)',
-    },
-    
-    '& .MuiTabs-indicator': {
-      backgroundColor: 'var(--color-white)',
-      height: '4px',
-      boxShadow: '0 2px 8px rgba(139, 92, 246, 0.4)',
-    },
-    
-    '& .MuiTab-root': {
-      color: 'var(--color-text-secondary)',
-      
-      '&:hover': {
-        color: 'var(--color-primary-500)',
-        background: 'linear-gradient(135deg, var(--color-primary-50), var(--color-primary-100))',
-      },
-      
-      '&.Mui-selected': {
-        color: 'var(--color-primary-700)',
-        background: 'linear-gradient(135deg, var(--color-primary-100), var(--color-primary-200))',
-        boxShadow: '0 4px 12px rgba(139, 92, 246, 0.3)',
-      },
-    },
-  }),
 
-  ...(variant === 'glass' && {
+  ...(variant === 'ghost' && {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     backdropFilter: 'blur(20px)',
     borderRadius: 'var(--radius-lg)',

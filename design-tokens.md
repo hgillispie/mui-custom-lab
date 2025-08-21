@@ -1,4 +1,24 @@
-# Design System Configuration File
+# Design System - Sage and Pine Green
+
+## Typography
+**Primary Font (Body)**: Outfit
+**Display Font (Headers)**: Poppins
+- Rationale: Outfit is a sleek sans-serif with minimalist design for high body text readability (high x-height, open forms per UX best practices); Poppins adds geometric boldness for headers, creating subtle hierarchy without overwhelming; both modern/professional, variable weights for flexibility and eye-friendly scaling.
+- Google Fonts URL: `@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:wght@100..900&display=swap');`
+
+## Color Palette  
+**Primary**: Sage - #7c8363
+**Secondary**: Pine - #31473a
+- Rationale: Sage provides a neutral, refreshing base with green undertones for calming foundations; pine adds deep, moody contrast for balance and focus. Psychologically evokes nature/trust; accessible contrasts prioritize readability (e.g., avoid low-contrast pairings, use #edf4f2-inspired lights for bgs).
+- Inspiration: Looka blog trends emphasizing versatile greens for vivid or soothing effects, as in eco-brands for professional UIs.
+
+## Key Features
+- WCAG AA compliant contrast ratios
+- Modern, clean aesthetic  
+- Professional appearance
+- Excellent readability
+
+<!-- # Design System Configuration File
 
 ## 🔴 CRITICAL: FONT SETUP MUST BE DONE FIRST!
 
@@ -31,7 +51,7 @@
    
    **Note:** In components, always include `font-sans` class to ensure Figtree is applied!
 
-4. **VERIFY:** Open DevTools → Inspect any text → Computed styles MUST show "Figtree"
+4. **VERIFY:** Open DevTools → Inspect any text → Computed styles MUST show "Figtree" -->
 
 
 
@@ -158,19 +178,20 @@ alwaysApply: true
 ## 🚨 CRITICAL: Font Families Configuration
 
 ### 🔴 PRIMARY FONT STACK (MUST BE CONFIGURED!)
-**THE ENTIRE DESIGN SYSTEM DEPENDS ON FIGTREE BEING PROPERLY LOADED!**
+**THE ENTIRE DESIGN SYSTEM DEPENDS ON OUTFIT AND POPPINS BEING PROPERLY LOADED!**
 
-- **Sans (DEFAULT):** 'Figtree', system-ui, -apple-system, sans-serif
-- **Display (Headlines):** 'Figtree', system-ui, -apple-system, sans-serif
-- **Body (Content):** 'Figtree', system-ui, -apple-system, sans-serif
+- **Body (DEFAULT):** 'Outfit', system-ui, -apple-system, sans-serif
+- **Heading (Headlines):** 'Poppins', system-ui, -apple-system, sans-serif
+- **Display (Large text):** 'Poppins', system-ui, -apple-system, sans-serif
 - **Mono (Code):** 'JetBrains Mono', 'Fira Code', Consolas, monospace
 
 ### ⚠️ Font Implementation Checklist:
 - [ ] Google Fonts import added to global CSS
-- [ ] Body font-family set to Figtree
-- [ ] Tailwind config updated with Figtree as sans
-- [ ] All components include 'font-sans' class
-- [ ] DevTools shows Figtree as computed font
+- [ ] Body font-family set to Outfit
+- [ ] Heading font-family set to Poppins
+- [ ] Tailwind config updated with Outfit as sans
+- [ ] All components include appropriate font classes
+- [ ] DevTools shows Outfit/Poppins as computed fonts
 
 ## Type Scale System
 
@@ -303,10 +324,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        // 🚨 OVERRIDE DEFAULT SANS WITH FIGTREE!
-        sans: ['Figtree', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        display: ['Figtree', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        body: ['Figtree', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        // 🚨 OVERRIDE DEFAULT SANS WITH OUTFIT!
+        sans: ['Outfit', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        heading: ['Poppins', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['Poppins', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        body: ['Outfit', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'Courier New', 'monospace'],
       },
   fontSize: {
@@ -913,9 +935,10 @@ module.exports = {
       fontFamily: {
         // 🔴 CRITICAL: Import from typography.mdc
         // 🚨 WITHOUT THIS, YOUR DESIGN SYSTEM WON'T WORK!
-        sans: ['Figtree', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        display: ['Figtree', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        body: ['Figtree', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        sans: ['Outfit', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        heading: ['Poppins', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['Poppins', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        body: ['Outfit', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
       },
       fontSize: {

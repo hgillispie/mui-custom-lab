@@ -15,7 +15,7 @@ import {
 } from '@mui/icons-material';
 
 export interface SnackbarProps extends Omit<MuiSnackbarProps, 'anchorOrigin'> {
-  variant?: 'contained' | 'outlined' | 'minimal' | 'gradient' | 'glass';
+  variant?: 'contained' | 'outlined' | 'minimal' | 'ghost';
   severity?: 'success' | 'info' | 'warning' | 'error';
   size?: 'small' | 'medium' | 'large';
   position?: 'bottom-left' | 'bottom-center' | 'bottom-right' | 'top-left' | 'top-center' | 'top-right';
@@ -74,13 +74,8 @@ const StyledSnackbarContainer = styled(MuiBox, {
     boxShadow: 'var(--shadow-sm)',
   }),
 
-  ...(variant === 'gradient' && {
-    backgroundColor: 'var(--color-bg-elevated)',
-    border: '1px solid var(--color-border-default)',
-    boxShadow: 'var(--shadow-lg)',
-  }),
 
-  ...(variant === 'glass' && {
+  ...(variant === 'ghost' && {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     backdropFilter: 'blur(20px)',
     border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -223,25 +218,25 @@ const StyledSnackbarContent = styled(MuiAlert, {
   // Severity-specific icon colors
   ...(severity === 'success' && {
     '& .MuiAlert-icon': {
-      color: variant === 'gradient' ? 'var(--color-white)' : 'var(--color-success-600)',
+      color: 'var(--color-success-600)',
     },
   }),
 
   ...(severity === 'info' && {
     '& .MuiAlert-icon': {
-      color: variant === 'gradient' ? 'var(--color-white)' : 'var(--color-primary-600)',
+      color: 'var(--color-primary-600)',
     },
   }),
 
   ...(severity === 'warning' && {
     '& .MuiAlert-icon': {
-      color: variant === 'gradient' ? 'var(--color-white)' : 'var(--color-warning-600)',
+      color: 'var(--color-warning-600)',
     },
   }),
 
   ...(severity === 'error' && {
     '& .MuiAlert-icon': {
-      color: variant === 'gradient' ? 'var(--color-white)' : 'var(--color-error-600)',
+      color: 'var(--color-error-600)',
     },
   }),
 
@@ -310,48 +305,29 @@ const StyledSnackbarContent = styled(MuiAlert, {
     color: 'var(--color-error-700)',
   }),
 
-  ...(variant === 'gradient' && severity === 'success' && {
-    background: 'linear-gradient(135deg, var(--color-success-300), var(--color-success-600))',
-    color: 'var(--color-white)',
-  }),
 
-  ...(variant === 'gradient' && severity === 'info' && {
-    background: 'linear-gradient(135deg, var(--color-primary-300), var(--color-primary-700))',
-    color: 'var(--color-white)',
-  }),
-
-  ...(variant === 'gradient' && severity === 'warning' && {
-    background: 'linear-gradient(135deg, var(--color-warning-300), var(--color-warning-600))',
-    color: 'var(--color-white)',
-  }),
-
-  ...(variant === 'gradient' && severity === 'error' && {
-    background: 'linear-gradient(135deg, var(--color-error-300), var(--color-error-600))',
-    color: 'var(--color-white)',
-  }),
-
-  ...(variant === 'glass' && severity === 'success' && {
+  ...(variant === 'ghost' && severity === 'success' && {
     backgroundColor: 'rgba(34, 197, 94, 0.1)',
     backdropFilter: 'blur(20px)',
     border: '1px solid rgba(34, 197, 94, 0.2)',
     color: 'var(--color-success-700)',
   }),
 
-  ...(variant === 'glass' && severity === 'info' && {
+  ...(variant === 'ghost' && severity === 'info' && {
     backgroundColor: 'rgba(139, 92, 246, 0.1)',
     backdropFilter: 'blur(20px)',
     border: '1px solid rgba(139, 92, 246, 0.2)',
     color: 'var(--color-primary-700)',
   }),
 
-  ...(variant === 'glass' && severity === 'warning' && {
+  ...(variant === 'ghost' && severity === 'warning' && {
     backgroundColor: 'rgba(245, 158, 11, 0.1)',
     backdropFilter: 'blur(20px)',
     border: '1px solid rgba(245, 158, 11, 0.2)',
     color: 'var(--color-warning-700)',
   }),
 
-  ...(variant === 'glass' && severity === 'error' && {
+  ...(variant === 'ghost' && severity === 'error' && {
     backgroundColor: 'rgba(239, 68, 68, 0.1)',
     backdropFilter: 'blur(20px)',
     border: '1px solid rgba(239, 68, 68, 0.2)',
@@ -377,37 +353,29 @@ const StyledActionButton = styled(MuiButton, {
   },
 
   // Variant and severity specific action button colors
-  ...(variant === 'gradient' && {
-    color: 'var(--color-white)',
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    border: '1px solid rgba(255, 255, 255, 0.3)',
-    '&:hover': {
-      backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    },
-  }),
 
-  ...(variant !== 'gradient' && severity === 'success' && {
+  ...(severity === 'success' && {
     color: 'var(--color-success-700)',
     '&:hover': {
       backgroundColor: 'var(--color-success-50)',
     },
   }),
 
-  ...(variant !== 'gradient' && severity === 'info' && {
+  ...(severity === 'info' && {
     color: 'var(--color-primary-700)',
     '&:hover': {
       backgroundColor: 'var(--color-primary-50)',
     },
   }),
 
-  ...(variant !== 'gradient' && severity === 'warning' && {
+  ...(severity === 'warning' && {
     color: 'var(--color-warning-700)',
     '&:hover': {
       backgroundColor: 'var(--color-warning-50)',
     },
   }),
 
-  ...(variant !== 'gradient' && severity === 'error' && {
+  ...(severity === 'error' && {
     color: 'var(--color-error-700)',
     '&:hover': {
       backgroundColor: 'var(--color-error-50)',

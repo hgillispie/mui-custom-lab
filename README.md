@@ -1,62 +1,66 @@
-# Material Design System
+# Sage & Pine Design System
 
-A comprehensive, heavily-transformed Material UI design system with custom variants, design tokens, enhanced animations, and real-world templates. Built for AI-powered development with Builder.io Fusion and similar tools.
+A comprehensive Material UI design system with 27+ transformed components featuring the Sage & Pine color palette and Outfit + Poppins typography. Optimized for AI code generation tools with clear usage patterns and production-ready templates.
 
-## 🎯 AI Development System
+## 🎯 AI-Ready Component Library
 
-This design system is specifically optimized for AI code generation tools like Builder.io Fusion. It provides:
+This design system provides AI tools with:
 
-- **35+ Production-Ready Components** with consistent API patterns
-- **Real-World Templates** demonstrating component composition
-- **Composition Patterns** showing how components work together
-- **Comprehensive Documentation** for AI understanding
-- **Predictable Prop Interfaces** following consistent conventions
+- **27+ Transformed Components** with Sage & Pine styling
+- **4 Production Templates** for complete page implementations  
+- **Clear Usage Guidelines** for component vs MUI decisions
+- **Consistent Prop Patterns** for predictable AI generation
+- **Real-World Examples** showing proper composition
 
 ## 🏗️ System Architecture
 
 ### Component Categories
 ```
-📁 client/components/ui/          # 35+ transformed components
-📁 client/templates/              # Real-world page templates
-📁 client/pages/                  # Interactive documentation
-📁 client/styles/tokens.css       # Design token definitions
-📁 client/utils/component-registry.js  # AI-readable component specs
+📁 client/components/ui/          # 27+ transformed components with Sage & Pine styling
+📁 client/templates/              # 4 production-ready page templates
+📁 client/styles/tokens.css       # Sage & Pine design token definitions
+📁 client/theme/mui-theme.ts       # MUI theme with Outfit + Poppins fonts
 ```
 
-### AI Navigation Guide
-- **Templates** (`/templates`) - Pre-built page patterns for common use cases
-- **Component Library** (`/components`) - Individual component documentation with live examples
-- **Composition Guide** (`/composition-guide`) - Patterns for combining components effectively
+### AI Usage Guidelines
+- **Use Our Components** for all interactive UI elements (buttons, inputs, alerts)
+- **Use Generic MUI** for layout, spacing, and non-visual utilities (Box, Stack, Typography)
+- **Use Production Templates** for complete page implementations (Dashboard, LoginForm)
+- **Follow Consistent Patterns** for prop usage and component composition
 
 ## 🧩 Component Usage for AI
 
-### Import Patterns (Critical for AI)
+### Critical Import Patterns
 ```jsx
-// ✅ ALWAYS use our transformed components for UI elements
+// ✅ ALWAYS use our transformed components for interactive UI
 import Button from './client/components/ui/Button';
-import Input from './client/components/ui/Input';  // Alias for TextField
+import Input from './client/components/ui/Input';
 import Card from './client/components/ui/Card';
 import Switch from './client/components/ui/Switch';
+import Alert from './client/components/ui/Alert';
+import Modal from './client/components/ui/Modal';
 
-// ✅ Use MUI directly for layout and utilities
-import { Box, Stack, Grid, Typography, Divider } from '@mui/material';
+// ✅ Use generic MUI for layout, spacing, and non-visual utilities
+import { Box, Stack, Grid, Typography, Container, Divider } from '@mui/material';
 
 // ✅ Use MUI icons
-import { Search, Add, Delete, Settings } from '@mui/icons-material';
+import { Search, Add, Delete, Settings, Home, User } from '@mui/icons-material';
 
 // ❌ NEVER import MUI components that we've transformed
 // import { Button } from '@mui/material';  // NO - use our Button
-// import { TextField } from '@mui/material'; // NO - use our Input/TextField
+// import { TextField } from '@mui/material'; // NO - use our Input
+// import { Switch } from '@mui/material'; // NO - use our Switch
 ```
 
-### Component Decision Matrix for AI
-| Use Case | Component Source | Example |
-|----------|------------------|---------|
-| Buttons, Forms, Cards | **Our System** | `<Button variant="gradient">` |
-| Layout, Spacing | **MUI Direct** | `<Box sx={{ p: 2 }}>` |
-| Typography | **MUI Direct** | `<Typography variant="h4">` |
-| Icons | **MUI Icons** | `<Search />` |
-| Complex Layouts | **Our Templates** | `<Dashboard />` |
+### AI Decision Matrix
+| Component Type | Source | Example |
+|---------------|--------|---------|
+| **Interactive UI** | **Our System** | `<Button variant="gradient">`, `<Input />`, `<Switch />` |
+| **Layout & Spacing** | **Generic MUI** | `<Box sx={{ p: 2 }}>`, `<Stack spacing={3}>` |
+| **Typography** | **Generic MUI** | `<Typography variant="h4">` (inherits Outfit + Poppins) |
+| **Icons** | **MUI Icons** | `<Search />`, `<Add />` |
+| **Non-Visual Utils** | **Generic MUI** | `<Divider />`, `<Container />` |
+| **Complete Pages** | **Our Templates** | `<Dashboard />`, `<LoginForm />` |
 
 ## 📋 Available Templates (AI Usage)
 
@@ -311,17 +315,17 @@ active={isActive}       // For navigation items
 | **Display** | Card, Table, Avatar, Badge, Chip, List, Tooltip, Accordion | Complete |
 | **Feedback** | Alert, Modal, Dialog, Snackbar, Progress | Complete |
 
-### 📋 Templates Available
-- **Dashboard** - Analytics dashboard with stats and tables
-- **LoginForm** - Authentication with social login
-- **SettingsForm** - User preferences with tabs
-- **DataTable** - CRUD operations with filtering
+### 📄 Production Templates (4 complete)
+- **Dashboard** - Analytics with stats cards, charts, data tables
+- **LoginForm** - Authentication with validation, social login options
+- **SettingsForm** - User preferences with tabbed interface, form validation
+- **DataTable** - CRUD operations with filtering, sorting, bulk actions
 
-### 🔗 Integration Resources
-- **Component Registry** (`/client/utils/component-registry.js`) - Complete component specifications
-- **Live Documentation** (`/components`) - Interactive component explorer
-- **Composition Guide** (`/composition-guide`) - Component combination patterns
-- **Template Gallery** (`/templates`) - Real-world usage examples
+### 🌿 Design System Features
+- **Sage & Pine Color Palette** - Professional nature-inspired aesthetic
+- **Outfit + Poppins Typography** - Modern font pairing for excellent readability
+- **Enhanced Animations** - Smooth hover effects, focus states, transitions
+- **CSS Design Tokens** - Consistent styling across all components
 
 ## 🚀 Quick Start for AI
 
@@ -423,20 +427,20 @@ function UsersPage() {
 ## 💡 AI Best Practices
 
 ### Do's ✅
-- Always use our transformed components for UI elements
-- Wrap content in Cards for logical grouping
-- Use Stack/Grid for layout, our components for interaction
-- Follow consistent prop naming patterns
-- Implement proper error states and loading indicators
-- Use templates for complete page implementations
+- Use our Sage & Pine components for all interactive UI elements
+- Use generic MUI for layout, spacing, and non-visual utilities
+- Wrap related content in Card components for visual grouping
+- Follow consistent prop patterns (variant, size, error, loading)
+- Implement proper loading, error, and success states
+- Use production templates for complete page implementations
 
 ### Don'ts ❌
-- Don't mix MUI default components with our system unnecessarily
-- Don't forget error handling in forms
-- Don't skip loading states for async operations
-- Don't ignore responsive design considerations
-- Don't pass unsupported props to styled components
+- Don't import MUI components that we've transformed (Button, TextField, Switch)
+- Don't skip error handling and validation in forms
+- Don't ignore responsive design with MUI's breakpoint system
+- Don't mix component systems unnecessarily
+- Don't hardcode colors instead of using our themed components
 
 ---
 
-**🤖 AI Integration Ready**: This design system is optimized for AI code generation with predictable patterns, comprehensive documentation, and real-world examples. Use `/templates` for complete pages, `/components` for individual elements, and `/composition-guide` for combination patterns.
+**🌿 Sage & Pine Design System**: Professional nature-inspired component library with Pine (`#31473a`) primary and Sage (`#7c8363`) secondary colors, featuring Outfit + Poppins typography. Optimized for AI code generation with clear usage patterns, 27+ transformed components, and 4 production-ready templates.

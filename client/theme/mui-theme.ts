@@ -13,50 +13,51 @@ const getCSSVariable = (name: string): string => {
 // Create a custom theme that uses our design tokens
 export const createCustomTheme = () => {
   // Parse color values from CSS variables
-  const primaryColor = '#8b5cf6'; // var(--color-primary-500)
-  const secondaryColor = '#f59e0b'; // var(--color-secondary-500)
+  const primaryColor = '#7c8363'; // var(--color-primary-500) - Sage
+  const secondaryColor = '#31473a'; // var(--color-secondary-500) - Pine
   
   return createTheme({
-    // Use Figtree font for all MUI components
+    // Use Outfit + Poppins font system for all MUI components
     typography: {
-      fontFamily: '"Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-      h1: { fontWeight: 700 },
-      h2: { fontWeight: 700 },
-      h3: { fontWeight: 600 },
-      h4: { fontWeight: 600 },
-      h5: { fontWeight: 600 },
-      h6: { fontWeight: 600 },
+      fontFamily: '"Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+      h1: { fontFamily: '"Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontWeight: 600 },
+      h2: { fontFamily: '"Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontWeight: 600 },
+      h3: { fontFamily: '"Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontWeight: 600 },
+      h4: { fontFamily: '"Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontWeight: 500 },
+      h5: { fontFamily: '"Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontWeight: 500 },
+      h6: { fontFamily: '"Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontWeight: 500 },
       button: { 
+        fontFamily: '"Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
         fontWeight: 500,
         textTransform: 'none' // Disable uppercase transformation
       },
     },
     
-    // Map our color palette to MUI's theme
+    // Map our Sage & Pine color palette to MUI's theme
     palette: {
       primary: {
-        50: '#f5f3ff',
-        100: '#ede9fe',
-        200: '#ddd6fe',
-        300: '#c4b5fd',
-        400: '#a78bfa',
-        main: '#8b5cf6', // 500
-        600: '#7c3aed',
-        700: '#6d28d9',
-        800: '#5b21b6',
-        900: '#4c1d95',
+        50: '#fafbf9',
+        100: '#dcded3',
+        200: '#bdc2ae',
+        300: '#9fa588',
+        400: '#7f8665',
+        main: '#7c8363', // 500 - Sage
+        600: '#798061',
+        700: '#5e644b',
+        800: '#434736',
+        900: '#292b20',
       },
       secondary: {
-        50: '#fef3c7',
-        100: '#fee4a6',
-        200: '#fdd68a',
-        300: '#fcc55e',
-        400: '#fbb437',
-        main: '#f59e0b', // 500
-        600: '#d97706',
-        700: '#b45309',
-        800: '#92400e',
-        900: '#78350f',
+        50: '#f9fbfa',
+        100: '#c2d5c9',
+        200: '#8aae99',
+        300: '#59816a',
+        400: '#334a3c',
+        main: '#31473a', // 500 - Pine
+        600: '#2f4438',
+        700: '#26372d',
+        800: '#1d2a22',
+        900: '#141c17',
       },
       error: {
         main: '#ef4444', // var(--color-error-500)
@@ -65,7 +66,7 @@ export const createCustomTheme = () => {
         main: '#f59e0b', // var(--color-warning-500)
       },
       success: {
-        main: '#10b981', // var(--color-success-500)
+        main: '#22c55e', // var(--color-success-500)
       },
       info: {
         main: '#3b82f6', // var(--color-info-500)
@@ -202,10 +203,10 @@ export const createCustomTheme = () => {
             fontWeight: 500,
           },
           colorPrimary: {
-            backgroundColor: alpha('#8b5cf6', 0.1),
-            color: '#8b5cf6',
+            backgroundColor: alpha('#31473a', 0.1),
+            color: '#31473a',
             '&:hover': {
-              backgroundColor: alpha('#8b5cf6', 0.2),
+              backgroundColor: alpha('#31473a', 0.2),
             },
           },
         },
@@ -246,8 +247,8 @@ export const createCustomTheme = () => {
             borderRadius: '0.375rem', // var(--radius-md)
           },
           standardSuccess: {
-            backgroundColor: alpha('#10b981', 0.1),
-            color: '#059669',
+            backgroundColor: alpha('#22c55e', 0.1),
+            color: '#16a34a',
           },
           standardError: {
             backgroundColor: alpha('#ef4444', 0.1),
