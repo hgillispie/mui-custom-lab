@@ -33,12 +33,12 @@ This design system provides AI tools with:
 ### Critical Import Patterns
 ```jsx
 // ✅ ALWAYS use our transformed components for interactive UI
-import Button from './client/components/ui/Button';
-import Input from './client/components/ui/Input';
-import Card from './client/components/ui/Card';
-import Switch from './client/components/ui/Switch';
-import Alert from './client/components/ui/Alert';
-import Modal from './client/components/ui/Modal';
+import Button from '../mui-custom-lab/client/components/ui/Button';
+import Input from '../mui-custom-lab/client/components/ui/Input';
+import Card from '../mui-custom-lab/client/components/ui/Card';
+import Switch from '../mui-custom-lab/client/components/ui/Switch';
+import Alert from '../mui-custom-lab/client/components/ui/Alert';
+import Modal from '../mui-custom-lab/client/components/ui/Modal';
 
 // ✅ Use generic MUI for layout, spacing, and non-visual utilities
 import { Box, Stack, Grid, Typography, Container, Divider } from '@mui/material';
@@ -67,22 +67,22 @@ import { Search, Add, Delete, Settings, Home, User } from '@mui/icons-material';
 ### Real-World Page Templates
 ```jsx
 // Dashboard with stats, tables, charts
-import Dashboard from './client/templates/Dashboard';
+import Dashboard from '../mui-custom-lab/client/templates/Dashboard';
 <Dashboard showDemo={true} />
 
 // Authentication forms with validation
-import LoginForm from './client/templates/LoginForm';
+import LoginForm from '../mui-custom-lab/client/templates/LoginForm';
 <LoginForm 
   onLogin={(email, password) => handleAuth(email, password)}
   onSignup={() => navigate('/signup')}
 />
 
 // Settings panel with tabs and preferences
-import SettingsForm from './client/templates/SettingsForm';
+import SettingsForm from '../mui-custom-lab/client/templates/SettingsForm';
 <SettingsForm onSave={(settings) => updateUserSettings(settings)} />
 
 // Data table with filtering, pagination, actions
-import DataTable from './client/templates/DataTable';
+import DataTable from '../mui-custom-lab/client/templates/DataTable';
 <DataTable 
   data={users}
   onEdit={(user) => editUser(user)}
@@ -329,35 +329,39 @@ active={isActive}       // For navigation items
 
 ## 🚀 Quick Start for AI
 
-### 1. Basic Page Structure
+### 1. Basic Page with Sage & Pine Styling
 ```jsx
-import { Box, Stack, Typography } from '@mui/material';
-import Card from './client/components/ui/Card';
-import Button from './client/components/ui/Button';
+import { Box, Container, Stack, Typography } from '@mui/material';
+import Card from '../mui-custom-lab/client/components/ui/Card';
+import Button from '../mui-custom-lab/client/components/ui/Button';
 
 function MyPage() {
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>Page Title</Typography>
-      <Card variant="contained">
-        <Stack spacing={2}>
-          <Typography variant="body1">Content goes here</Typography>
-          <Button variant="gradient">Action Button</Button>
+    <Container maxWidth="lg">
+      <Box sx={{ py: 4 }}>
+        <Stack spacing={4}>
+          <Typography variant="h4" component="h1">Page Title</Typography>
+          <Card variant="contained">
+            <Stack spacing={3}>
+              <Typography variant="body1">Content with Outfit font</Typography>
+              <Button variant="gradient">Pine & Sage Button</Button>
+            </Stack>
+          </Card>
         </Stack>
-      </Card>
-    </Box>
+      </Box>
+    </Container>
   );
 }
 ```
 
-### 2. Form with Validation
+### 2. Form with Sage & Pine Components
 ```jsx
 import { useState } from 'react';
 import { Stack } from '@mui/material';
-import Card from './client/components/ui/Card';
-import Input from './client/components/ui/Input';
-import Button from './client/components/ui/Button';
-import Alert from './client/components/ui/Alert';
+import Card from '../mui-custom-lab/client/components/ui/Card';
+import Input from '../mui-custom-lab/client/components/ui/Input';
+import Button from '../mui-custom-lab/client/components/ui/Button';
+import Alert from '../mui-custom-lab/client/components/ui/Alert';
 
 function ContactForm() {
   const [formData, setFormData] = useState({ name: '', email: '' });
@@ -392,7 +396,7 @@ function ContactForm() {
           />
           
           <Button type="submit" variant="gradient" fullWidth>
-            Submit
+            Submit Form
           </Button>
         </Stack>
       </form>
@@ -401,24 +405,34 @@ function ContactForm() {
 }
 ```
 
-### 3. Using Complete Templates
+### 3. Using Production Templates
 ```jsx
-import Dashboard from './client/templates/Dashboard';
-import DataTable from './client/templates/DataTable';
+import Dashboard from '../mui-custom-lab/client/templates/Dashboard';
+import LoginForm from '../mui-custom-lab/client/templates/LoginForm';
+import DataTable from '../mui-custom-lab/client/templates/DataTable';
 
-// Full dashboard page
+// Analytics dashboard with Sage & Pine styling
 function DashboardPage() {
   return <Dashboard showDemo={true} />;
 }
 
-// Data management page
+// Authentication with Pine/Sage theme
+function LoginPage() {
+  return (
+    <LoginForm 
+      onLogin={(email, password) => handleAuth(email, password)}
+      onSignup={() => navigate('/signup')}
+    />
+  );
+}
+
+// Data management with enhanced styling
 function UsersPage() {
   return (
     <DataTable 
       data={users}
       onEdit={(user) => handleEditUser(user)}
       onDelete={(user) => handleDeleteUser(user)}
-      onView={(user) => handleViewUser(user)}
     />
   );
 }

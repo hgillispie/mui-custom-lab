@@ -8,10 +8,10 @@ This is a comprehensive Material UI component library with the Sage & Pine desig
 ### Essential Import Patterns
 ```jsx
 // ✅ Use our transformed components for UI elements
-import Button from './client/components/ui/Button';
-import Input from './client/components/ui/Input';
-import Card from './client/components/ui/Card';
-import Switch from './client/components/ui/Switch';
+import Button from '../mui-custom-lab/client/components/ui/Button';
+import Input from '../mui-custom-lab/client/components/ui/Input';
+import Card from '../mui-custom-lab/client/components/ui/Card';
+import Switch from '../mui-custom-lab/client/components/ui/Switch';
 
 // ✅ Use MUI directly for layout, typography, and non-visual utilities  
 import { Box, Stack, Grid, Typography, Container, Divider, Paper } from '@mui/material';
@@ -75,7 +75,7 @@ import { Search, Add, Delete, Settings, Home } from '@mui/icons-material';
 ### Dashboard Template
 Complete analytics dashboard with stats cards, charts, and data tables.
 ```jsx
-import Dashboard from './client/templates/Dashboard';
+import Dashboard from '../mui-custom-lab/client/templates/Dashboard';
 
 <Dashboard 
   showDemo={true}  // Shows sample data
@@ -87,7 +87,7 @@ import Dashboard from './client/templates/Dashboard';
 ### LoginForm Template  
 Authentication form with validation, social login, and error handling.
 ```jsx
-import LoginForm from './client/templates/LoginForm';
+import LoginForm from '../mui-custom-lab/client/templates/LoginForm';
 
 <LoginForm 
   onLogin={(email, password) => handleAuth(email, password)}
@@ -101,7 +101,7 @@ import LoginForm from './client/templates/LoginForm';
 ### SettingsForm Template
 User preferences panel with tabs, switches, and form validation.
 ```jsx
-import SettingsForm from './client/templates/SettingsForm';
+import SettingsForm from '../mui-custom-lab/client/templates/SettingsForm';
 
 <SettingsForm 
   initialSettings={userSettings}
@@ -113,7 +113,7 @@ import SettingsForm from './client/templates/SettingsForm';
 ### DataTable Template
 CRUD operations with filtering, sorting, and bulk actions.
 ```jsx
-import DataTable from './client/templates/DataTable';
+import DataTable from '../mui-custom-lab/client/templates/DataTable';
 
 <DataTable 
   data={users}
@@ -361,8 +361,8 @@ active={isActive}       // For navigation items
 ### Basic Page Layout
 ```jsx
 import { Box, Container, Typography, Stack } from '@mui/material';
-import Card from './client/components/ui/Card';
-import Button from './client/components/ui/Button';
+import Card from '../mui-custom-lab/client/components/ui/Card';
+import Button from '../mui-custom-lab/client/components/ui/Button';
 
 function StandardPage() {
   return (
@@ -394,10 +394,10 @@ function StandardPage() {
 ### Form Page Layout
 ```jsx
 import { Container, Box, Stack, Typography } from '@mui/material';
-import Card from './client/components/ui/Card';
-import Input from './client/components/ui/Input';
-import Button from './client/components/ui/Button';
-import Alert from './client/components/ui/Alert';
+import Card from '../mui-custom-lab/client/components/ui/Card';
+import Input from '../mui-custom-lab/client/components/ui/Input';
+import Button from '../mui-custom-lab/client/components/ui/Button';
+import Alert from '../mui-custom-lab/client/components/ui/Alert';
 
 function FormPage() {
   const [formData, setFormData] = useState({});
@@ -467,45 +467,45 @@ function FormPage() {
 ### Quick Component Lookup
 ```jsx
 // Forms
-import Button from './client/components/ui/Button';
-import Input from './client/components/ui/Input';
-import TextField from './client/components/ui/TextField';  // Alias for Input
-import Select from './client/components/ui/Select';
-import Checkbox from './client/components/ui/Checkbox';
-import Radio from './client/components/ui/Radio';
-import Switch from './client/components/ui/Switch';
-import Slider from './client/components/ui/Slider';
+import Button from '../mui-custom-lab/client/components/ui/Button';
+import Input from '../mui-custom-lab/client/components/ui/Input';
+import TextField from '../mui-custom-lab/client/components/ui/TextField';  // Alias for Input
+import Select from '../mui-custom-lab/client/components/ui/Select';
+import Checkbox from '../mui-custom-lab/client/components/ui/Checkbox';
+import Radio from '../mui-custom-lab/client/components/ui/Radio';
+import Switch from '../mui-custom-lab/client/components/ui/Switch';
+import Slider from '../mui-custom-lab/client/components/ui/Slider';
 
 // Navigation  
-import AppBar from './client/components/ui/AppBar';
-import Tabs from './client/components/ui/Tabs';
-import Menu from './client/components/ui/Menu';
-import Drawer from './client/components/ui/Drawer';
-import Breadcrumbs from './client/components/ui/Breadcrumbs';
-import Pagination from './client/components/ui/Pagination';
+import AppBar from '../mui-custom-lab/client/components/ui/AppBar';
+import Tabs from '../mui-custom-lab/client/components/ui/Tabs';
+import Menu from '../mui-custom-lab/client/components/ui/Menu';
+import Drawer from '../mui-custom-lab/client/components/ui/Drawer';
+import Breadcrumbs from '../mui-custom-lab/client/components/ui/Breadcrumbs';
+import Pagination from '../mui-custom-lab/client/components/ui/Pagination';
 
 // Display
-import Card from './client/components/ui/Card';
-import Table from './client/components/ui/Table';
-import List from './client/components/ui/List';
-import Avatar from './client/components/ui/Avatar';
-import Chip from './client/components/ui/Chip';
-import Badge from './client/components/ui/Badge';
-import Tooltip from './client/components/ui/Tooltip';
-import Accordion from './client/components/ui/Accordion';
+import Card from '../mui-custom-lab/client/components/ui/Card';
+import Table from '../mui-custom-lab/client/components/ui/Table';
+import List from '../mui-custom-lab/client/components/ui/List';
+import Avatar from '../mui-custom-lab/client/components/ui/Avatar';
+import Chip from '../mui-custom-lab/client/components/ui/Chip';
+import Badge from '../mui-custom-lab/client/components/ui/Badge';
+import Tooltip from '../mui-custom-lab/client/components/ui/Tooltip';
+import Accordion from '../mui-custom-lab/client/components/ui/Accordion';
 
 // Feedback
-import Alert from './client/components/ui/Alert';
-import Dialog from './client/components/ui/Dialog';
-import Modal from './client/components/ui/Modal';
-import Snackbar from './client/components/ui/Snackbar';
-import Progress from './client/components/ui/Progress';
+import Alert from '../mui-custom-lab/client/components/ui/Alert';
+import Dialog from '../mui-custom-lab/client/components/ui/Dialog';
+import Modal from '../mui-custom-lab/client/components/ui/Modal';
+import Snackbar from '../mui-custom-lab/client/components/ui/Snackbar';
+import Progress from '../mui-custom-lab/client/components/ui/Progress';
 
 // Templates
-import Dashboard from './client/templates/Dashboard';
-import LoginForm from './client/templates/LoginForm';
-import SettingsForm from './client/templates/SettingsForm';
-import DataTable from './client/templates/DataTable';
+import Dashboard from '../mui-custom-lab/client/templates/Dashboard';
+import LoginForm from '../mui-custom-lab/client/templates/LoginForm';
+import SettingsForm from '../mui-custom-lab/client/templates/SettingsForm';
+import DataTable from '../mui-custom-lab/client/templates/DataTable';
 ```
 
 ## 🎨 Sage & Pine Design Token Reference
